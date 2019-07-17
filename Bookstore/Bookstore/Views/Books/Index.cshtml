@@ -15,10 +15,22 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfPages)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeightInGrams)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dimensions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Format)
         </th>
         <th></th>
     </tr>
@@ -29,15 +41,27 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IBAN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IBAN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IBAN })
+            @Html.DisplayFor(modelItem => item.Publisher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfPages)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightInGrams)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dimensions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Format)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ISBN }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ISBN }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ISBN })
         </td>
     </tr>
 }

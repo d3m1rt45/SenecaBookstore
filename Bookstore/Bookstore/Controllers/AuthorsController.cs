@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -10,116 +11,108 @@ using Bookstore.Models;
 
 namespace Bookstore.Controllers
 {
-    public class BooksController : Controller
+    public class AuthorsController : Controller
     {
         private BookstoreContext db = new BookstoreContext();
 
-        // GET: Books
-        public ActionResult Index()
+        // GET: Authors
+        public async Task<ActionResult> Index()
         {
-            return View(db.Books.ToList());
+            return View(await db.Authors.ToListAsync());
         }
 
-        // GET: Books/Details/5
-        public ActionResult Details(string id)
+        // GET: Authors/Details/5
+        public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Author author = await db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(author);
         }
 
-        // GET: Books/Create
+        // GET: Authors/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Books/Create
+        // POST: Authors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] Author author)
         {
             if (ModelState.IsValid)
             {
-                Author author = db.Authors.Find(book.AuthorName);
-                Genre genre = db.Genres.Find(book.GenreName);
-
-                author.Books.Add(book);
-                genre.Books.Add(book);
-                book.Genre = genre;
-                book.Author = author;
-
-                db.Books.Add(book);
-                db.SaveChanges();
+                db.Authors.Add(author);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View(author);
         }
 
-        // GET: Books/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Authors/Edit/5
+        public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Author author = await db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(author);
         }
 
-        // POST: Books/Edit/5
+        // POST: Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ISBN,Title,Description,Publisher,NumberOfPages,WeightInGrams,Dimensions,Format")] Book book)
+        public async Task<ActionResult> Edit([Bind(Include = "Name")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Entry(author).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(book);
+            return View(author);
         }
 
-        // GET: Books/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Authors/Delete/5
+        public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Author author = await db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(author);
         }
 
-        // POST: Books/Delete/5
+        // POST: Authors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Book book = db.Books.Find(id);
-            db.Books.Remove(book);
-            db.SaveChanges();
+            Author author = await db.Authors.FindAsync(id);
+            db.Authors.Remove(author);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
