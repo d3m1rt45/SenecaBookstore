@@ -5,11 +5,13 @@ namespace Bookstore.Models
     public class Genre
     {
         public string Name { get; set; }
-        public List<Book> Books { get; set; }
+
+        public virtual IEnumerable<Book> Books { get; set; }
 
         public Genre()
         {
-            Books = new List<Book>();
+            if (this.Books == null)
+                Books = new List<Book>();
         }
     }
 }

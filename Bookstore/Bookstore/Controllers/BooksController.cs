@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Bookstore.Models;
+using System.Data.Entity.Migrations;
 
 namespace Bookstore.Controllers
 {
@@ -53,8 +54,8 @@ namespace Bookstore.Controllers
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);
 
-                author.Books.Add(book);
-                genre.Books.Add(book);
+                author.Books.ToList().Add(book);
+                genre.Books.ToList().Add(book);
                 book.Genre = genre;
                 book.Author = author;
 
@@ -78,6 +79,7 @@ namespace Bookstore.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(book);
         }
 
@@ -86,11 +88,23 @@ namespace Bookstore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ISBN,Title,Description,Publisher,NumberOfPages,WeightInGrams,Dimensions,Format")] Book book)
+        public ActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                Author author = db.Authors.Find(book.AuthorName);
+                Genre genre = db.Genres.Find(book.GenreName);
+
+                if (!author.Books.Contains(book))
+                    author.Books.ToList().Add(book);
+
+                if (!genre.Books.Contains(book))
+                    genre.Books.ToList().Add(book);
+
+                book.Genre = genre;
+                book.Author = author;
+
+                db.Books.AddOrUpdate(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

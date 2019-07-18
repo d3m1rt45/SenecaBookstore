@@ -34,10 +34,6 @@ namespace Bookstore.Models
             modelBuilder.Entity<Book>()
                 .HasRequired(x => x.Genre);
 
-            modelBuilder.Entity<Book>()
-                .Ignore(x => x.GenreName)
-                .Ignore(x => x.AuthorName);
-
             modelBuilder.Entity<Author>()
                 .HasKey(x => x.Name);
 

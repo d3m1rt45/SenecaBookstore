@@ -12,7 +12,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenreName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -36,34 +45,43 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publisher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfPages)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WeightInGrams)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dimensions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Format)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ISBN }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ISBN }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ISBN })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ISBN)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Author.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Genre.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Publisher)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberOfPages)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.WeightInGrams)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Dimensions)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Format)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ISBN }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ISBN }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ISBN })
+    </td>
+</tr>
 }
 
 </table>
