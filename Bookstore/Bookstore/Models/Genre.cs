@@ -8,10 +8,6 @@ namespace Bookstore.Models
 
         public virtual IEnumerable<Book> Books { get; set; }
 
-        public Genre()
-        {
-            if (this.Books == null)
-                Books = new List<Book>();
-        }
+        public Genre() { if (this.Books == null) Books = new List<Book>(); }
     }
 }
