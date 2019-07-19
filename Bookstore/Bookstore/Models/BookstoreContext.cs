@@ -21,15 +21,22 @@ namespace Bookstore.Models
             modelBuilder.Entity<Book>()
                 .Property(x => x.ISBN)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .HasMaxLength(13)
                 .IsRequired();
 
             modelBuilder.Entity<Book>()
-                .Property(x => x.Title)
-                .HasMaxLength(50);
+                .HasRequired(x => x.Author);
 
             modelBuilder.Entity<Book>()
-                .HasRequired(x => x.Author);
+                .Property(x => x.Description)
+                .IsRequired();
+
+            modelBuilder.Entity<Book>()
+                .Property(x => x.Publisher)
+                .IsRequired();
+
+            modelBuilder.Entity<Book>()
+                .Property(x => x.Format)
+                .IsRequired();
 
             modelBuilder.Entity<Book>()
                 .HasRequired(x => x.Genre);

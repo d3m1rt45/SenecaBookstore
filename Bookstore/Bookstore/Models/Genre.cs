@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bookstore.Models
 {
     public class Genre
     {
+        [Required]
         public string Name { get; set; }
 
-        public virtual IEnumerable<Book> Books { get; set; }
-
-        public Genre() { if (this.Books == null) Books = new List<Book>(); }
+        public virtual List<Book> Books { get; set; }
     }
 }

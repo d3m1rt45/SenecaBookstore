@@ -3,16 +3,6 @@
 @{
     ViewBag.Title = "Create";
 
-    List<SelectListItem> Genres = new List<SelectListItem>()
-    {
-        new SelectListItem { Text = "Non-Fiction", Value = "Non-Fiction" },
-        new SelectListItem { Text = "Fiction", Value = "Fiction" },
-        new SelectListItem { Text = "Business", Value = "Business" },
-        new SelectListItem { Text = "Philosophy", Value = "Philosophy" },
-        new SelectListItem { Text = "Spiritual", Value = "Spiritual" },
-        new SelectListItem { Text = "Smart Thinking", Value = "Smart Thinking" }
-    };
-
     List<SelectListItem> Formats = new List<SelectListItem>()
     {
         new SelectListItem { Text = "Hardcover", Value = "Hardcover" },
@@ -48,7 +38,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.AuthorName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.AuthorName, "AuthorName", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.AuthorName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.AuthorName, "", new { @class = "text-danger" })
@@ -56,9 +46,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.GenreName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.GenreName, "GenreName", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.GenreName, Genres, new { @class = "form-control" })
+            @Html.EditorFor(model => model.GenreName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.GenreName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -96,10 +86,18 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Dimensions, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.WidthInMm, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Dimensions, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Dimensions, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.WidthInMm, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WidthInMm, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HeightInMm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HeightInMm, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HeightInMm, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -110,13 +108,20 @@
             @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        @if (ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+                window.onload = function () {
+                    alert("@ViewBag.Message");
+                };
+            </script>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 <div>
@@ -124,5 +129,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")   
 }

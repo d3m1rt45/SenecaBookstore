@@ -10,16 +10,40 @@ namespace Bookstore.Models
 {
     public class Book
     {
+        [Required]
+        [StringLength(13, MinimumLength = 13)]
         public string ISBN { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string Title { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string AuthorName { get; set; }
+
+        [Required]
         public string GenreName { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
+        [Required]
         public string Publisher { get; set; }
+
+        [Required]
+        [Range(1, 1200)]
         public int NumberOfPages { get; set; }
-        public int WeightInGrams { get; set; }
-        public string Dimensions { get; set; }
+
+        [Required]
         public string Format { get; set; }
+
+        [Range(1, 1000)]
+        public int WeightInGrams { get; set; }
+        public int? WidthInMm { get; set; }
+        public int? HeightInMm { get; set; }
+        public int? LengthInMm { get; set; }
+
 
         [ForeignKey("GenreName")]
         public virtual Genre Genre { get; set; }

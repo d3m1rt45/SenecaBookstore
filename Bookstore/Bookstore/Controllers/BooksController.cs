@@ -49,16 +49,36 @@ namespace Bookstore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book)
         {
+            Book duplicate = db.Books.FirstOrDefault(x => x.ISBN == book.ISBN);
+            if (duplicate != null)
+            {
+                ViewBag.Message = "ISBN already exists in the database.";
+                return View(book);
+            }
+
             if (ModelState.IsValid)
             {
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);
 
-                author.Books.ToList().Add(book);
-                genre.Books.ToList().Add(book);
+                if (author == null)
+                    author = new Author() { Name = book.AuthorName };
+
+                if (genre == null)
+                    genre = new Genre() { Name = book.GenreName };
+
+                if (author.Books == null)
+                    author.Books = new List<Book>();
+
+                if (genre.Books == null)
+                    genre.Books = new List<Book>();
+
                 book.Genre = genre;
                 book.Author = author;
 
+                author.Books.Add(book);
+                genre.Books.Add(book);
+                
                 db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,14 +112,34 @@ namespace Bookstore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var isDuplicate = db.Books.Any(x => x.ISBN == book.ISBN);
+                if (isDuplicate)
+                {
+                    var duplicate = db.Books.Find(book.ISBN);
+                    db.Books.Remove(duplicate);
+                    db.SaveChanges();
+                }
+
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);
 
+                if (author == null)
+                    author = new Author() { Name = book.AuthorName };
+
+                if (genre == null)
+                    genre = new Genre() { Name = book.GenreName };
+
+                if (author.Books == null)
+                    author.Books = new List<Book>();
+
+                if (genre.Books == null)
+                    genre.Books = new List<Book>();
+
                 if (!author.Books.Contains(book))
-                    author.Books.ToList().Add(book);
+                    author.Books.Add(book);
 
                 if (!genre.Books.Contains(book))
-                    genre.Books.ToList().Add(book);
+                    genre.Books.Add(book);
 
                 book.Genre = genre;
                 book.Author = author;

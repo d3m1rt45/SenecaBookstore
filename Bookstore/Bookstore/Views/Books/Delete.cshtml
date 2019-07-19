@@ -17,6 +17,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Title)
+        </dd> 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthorName)
         </dd>
 
         <dt>
@@ -52,11 +60,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dimensions)
+            Dimensions
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Dimensions)
+            @Model.HeightInMm x @Model.WidthInMm mm ( [Height] x [Width] )
         </dd>
 
         <dt>
