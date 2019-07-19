@@ -112,13 +112,20 @@ namespace Bookstore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isDuplicate = db.Books.Any(x => x.ISBN == book.ISBN);
-                if (isDuplicate)
-                {
-                    var duplicate = db.Books.Find(book.ISBN);
-                    db.Books.Remove(duplicate);
-                    db.SaveChanges();
-                }
+                Book duplicate = db.Books.Find(book.ISBN);
+
+                Author prevAuthor = duplicate.Author;
+                Genre prevGenre = duplicate.Genre;
+
+                db.Books.Remove(duplicate);
+
+                if (prevAuthor.Books.Count() < 1)
+                    db.Authors.Remove(prevAuthor);
+
+                if (prevGenre.Books.Count() < 1)
+                    db.Genres.Remove(prevGenre);
+
+                db.SaveChanges();
 
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);
@@ -144,7 +151,7 @@ namespace Bookstore.Controllers
                 book.Genre = genre;
                 book.Author = author;
 
-                db.Books.AddOrUpdate(book);
+                db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -172,7 +179,17 @@ namespace Bookstore.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Book book = db.Books.Find(id);
+            Author author = book.Author;
+            Genre genre = book.Genre;
+
             db.Books.Remove(book);
+
+            if (author.Books.Count() < 1)
+                db.Authors.Remove(author);
+
+            if (genre.Books.Count() < 1)
+                db.Genres.Remove(genre);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
