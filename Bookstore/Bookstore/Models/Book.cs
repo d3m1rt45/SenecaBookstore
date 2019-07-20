@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -44,6 +45,11 @@ namespace Bookstore.Models
         public int? HeightInMm { get; set; }
         public int? LengthInMm { get; set; }
 
+        [DisplayName("Upload Image")]
+        public string ImagePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         [ForeignKey("GenreName")]
         public virtual Genre Genre { get; set; }

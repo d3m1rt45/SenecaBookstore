@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Bookstore.Models;
 using System.Data.Entity.Migrations;
+using System.IO;
 
 namespace Bookstore.Controllers
 {
@@ -49,8 +50,8 @@ namespace Bookstore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book)
         {
-            Book duplicate = db.Books.FirstOrDefault(x => x.ISBN == book.ISBN);
-            if (duplicate != null)
+            bool isDuplicate = db.Books.Any(x => x.ISBN == book.ISBN);
+            if (isDuplicate)
             {
                 ViewBag.Message = "ISBN already exists in the database.";
                 return View(book);
@@ -58,6 +59,12 @@ namespace Bookstore.Controllers
 
             if (ModelState.IsValid)
             {
+                string extension = Path.GetExtension(book.ImageFile.FileName);
+                string imageFileName = book.ISBN + extension;
+                book.ImagePath = "~/Images" + imageFileName;
+                imageFileName = Path.Combine(Server.MapPath("~/Images"), imageFileName);
+                book.ImageFile.SaveAs(imageFileName);
+
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);
 

@@ -13,7 +13,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
     
@@ -108,20 +108,28 @@
             @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
         </div>
     </div>
-        @if (ViewBag.Message != null)
-        {
-            <script type="text/javascript">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="ImageFile" required />
+        </div>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
                 window.onload = function () {
                     alert("@ViewBag.Message");
                 };
-            </script>
-        }
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        </script>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
 
 <div>
