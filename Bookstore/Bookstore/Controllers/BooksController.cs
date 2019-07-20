@@ -124,6 +124,7 @@ namespace Bookstore.Controllers
                 Author prevAuthor = duplicate.Author;
                 Genre prevGenre = duplicate.Genre;
 
+
                 db.Books.Remove(duplicate);
 
                 if (prevAuthor.Books.Count() < 1)
@@ -133,6 +134,18 @@ namespace Bookstore.Controllers
                     db.Genres.Remove(prevGenre);
 
                 db.SaveChanges();
+
+                if (book.ImageFile != null)
+                {
+                    string imageFileName = Path.Combine(Server.MapPath("~/Images"), duplicate.ImagePath);
+                    System.IO.File.Delete(imageFileName);
+
+                    string extension = Path.GetExtension(book.ImageFile.FileName);
+                    imageFileName = book.ISBN + extension;
+                    book.ImagePath = imageFileName;
+                    imageFileName = Path.Combine(Server.MapPath("~/Images"), imageFileName);
+                    book.ImageFile.SaveAs(imageFileName);
+                }
 
                 Author author = db.Authors.Find(book.AuthorName);
                 Genre genre = db.Genres.Find(book.GenreName);

@@ -3,16 +3,6 @@
 @{
     ViewBag.Title = "Edit";
 
-    List<SelectListItem> Genres = new List<SelectListItem>()
-    {
-        new SelectListItem { Text = "Non-Fiction", Value = "Non-Fiction" },
-        new SelectListItem { Text = "Fiction", Value = "Fiction" },
-        new SelectListItem { Text = "Business", Value = "Business" },
-        new SelectListItem { Text = "Philosophy", Value = "Philosophy" },
-        new SelectListItem { Text = "Spiritual", Value = "Spiritual" },
-        new SelectListItem { Text = "Smart Thinking", Value = "Smart Thinking" }
-    };
-
     List<SelectListItem> Formats = new List<SelectListItem>()
     {
         new SelectListItem { Text = "Hardcover", Value = "Hardcover" },
@@ -23,7 +13,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Books", FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
     
@@ -52,7 +42,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.GenreName, "GenreName", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.GenreName, Genres, new { @class = "form-control" })
+            @Html.EditorFor(model => model.GenreName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.GenreName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -110,6 +100,13 @@
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.Format, Formats, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2"><b>Update Image</b></div>
+        <div class="col-md-10">
+            <input type="file" name="ImageFile" />
         </div>
     </div>
 
