@@ -61,7 +61,7 @@ namespace Bookstore.Controllers
             {
                 string extension = Path.GetExtension(book.ImageFile.FileName);
                 string imageFileName = book.ISBN + extension;
-                book.ImagePath = "~/Images" + imageFileName;
+                book.ImagePath = imageFileName;
                 imageFileName = Path.Combine(Server.MapPath("~/Images"), imageFileName);
                 book.ImageFile.SaveAs(imageFileName);
 
@@ -188,6 +188,9 @@ namespace Bookstore.Controllers
             Book book = db.Books.Find(id);
             Author author = book.Author;
             Genre genre = book.Genre;
+
+            string imageFileName = Path.Combine(Server.MapPath("~/Images"), book.ImagePath);
+            System.IO.File.Delete(imageFileName);
 
             db.Books.Remove(book);
 
