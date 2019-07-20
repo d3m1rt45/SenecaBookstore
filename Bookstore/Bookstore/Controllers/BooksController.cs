@@ -202,8 +202,8 @@ namespace Bookstore.Controllers
             Author author = book.Author;
             Genre genre = book.Genre;
 
-            string imageFileName = Path.Combine(Server.MapPath("~/Images"), book.ImagePath);
-            System.IO.File.Delete(imageFileName);
+            //string imageFileName = Path.Combine(Server.MapPath("~/Images"), book.ImagePath);
+            //System.IO.File.Delete(imageFileName);
 
             db.Books.Remove(book);
 

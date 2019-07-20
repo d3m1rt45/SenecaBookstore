@@ -19,6 +19,9 @@ namespace Bookstore.Models
         [MaxLength(50)]
         public string Title { get; set; }
 
+        [DataType(DataType.Currency)]
+        public decimal Price { get; set; }
+
         [Required]
         [StringLength(50)]
         public string AuthorName { get; set; }
@@ -43,7 +46,7 @@ namespace Bookstore.Models
         public int WeightInGrams { get; set; }
         public int? WidthInMm { get; set; }
         public int? HeightInMm { get; set; }
-        public int? LengthInMm { get; set; }
+
 
         [DisplayName("Upload Image")]
         public string ImagePath { get; set; }
