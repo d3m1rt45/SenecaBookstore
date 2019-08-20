@@ -16,7 +16,7 @@ namespace Bookstore.Models
         public string ISBN { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Title { get; set; }
 
         [DataType(DataType.Currency)]
@@ -24,7 +24,7 @@ namespace Bookstore.Models
 
         [Required]
         [StringLength(50)]
-        public string AuthorName { get; set; }
+        public List<string> AuthorName { get; set; }
 
         [Required]
         public string GenreName { get; set; }
