@@ -24,7 +24,7 @@ namespace Bookstore.Models
 
         [Required]
         [StringLength(50)]
-        public List<string> AuthorName { get; set; }
+        public string AuthorName { get; set; }
 
         [Required]
         public string GenreName { get; set; }
