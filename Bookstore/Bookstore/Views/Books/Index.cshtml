@@ -12,52 +12,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ISBN)
+            @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GenreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Publisher)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Format)
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ISBN)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AuthorName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.GenreName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Publisher)
-    
-    <td>
-        @Html.DisplayFor(modelItem => item.Format)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ISBN }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ISBN }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ISBN })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Format)
+            </td>
+        </tr>
+    }
 
 </table>

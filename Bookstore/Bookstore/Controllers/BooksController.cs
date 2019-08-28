@@ -178,6 +178,22 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
+        public ActionResult ByGenre(string role)
+        {
+            Genre genre = db.Genres.Find(role);
+            List<Book> books = genre.Books;
+
+            return View(books);
+        }
+
+        public ActionResult ByAuthor(string role)
+        {
+            Author author = db.Authors.Find(role);
+            List<Book> books = author.Books;
+
+            return View(books);
+        }
+
         // GET: Books/Delete/5
         public ActionResult Delete(string id)
         {

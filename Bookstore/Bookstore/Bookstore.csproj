@@ -259,6 +259,8 @@
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Books\ByGenre.cshtml" />
+    <Content Include="Views\Books\ByAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

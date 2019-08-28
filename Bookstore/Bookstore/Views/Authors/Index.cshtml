@@ -1,33 +1,14 @@
 ﻿@model IEnumerable<Bookstore.Models.Author>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Authors";
 }
 
-<h2>Index</h2>
+<h2>Authors</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model)
+{
+    @Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null)
+    <br />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Name }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Name }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Name })
-        </td>
-    </tr>
 }
-
-</table>

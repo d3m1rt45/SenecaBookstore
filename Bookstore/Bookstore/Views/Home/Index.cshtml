@@ -40,8 +40,8 @@
 <!--TODO: Use Bootstrap Class instead of [style="margin-bottom:3em]-->
 <div class="row">
     <div class="col-xs-12">
-        <h4>Philosophy</h4>
-        <div class="row" style="margin-top:1em; margin-bottom:3em;">
+        <h4>@Html.ActionLink("Philosophy", "ByGenre", "Books", new { role = "Philosophy" }, null)</h4>
+        <div class="row" style="margin-bottom:3em;">
             <div class="col-xs-2">
                 <a href="#">
                     <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9780141018829.PNG" />
@@ -77,48 +77,49 @@
 </div>
 
 <!--SECTION: BUSINESS, FINANCE & LAW-->
-<div class="row">
-    <div class="col-xs-12">
-        <h4>Business, Finance and Law</h4>
-        <div class="row" style="margin-top:1em; margin-bottom:3em;">
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9780753555200.PNG" />
-                </a>
-            </div>
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9780857080097.PNG" />
-                </a>
-            </div>
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781473637498.PNG" />
-                </a>
-            </div>
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781781257937.PNG" />
-                </a>
-            </div>
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781786896070.PNG" />
-                </a>
-            </div>
-            <div class="col-xs-2 bg-dark">
-                <a href="#">
-                    <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781509841141.PNG" />
-                </a>
+    <div class="row">
+        
+        <div class="col-xs-12">
+            <h4>@Html.ActionLink("Business, Finance & Law", "ByGenre", "Books", new { role = "Business, Finance & Law" }, null)</h4>
+            <div class="row" style="margin-top:1em; margin-bottom:3em;">
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9780753555200.PNG" />
+                    </a>
+                </div>
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9780857080097.PNG" />
+                    </a>
+                </div>
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781473637498.PNG" />
+                    </a>
+                </div>
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781781257937.PNG" />
+                    </a>
+                </div>
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781786896070.PNG" />
+                    </a>
+                </div>
+                <div class="col-xs-2 bg-dark">
+                    <a href="#">
+                        <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/9781509841141.PNG" />
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <!--SECTION: CRIME & MYSTERY-->
 <div class="row">
     <div class="col-xs-12">
-        <h4>Crime & Mystery</h4>
+        <h4>@Html.ActionLink("Crime & Mystery", "ByGenre", "Books", new { role = "Crime & Mystery" }, null)</h4>
         <div class="row" style="margin-top:1em; margin-bottom:3em;">
             <div class="col-xs-2 bg-dark">
                 <a href="#">
@@ -157,7 +158,7 @@
 <!--SECTION: PSYCHOLOGY-->
 <div class="row">
     <div class="col-xs-12">
-        <h4>Psychology</h4>
+        <h4>@Html.ActionLink("Psychology", "ByGenre", "Books", new { role = "Psychology" }, null)</h4>
         <div class="row" style="margin-top:1em; margin-bottom:3em;">
             <div class="col-xs-2 bg-dark">
                 <a href="#">
@@ -196,5 +197,11 @@
 <!-- OTHER GENRES -->
 <div>
     <!--TODO: Style This Link Better-->
-    <a href="#"><h4>Other Genres</h4></a>
+    <h4>Other Genres</h4>
+
+    @Html.ActionLink("Fantasy", "ByGenre", "Books", new { role = "Fantasy" }, null) <br />
+    @Html.ActionLink("Health & Lifestyle", "ByGenre", "Books", new { role = "Health & Lifestyle" }, null) <br />
+    @Html.ActionLink("Personal Improvement", "ByGenre", "Books", new { role = "Personal Improvement" }, null) <br />
+    @Html.ActionLink("Romance", "ByGenre", "Books", new { role = "Romance" }, null) <br />
+
 </div>
