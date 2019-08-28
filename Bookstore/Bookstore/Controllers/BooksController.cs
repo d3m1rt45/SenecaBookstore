@@ -178,6 +178,12 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
+        public ActionResult ByISBN(string role)
+        {
+            Book book = db.Books.Find(role);
+            return View(book);
+        }
+
         public ActionResult ByGenre(string role)
         {
             Genre genre = db.Genres.Find(role);

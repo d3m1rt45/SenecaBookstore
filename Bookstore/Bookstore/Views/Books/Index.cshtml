@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -29,10 +29,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Author.Name)
+                <a href="/Books/ByISBN?role=@item.ISBN"> @Html.DisplayFor(modelItem => item.Title) </a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Author.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

@@ -8,7 +8,5 @@
 
 @foreach (var item in Model)
 {
-    @Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null)
-    <br />
-
+    @Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null) <br />
 }
