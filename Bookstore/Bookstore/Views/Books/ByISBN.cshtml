@@ -6,90 +6,103 @@
 
 <h2>@Model.Title</h2>
 
-<div>
+<div class="container">
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Author) 
-        </dt>
+        <div class="row">
+            <div class="col-xs-4">
+                <img style="width:100%" src="~/Images/@Model.ImagePath" />
+            </div>
 
-        <dd>
-            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br />
-        </dd>
+            <div class="col-xs-8">
+                <dt> @Html.DisplayNameFor(model => model.Author) </dt>
+                <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br /> </dd>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+            <div class="col-xs-8">
+                <dt> @Html.DisplayNameFor(model => model.Genre) </dt>
+                <dd> <a href="/Books/ByGenre?role=@Model.Genre.Name"> @Html.DisplayFor(model => model.Genre.Name) </a> </dd>
+            </div>
 
-        <dd>
-            <a href="/Books/ByGenre?role=@Model.Genre.Name"> @Html.DisplayFor(model => model.Genre.Name) </a>
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumberOfPages)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfPages)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NumberOfPages)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfPages)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Format)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Format)
+                </dd>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Format)
-        </dt>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.WeightInGrams)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.WeightInGrams)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Format)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.WidthInMm)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WeightInGrams)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.WidthInMm)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.WeightInGrams)
-        </dd>
+            <div class="col-xs-8">
+                <dt>
+                    @Html.DisplayNameFor(model => model.HeightInMm)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WidthInMm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WidthInMm)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HeightInMm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HeightInMm)
-        </dd>
-
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.HeightInMm)
+                </dd>
+                </div>
+            </div>
+</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ISBN }) |
