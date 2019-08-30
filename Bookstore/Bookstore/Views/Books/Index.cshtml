@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            Image
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
@@ -28,6 +31,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                <img style="height:30%" src="~/Images/@item.ImagePath" />
+            </td>
             <td>
                 <a href="/Books/ByISBN?role=@item.ISBN"> @Html.DisplayFor(modelItem => item.Title) </a>
             </td>
