@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Bookstore.Models.Book>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Books";
 }
 
-<h2>Index</h2>
+<h2>All Books</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            Image
+            Cover
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)

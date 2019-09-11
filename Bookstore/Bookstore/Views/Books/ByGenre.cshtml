@@ -14,6 +14,9 @@
 <table class="table">
     <tr>
         <th>
+            Cover
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
@@ -29,6 +32,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img style="height:30%;" src="~/Images/@item.ImagePath" />
+        </td>
         <td>
             <a href="/Books/ByAuthor?role=@item.AuthorName"> @Html.DisplayFor(modelItem => item.AuthorName) </a>
         </td>
