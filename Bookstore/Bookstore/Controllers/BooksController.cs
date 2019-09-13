@@ -19,7 +19,9 @@ namespace Bookstore.Controllers
         // GET: Books
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            var bookList = db.Books.ToList();
+
+            return View(bookList);
         }
 
         // GET: Books/Details/5
@@ -85,7 +87,7 @@ namespace Bookstore.Controllers
 
                 author.Books.Add(book);
                 genre.Books.Add(book);
-                
+
                 db.Books.Add(book);
                 db.SaveChanges();
                 return RedirectToAction("Index");
