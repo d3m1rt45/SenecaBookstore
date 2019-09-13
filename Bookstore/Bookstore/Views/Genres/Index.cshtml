@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Bookstore.Models.Genre>
+
+@{
+    ViewBag.Title = "Genres";
+}
+
+<h2>Genres</h2>
+
+@foreach (var item in Model)
+{
+    @Html.ActionLink(item.Name, "ByGenre", "Books", new { role = item.Name }, null) <br />    
+}

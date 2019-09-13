@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Bookstore.Models.Book>
+
+@{
+    ViewBag.Title = "Home Page";
+
+    var featured = Model.Take(4).ToArray();
+    var philosophy = Model.Where(x => x.GenreName == "Philosophy").Take(6).ToArray();
+    var business = Model.Where(x => x.GenreName == "Business, Finance and Law").Take(6).ToArray();
+    var crime = Model.Where(x => x.GenreName == "Crime and Mystery").Take(6).ToArray();
+    var psychology = Model.Where(x => x.GenreName == "Psychology").Take(6).ToArray();
+}
+
+<div class="container bg-light">
+
+    <div class="jumbotron">
+
+        <!-- TODO: STYLE THE HEADER BETTER -->
+        <!-- TODO: SORT OUT STYLE TAG-->
+
+        <h1 class="text-center mt-0" style="font-family:Lobster;"><b>Featured Titles</b></h1> <br />
+        <div class="row">
+
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="col-3">
+                    <a href="/Books/ByISBN?role=@featured[i].ISBN">
+                        <img class="hvr-grow-shadow w-100 h-100" src="~/Images/@featured[i].ImagePath" />
+                    </a>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <!--TODO: Make Sections Responsive-->
+    <!--SECTION: PHILOSOPHY-->
+    <!--TODO: Use Bootstrap Class instead of [style="margin-bottom:3em]-->
+    <div class="row">
+        <div class="col-12">
+            <h3 style="font-family:Lobster;">@Html.ActionLink("Philosophy", "ByGenre", "Books", new { role = "Philosophy" }, null)</h3>
+            <div class="row mt-3 mb-5">
+                @for (int i = 0; i < 6; i++)
+                {
+                    <div class="col-2">
+                        <a href="/Books/ByISBN?role=@philosophy[i].ISBN">
+                            <img class="hvr-grow-shadow w-100 h-100" src="~/Images/@philosophy[i].ImagePath" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!--SECTION: BUSINESS, FINANCE & LAW-->
+    <div class="row">
+        <div class="col-12">
+            <h3 style="font-family:Lobster;">
+                @Html.ActionLink("Business, Finance and Law", "ByGenre", "Books", new { role = "Business, Finance and Law" }, null)</h4>
+                <div class="row mt-3 mb-5">
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        <div class="col-2">
+                            <a href="/Books/ByISBN?role=@business[i].ISBN">
+                                <img class="hvr-grow-shadow w-100 h-100" style="width:100%; height:100%" src="~/Images/@business[i].ImagePath" />
+                            </a>
+                        </div>
+                    }
+                </div> 
+        </div>
+    </div>
+
+    <!--SECTION: CRIME & MYSTERY-->
+    <div class="row">
+        <div class="col-12">
+            <h3 style="font-family:Lobster;">@Html.ActionLink("Crime and Mystery", "ByGenre", "Books", new { role = "Crime and Mystery" }, null)</h3>
+            <div class="row mt-3 mb-5">
+                @for (int i = 0; i < 6; i++)
+                {
+                    <div class="col-2">
+                        <a href="/Books/ByISBN?role=@crime[i].ISBN">
+                            <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/@crime[i].ImagePath" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!--SECTION: PSYCHOLOGY-->
+    <div class="row">
+        <div class="col-12">
+            <h3 style="font-family:Lobster;">@Html.ActionLink("Psychology", "ByGenre", "Books", new { role = "Psychology" }, null)</h3>
+            <div class="row mt-3 mb-5">
+                @for (int i = 0; i < 6; i++)
+                {
+                    <div class="col-2">
+                        <a href="/Books/ByISBN?role=@psychology[i].ISBN">
+                            <img class="hvr-grow-shadow" style="width:100%; height:100%" src="~/Images/@psychology[i].ImagePath" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- OTHER GENRES -->
+    <div>
+        <!--TODO: Style This Link Better-->
+        <h3 style="font-family:Lobster;">Other Genres</h3>
+
+        <h3 style="font-family:Lobster;">
+            <div class="row">
+                <div class="col-3"> @Html.ActionLink("Fantasy", "ByGenre", "Books", new { role = "Fantasy" }, null) </div>
+                <div class="col-3"> @Html.ActionLink("Health and Lifestyle", "ByGenre", "Books", new { role = "Health and Lifestyle" }, null) </div>
+                <div class="col-3">@Html.ActionLink("Self-Help", "ByGenre", "Books", new { role = "Self-Help" }, null) </div>
+                <div class="col-3"> @Html.ActionLink("Romance", "ByGenre", "Books", new { role = "Romance" }, null)</div>
+            </div>
+        </h3>
+
+    </div>
+</div>
