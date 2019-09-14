@@ -293,7 +293,6 @@
     <Content Include="Views\Books\ByGenre.cshtml" />
     <Content Include="Views\Books\ByAuthor.cshtml" />
     <Content Include="Views\Books\ByISBN.cshtml" />
-    <Content Include="Views\Books\ByISBN - Copy.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
