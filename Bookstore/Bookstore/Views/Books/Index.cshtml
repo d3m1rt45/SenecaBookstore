@@ -15,7 +15,7 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-2 my-3 d-flex align-items-stretch">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
                 <div class="card w-100 bg-light hvr-grow-shadow">
                     <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN">
                         <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" />
