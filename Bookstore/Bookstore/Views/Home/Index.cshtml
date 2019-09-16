@@ -5,6 +5,7 @@
 
     Bookstore.Models.Book[][] genres = new Bookstore.Models.Book[5][];
 
+
     genres[0] = Model.Take(4).ToArray();
     genres[1] = Model.Where(x => x.GenreName == "Philosophy").Take(6).ToArray();
     genres[2] = Model.Where(x => x.GenreName == "Business, Finance and Law").Take(6).ToArray();
@@ -15,14 +16,14 @@
 <div class="container bg-light">
 
 <!-- Featured Titles (4) -->
-    <div class="jumbotron py-5">
+    <div class="jumbotron pt-5 pb-0">
         <h1 class="text-center mt-0"><b>Featured Titles</b></h1> <br />
         <div class="row">
             @for (int i = 0; i < 4; i++)
             {
-                <div class="col-3">
+                <div class="col-6 col-md-3">
                     <a href="/Books/ByISBN?role=@genres[0][i].ISBN">
-                        <img class="hvr-grow-shadow w-100 h-100" src="~/Images/@genres[0][i].ImagePath" />
+                        <img class="hvr-grow-shadow w-100 mb-5" src="~/Images/@genres[0][i].ImagePath" />
                     </a>
                 </div>
             }
@@ -42,7 +43,7 @@
                 <div class="row mt-3">
                     @for (int i = 0; i < 6; i++)
                     {
-                        <div class="mb-3 col-2">
+                        <div class="mb-3 col-6 col-sm-4 col-md-2">
                             <a href="/Books/ByISBN?role=@genres[x][i].ISBN">
                                 <img class="hvr-grow-shadow w-100 h-100" src="~/Images/@genres[x][i].ImagePath" />
                             </a>
@@ -57,15 +58,14 @@
     
 <!-- Other Genres -->
     <div>
-        <h3 style="font-family:Lobster;">Other Genres</h3>
-
-        <h3 style="font-family:Lobster;">
-            <div class="row">
-                <div class="col-3"> @Html.ActionLink("Fantasy", "ByGenre", "Books", new { role = "Fantasy" }, null) </div>
-                <div class="col-3"> @Html.ActionLink("Health and Lifestyle", "ByGenre", "Books", new { role = "Health and Lifestyle" }, null) </div>
-                <div class="col-3">@Html.ActionLink("Self-Help", "ByGenre", "Books", new { role = "Self-Help" }, null) </div>
-                <div class="col-3"> @Html.ActionLink("Romance", "ByGenre", "Books", new { role = "Romance" }, null)</div>
+        <h3>Other Genres</h3>
+        <h5>
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("Fantasy", "ByGenre", "Books", new { role = "Fantasy" }, null)
+                @Html.ActionLink("Health and Lifestyle", "ByGenre", "Books", new { role = "Health and Lifestyle" }, null)
+                @Html.ActionLink("Self-Help", "ByGenre", "Books", new { role = "Self-Help" }, null)
+                @Html.ActionLink("Romance", "ByGenre", "Books", new { role = "Romance" }, null)
             </div>
-        </h3>
+        </h5>
     </div>
 </div>
