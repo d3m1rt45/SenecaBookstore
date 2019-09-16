@@ -3,10 +3,6 @@
     padding-bottom: 20px;
 }
 
-#featured-titles {
-    font-family: 'Abril Fatface', cursive;
-}
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -25,4 +21,59 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Header Styles */
+h1 {
+    font-family: Merriweather, cursive;
+    font-weight: bold;
+}
+h2,h3,h4,h5 {
+    font-family: Merriweather, cursive;
+    color:black;
+}
+
+
+/* Navigation Bar Styles*/
+.navbar-brand,
+.navbar-nav {
+    font-family: Merriweather, cursive;
+}
+
+
+/* merriweather-regular - latin */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: url('Fonts/merriweather-v21-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Merriweather Regular'), local('Merriweather-Regular'), url('Fonts/merriweather-v21-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('Fonts/merriweather-v21-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('Fonts/merriweather-v21-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('Fonts/merriweather-v21-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('Fonts/merriweather-v21-latin-regular.svg#Merriweather') format('svg'); /* Legacy iOS */
+}
+/* merriweather-700 - latin */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 700;
+    src: url('Fonts/merriweather-v21-latin-700.eot'); /* IE9 Compat Modes */
+    src: local('Merriweather Bold'), local('Merriweather-Bold'), url('Fonts/merriweather-v21-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('Fonts/merriweather-v21-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+    url('Fonts/merriweather-v21-latin-700.woff') format('woff'), /* Modern Browsers */
+    url('Fonts/merriweather-v21-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('Fonts/merriweather-v21-latin-700.svg#Merriweather') format('svg'); /* Legacy iOS */
+}
+/* merriweather-900 - latin */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 900;
+    src: url('Fonts/merriweather-v21-latin-900.eot'); /* IE9 Compat Modes */
+    src: local('Merriweather Black'), local('Merriweather-Black'), url('Fonts/merriweather-v21-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('Fonts/merriweather-v21-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+    url('Fonts/merriweather-v21-latin-900.woff') format('woff'), /* Modern Browsers */
+    url('Fonts/merriweather-v21-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('Fonts/merriweather-v21-latin-900.svg#Merriweather') format('svg'); /* Legacy iOS */
 }

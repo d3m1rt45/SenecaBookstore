@@ -20,7 +20,6 @@ namespace Bookstore.Controllers
         public ActionResult Index()
         {
             var bookList = db.Books.ToList();
-
             return View(bookList);
         }
 

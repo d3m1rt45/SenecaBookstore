@@ -182,6 +182,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BooksToHome.cs" />
     <Compile Include="Models\BookstoreContext.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -305,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Fonts\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
