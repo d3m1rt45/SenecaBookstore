@@ -4,9 +4,13 @@
     ViewBag.Title = "Authors";
 }
 
-<h2>Authors</h2>
+<h2 class="mt-4">All Authors</h2>
 
-@foreach (var item in Model)
-{
-    @Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null) <br />
-}
+<hr />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+         <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null)</h5>
+    }
+</div>

@@ -4,9 +4,13 @@
     ViewBag.Title = "Genres";
 }
 
-<h2>Genres</h2>
+<h2 class="mt-4">All Genres</h2>
 
-@foreach (var item in Model)
-{
-    @Html.ActionLink(item.Name, "ByGenre", "Books", new { role = item.Name }, null) <br />    
-}
+<hr />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByGenre", "Books", new { role = item.Name }, null)</h5>
+    }
+</div>
