@@ -11,40 +11,40 @@
             <img class="mt-5" style="width:100%" src="~/Images/@Model.ImagePath" />
         </div>
 
-        <!-- INFO -->
-        <div class="col-3 offset-1 text-left">
-            <h2 class="mt-5 pb-2">@Html.DisplayFor(model => model.Title)</h2>
+        <div class="col-6">
+            <div class="row">
+                <h2 class="col-12 mt-5 pb-2">@Html.DisplayFor(model => model.Title)</h2>
+                <div class="col-8">
+                    <dt> Author </dt>
+                    <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br /> </dd>
 
-            <dt> Author </dt>
-            <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br /> </dd>
+                    <dt> Genre </dt>
+                    <dd> <a href="/Books/ByGenre?role=@Model.Genre.Name"> @Html.DisplayFor(model => model.Genre.Name) </a> </dd>
 
-            <dt> Genre </dt>
-            <dd> <a href="/Books/ByGenre?role=@Model.Genre.Name"> @Html.DisplayFor(model => model.Genre.Name) </a> </dd>
+                    <dt> Price </dt>
+                    <dd> @Html.DisplayFor(model => model.Price) </dd>
 
-            <dt> Price </dt>
-            <dd> @Html.DisplayFor(model => model.Price) </dd>
+                    <dt> Publisher </dt>
+                    <dd> @Html.DisplayFor(model => model.Publisher) </dd>
 
-            <dt> Publisher </dt>
-            <dd> @Html.DisplayFor(model => model.Publisher) </dd>
+                    <dt> Pages </dt>
+                    <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
 
-            <dt> Pages </dt>
-            <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
+                    <dt> Format </dt>
+                    <dd> @Html.DisplayFor(model => model.Format) </dd>
 
-            <dt> Format </dt>
-            <dd> @Html.DisplayFor(model => model.Format) </dd>
+                    <dt> Weight</dt>
+                    <dd> @Html.DisplayFor(model => model.WeightInGrams)g </dd>
 
-            <dt> Weight</dt>
-            <dd> @Html.DisplayFor(model => model.WeightInGrams)g </dd>
-
-            <dt> Dimensions</dt>
-            <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
-        </div>
-
-        <!-- PURCHASE BUTTON -->
-        <div class="col-2 d-flex flex-column-reverse align-items-end">
-            <input type="button" value="Back" class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()"/>
-            <input type="button" value="Purchase" class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100"/>
-        </div>
+                    <dt> Dimensions</dt>
+                    <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
+                </div>
+                <div class="col-3 d-flex flex-column-reverse align-items-end">
+                    <input type="button" value="Back" class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()"/>
+                    <input type="button" value="Purchase" class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100"/>
+                </div>
+            </div><!-- row -->
+        </div><!-- col -->
 
         <!-- DESCRIPTION -->
         <div class="my-5 col-10 offset-1">
@@ -58,4 +58,4 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ISBN }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-</dl>#
+</dl>
