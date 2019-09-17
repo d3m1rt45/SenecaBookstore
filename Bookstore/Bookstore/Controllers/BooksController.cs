@@ -17,9 +17,21 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string order)
         {
-            var bookList = db.Books.ToList();
+            List<Book> bookList;
+
+            if (order == "AtoZ")
+                bookList = db.Books.OrderBy(x => x.Title).ToList();
+            else if (order == "ZtoA")
+                bookList = db.Books.OrderByDescending(x => x.Title).ToList();
+            else if (order == "lowToHigh")
+                bookList = db.Books.OrderBy(x => x.Price).ToList();
+            else if (order == "highToLow")
+                bookList = db.Books.OrderByDescending(x => x.Price).ToList();
+            else
+                bookList = db.Books.ToList();
+
             return View(bookList);
         }
 
@@ -136,7 +148,7 @@ namespace Bookstore.Controllers
 
                 db.SaveChanges();
 
-                if (book.ImageFile != null)
+                if (book.ImageFile.FileName != null)
                 {
                     string imageFileName = Path.Combine(Server.MapPath("~/Images"), duplicate.ImagePath);
                     System.IO.File.Delete(imageFileName);
