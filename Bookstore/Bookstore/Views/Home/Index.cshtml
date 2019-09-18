@@ -3,7 +3,19 @@
 @{
     ViewBag.Title = "Home Page";
 
-    Bookstore.Models.Book[][] genres = new Bookstore.Models.Book[5][];
+    var genres = new Bookstore.Models.Book[5][];
+    var otherGenres = new List<string>();
+
+    foreach (var item in Model)
+    {
+        if (item.GenreName != "Philosophy" && 
+            item.GenreName != "Business, Finance and Law" &&
+            item.GenreName != "Crime and Mystery" &&
+            item.GenreName != "Psychology")
+        {
+            otherGenres.Add(item.GenreName);
+        }
+    }
 
     genres[0] = Model.Take(4).ToArray();
     genres[1] = Model.Where(x => x.GenreName == "Philosophy").Take(6).ToArray();
@@ -19,52 +31,69 @@
         <h1 class="text-center mt-0"><b>Featured Titles</b></h1> <br />
         <div class="row">
             @for (int i = 0; i < 4; i++)
-            {
+{
                 <div class="col-6 col-md-3">
                     <a href="/Books/ByISBN?role=@genres[0][i].ISBN">
                         <img class="hvr-grow-shadow w-100 mb-5" src="~/Images/@genres[0][i].ImagePath" />
                     </a>
                 </div>
-            }
+}
         </div>
     </div> <hr/>
 
 <!-- Sections by Genre -->
     @for (int x = 1; x < 5; x++)
-    {
+{
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center py-1">
                     <h4 class="my-0">@genres[x][0].GenreName</h4>
-                    <!-- TODO: Make this a Functional Button-->
-                    <input type="button" class="btn btn-warning text-center py-1 hvr-grow-shadow" value="See More" onclick="window.location='@Url.Action("ByGenre", "Books", new {role = genres[x][0].GenreName})'" />
+                    <input type="button" class="btn btn-warning text-center py-1 hvr-grow-shadow" value="See More" onclick="window.location='@Url.Action("ByGenre", "Books", new { role = genres[x][0].GenreName })'" />
                 </div>
+
                 <div class="row mt-3">
                     @for (int i = 0; i < 6; i++)
                     {
-                        <div class="mb-3 col-6 col-sm-4 col-md-2">
-                            <a href="/Books/ByISBN?role=@genres[x][i].ISBN">
-                                <img class="hvr-grow-shadow w-100 h-100" src="~/Images/@genres[x][i].ImagePath" />
-                            </a>
+                        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
+                            <div class="card w-100 bg-light hvr-grow-rotate">
+                                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@genres[x][i].ISBN">
+                                    <img class="card-img-top w-100" src="~/Images/@genres[x][i].ImagePath" alt="Book cover" />
+                                    <div class="card-body d-flex flex-column text-center">
+                                        @if (genres[x][i].Title.Length > 11)
+                                        {
+                                            <p class="card-title font-weight-bold">@genres[x][i].Title.Substring(0, 11)...</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-title font-weight-bold">@genres[x][i].Title</p>
+                                        }
+                                        @if (genres[x][i].AuthorName.Length > 12)
+                                        {
+                                            <p class="card-text">@genres[x][i].AuthorName.Substring(0, 12)...</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">@genres[x][i].AuthorName</p>
+                                        }
+                                        <p class="card-text font-weight-bold">£@genres[x][i].Price</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    }
+}
                 </div>
                 <hr />
             </div>
         </div>
-    }
+}
     
     
 <!-- Other Genres -->
-    <div>
-        <h3>Other Genres</h3>
-        <h5>
-            <div class="d-flex justify-content-between">
-                @Html.ActionLink("Fantasy", "ByGenre", "Books", new { role = "Fantasy" }, null)
-                @Html.ActionLink("Health and Lifestyle", "ByGenre", "Books", new { role = "Health and Lifestyle" }, null)
-                @Html.ActionLink("Self-Help", "ByGenre", "Books", new { role = "Self-Help" }, null)
-                @Html.ActionLink("Romance", "ByGenre", "Books", new { role = "Romance" }, null)
-            </div>
-        </h5>
-    </div>
+<div class="row">
+    <h3 class="col-12">Other Genres</h3>
+    @foreach (var genre in otherGenres)
+    {
+        @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { @class = "col-4 h5", style = "font-family: Merriweather, cursive" })
+    }
+</div>
 </div>
