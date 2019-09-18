@@ -90,10 +90,10 @@
     
 <!-- Other Genres -->
 <div class="row">
-    <h3 class="col-12">Other Genres</h3>
+    <h3 class="col-12 mb-3">Other Genres</h3>
     @foreach (var genre in otherGenres)
     {
-        @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { @class = "col-4 h5", style = "font-family: Merriweather, cursive" })
+        @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { id = "otherGenres", @class = "h5 mb-3 col-12 col-sm-6 col-lg-4" })
     }
 </div>
 </div>
