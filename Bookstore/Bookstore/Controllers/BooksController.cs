@@ -35,8 +35,12 @@ namespace Bookstore.Controllers
                 bookList = bookList.OrderBy(x => x.Price);
             else if (order == "highToLow")
                 bookList = bookList.OrderByDescending(x => x.Price);
-            
-            return View(bookList.ToList());
+
+            if (bookList != null)
+                return View(bookList.ToList());
+            else
+                return View();
+
         }
 
         // GET: Books/Details/5
