@@ -28,7 +28,8 @@ h1 {
     font-family: Merriweather, cursive;
     font-weight: bold;
 }
-h2,h3,h4,h5,{
+
+h2,h3,h4,h5 {
     font-family: Merriweather, cursive;
     color:black;
 }

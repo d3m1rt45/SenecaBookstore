@@ -4,55 +4,87 @@
     ViewBag.Title = "Index";
 }
 
-<div class="d-flex col-12 pt-4 justify-content-between align-items-center">
-    <h2 class="d-inline-block">All Titles</h2>
-    <div class="d-inline-block text-danger">
-        
+<!--PageHead-->
+<div class="d-flex pt-4 justify-content-between align-items-center">
 
-        <select class="btn btn-warning hvr-grow-shadow" id="UrlList" onchange="doNavigate()">
+    <!--Header-->
+    <h2 class="d-block align-self-start font-weight-bold">All Titles</h2>
+
+    <!--SortBy-->
+    <div class="mr-auto ml-2 align-self-start">
+        <select class="btn btn-outline-dark bg-white text-dark py-1" id="UrlList" onchange="SortBy()">
             <option value="@Url.Action("Index", "Books", null)">Sort by...</option>
             <option value="@Url.Action("Index", "Books", new { order = "AtoZ" })">Title (a-z)</option>
             <option value="@Url.Action("Index", "Books", new { order = "ZtoA" })">Title (z-a)</option>
             <option value="@Url.Action("Index", "Books", new { order = "lowToHigh" })">Price ↓</option>
             <option value="@Url.Action("Index", "Books", new { order = "highToLow" })">Price ↑</option>
         </select>
-
         <script>
-            function doNavigate() {
+            function SortBy() {
                 window.location.href = document.getElementById("UrlList").value;
             }
         </script>
     </div>
+
+    <!--SearchBar-->
+    <div class="d-inline-block align-self-start ">
+        @using (Html.BeginForm())
+        {
+            <div class="input-group">
+                @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search Titles" })
+                <div class="input-group-prepend">
+                    <input class="btn btn-dark rounded hvr-grow-shadow" type="submit" value =">" />
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
 
 <hr />
 
+<!--BookList-->
 <div class="row">
-    @foreach (var item in Model)
+    @if (Model.FirstOrDefault() != null)
     {
-        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
-            <div class="card w-100 bg-light hvr-grow-rotate">
-                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN">
-                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" />
-                    <div class="card-body d-flex flex-column text-center">
-                        @if (item.Title.Length > 11) {
-                            <p class="card-title font-weight-bold">@item.Title.Substring(0, 11)...</p>
-                        } else {
-                            <p class="card-title font-weight-bold">@item.Title</p>
-                        }
-                        @if (item.AuthorName.Length > 12) {
-                            <p class="card-text">@item.AuthorName.Substring(0, 12)...</p>
-                        } else {
-                            <p class="card-text">@item.AuthorName</p>
-                        }
-                        <p class="card-text font-weight-bold">£@item.Price</p>
-                    </div>
-                </a>
+        foreach (var item in Model)
+        {
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
+                <div class="card w-100 bg-light hvr-grow-rotate">
+                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN">
+                        <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" />
+                        <div class="card-body d-flex flex-column text-center">
+                            @if (item.Title.Length > 11)
+                            {
+                                <p class="card-title font-weight-bold py-0 my-0">@item.Title.Substring(0, 11)...</p>
+                            }
+                            else
+                            {
+                                <p class="card-title font-weight-bold py-0 my-0">@item.Title</p>
+                            }
+                            @if (item.AuthorName.Length > 12)
+                            {
+                                <p class="card-text py-0 my-0">@item.AuthorName.Substring(0, 12)...</p>
+                            }
+                            else
+                            {
+                                <p class="card-text py-0 my-0">@item.AuthorName</p>
+                            }
+                            <p class="card-text font-weight-bold py-0 my-0">£@item.Price</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <h3 class="col mb-3">No Titles Found...</h3>
     }
 </div>
 
+<!--TODO: Fix this to the perception of users.-->
+<!--BackButton-->
 <div class="d-flex justify-content-between align-items-center pt-2">
     <input type="button" value="Back" class="d-inline-block btn-dark font-weight-bold text-uppercase text-black py-1 px-4" onclick="history.back()" />
     <p class="d-inline-block text-right mb-0"> @Html.ActionLink("Create New", "Create") </p>
