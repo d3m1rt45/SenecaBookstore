@@ -17,22 +17,26 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index(string order)
+        public ViewResult Index(string order, string search)
         {
-            List<Book> bookList;
+            var bookList = from b in db.Books
+                           select b;
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                bookList = bookList.Where(x => x.Title.Contains(search));
+            }
 
             if (order == "AtoZ")
-                bookList = db.Books.OrderBy(x => x.Title).ToList();
+                bookList = bookList.OrderBy(x => x.Title);
             else if (order == "ZtoA")
-                bookList = db.Books.OrderByDescending(x => x.Title).ToList();
+                bookList = bookList.OrderByDescending(x => x.Title);
             else if (order == "lowToHigh")
-                bookList = db.Books.OrderBy(x => x.Price).ToList();
+                bookList = bookList.OrderBy(x => x.Price);
             else if (order == "highToLow")
-                bookList = db.Books.OrderByDescending(x => x.Price).ToList();
-            else
-                bookList = db.Books.ToList();
-
-            return View(bookList);
+                bookList = bookList.OrderByDescending(x => x.Price);
+            
+            return View(bookList.ToList());
         }
 
         // GET: Books/Details/5
