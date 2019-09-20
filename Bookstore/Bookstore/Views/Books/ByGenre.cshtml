@@ -8,19 +8,21 @@
 <h2 class="mt-4">@genreName Titles</h2>
 
 <!--SortBy-->
-<div class="mr-auto ml-2 align-self-start">
-    <select class="btn btn-outline-dark bg-white text-dark py-1" id="UrlList" onchange="SortBy()">
-        <option value="@Url.Action("ByGenre", "Books", null)">Sort by...</option>
-        <option value="@Url.Action("ByGenre", "Books", new { order = "AtoZ", role = genreName })">Title (a-z)</option>
-        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "ZtoA" })">Title (z-a)</option>
-        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "lowToHigh" })">Price ↓</option>
-        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "highToLow" })">Price ↑</option>
-    </select>
-    <script>
-        function SortBy() {
-            window.location.href = document.getElementById("UrlList").value;
-        }
-    </script>
+<div class="d-flex justify-content-between">
+    <div class="d-inline-block">
+        <select class="btn btn-outline-dark bg-white text-dark py-1" id="UrlList" onchange="SortBy()">
+            <option value="@Url.Action("ByGenre", "Books", null)">Sort by...</option>
+            <option value="@Url.Action("ByGenre", "Books", new { order = "AtoZ", role = genreName })">Title (a-z)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "lowToHigh" })">Price ↓</option>
+            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "highToLow" })">Price ↑</option>
+        </select>
+        <script>
+            function SortBy() {
+                window.location.href = document.getElementById("UrlList").value;
+            }
+        </script>
+    </div>
 </div>
 
 <hr />
