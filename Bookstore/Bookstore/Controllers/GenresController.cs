@@ -16,9 +16,24 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Genres
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string search, string order)
         {
-            return View(await db.Genres.ToListAsync());
+            var genreQuery = db.Genres.AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+                genreQuery = genreQuery.Where(g => g.Name.Contains(search));
+
+            switch (order)
+            {
+                case "AtoZ":
+                    genreQuery = genreQuery.OrderBy(g => g.Name);
+                    break;
+                case "ZtoA":
+                    genreQuery = genreQuery.OrderByDescending(g => g.Name);
+                    break;
+            }
+
+            return View(await genreQuery.ToListAsync());
         }
 
         // GET: Genres/Details/5
