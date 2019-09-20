@@ -30,21 +30,29 @@ namespace Bookstore.Controllers
             }
 
             if (order == "AtoZ")
+            { 
                 booksQuery = from b in booksQuery
                              orderby b.Title
-                           select b;
+                             select b;
+            }
             else if (order == "ZtoA")
+            { 
                 booksQuery = from b in booksQuery
-                           orderby b.Title descending
-                           select b;
+                             orderby b.Title descending
+                             select b;
+            }
             else if (order == "lowToHigh")
+            { 
                 booksQuery = from b in booksQuery
-                           orderby b.Price
-                           select b;
+                             orderby b.Price
+                             select b;
+            }
             else if (order == "highToLow")
+            { 
                 booksQuery = from b in booksQuery
-                           orderby b.Price descending
-                           select b;
+                             orderby b.Price descending
+                             select b;
+            }
 
             if (booksQuery != null)
                 return View(booksQuery.ToList());
