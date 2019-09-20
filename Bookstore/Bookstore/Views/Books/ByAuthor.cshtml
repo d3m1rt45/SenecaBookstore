@@ -1,10 +1,52 @@
 ﻿@model IEnumerable<Bookstore.Models.Book>
 
 @{
-    ViewBag.Title = @Model.FirstOrDefault().AuthorName + " Titles";
+    var authorName = Model.FirstOrDefault().AuthorName;
+    ViewBag.Title = authorName;
 }
 
-<h2 class="mt-4">@Model.FirstOrDefault().AuthorName Titles</h2>
+<!--PageHeadStart-->
+    <div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
+        <!--Header-->
+        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@authorName</h2>
+
+        <!--SortBy-->
+        <select class="btn btn-outline-dark bg-white text-dark p-1" id="UrlList" onchange="SortBy()">
+            <option value="@Url.Action("ByAuthor", "Books", null)">Sort by...</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "lowToHigh" })">Price ↓</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "highToLow" })">Price ↑</option>
+        </select>
+        <script>
+            function SortBy() {
+                window.location.href = document.getElementById("UrlList").value;
+            }
+        </script>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <!--Map-->
+        <h5 class="font-italic my-0 py-0">
+            @Html.ActionLink("Home", "Index", "Home", null, null) /
+            @Html.ActionLink("Authors", "Index", "Authors", null, null) /
+            @authorName
+        </h5>
+
+        <!--SearchBar-->
+        <div class="d-inline-block align-self-start">
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    @Html.TextBox("search", null, new { @class = "form-control text-dark ", placeholder = "Search..." })
+                    <div class="input-group-prepend">
+                        <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+<!--PageHeadEnd-->
 
 <hr />
 

@@ -5,14 +5,14 @@
 }
 
 <!--PageHead-->
-<div class="d-flex pt-4 justify-content-between align-items-center">
+    <div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
 
-    <!--Header-->
-    <h2 class="d-block align-self-start font-weight-bold">All Titles</h2>
+        <!--Header-->
+        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">All Titles</h2>
 
-    <!--SortBy-->
-    <div class="mr-auto ml-2 align-self-start">
-        <select class="btn btn-outline-dark bg-white text-dark py-1" id="UrlList" onchange="SortBy()">
+
+        <!--SortBy-->
+        <select class="btn btn-outline-dark bg-white text-dark p-1" id="UrlList" onchange="SortBy()">
             <option value="@Url.Action("Index", "Books", null)">Sort by...</option>
             <option value="@Url.Action("Index", "Books", new { order = "AtoZ" })">Title (a-z)</option>
             <option value="@Url.Action("Index", "Books", new { order = "ZtoA" })">Title (z-a)</option>
@@ -26,20 +26,27 @@
         </script>
     </div>
 
+<div class="d-flex justify-content-between align-items-center">
+    <!--Map-->
+    <h5 class="font-italic my-0 py-0">
+        @Html.ActionLink("Home", "Index", "Home", null, null) / 
+        Books
+    </h5>
+
     <!--SearchBar-->
-    <div class="d-inline-block align-self-start ">
+    <div class="d-inline-block align-self-start">
         @using (Html.BeginForm())
         {
             <div class="input-group">
-                @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search Titles" })
+                @Html.TextBox("search", null, new { @class = "form-control text-dark ", placeholder = "Search..." })
                 <div class="input-group-prepend">
-                    <input class="btn btn-dark rounded hvr-grow-shadow" type="submit" value =">" />
+                    <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         }
     </div>
-</div>
 
+</div>
 
 <hr />
 
@@ -81,11 +88,4 @@
     {
         <h3 class="col mb-3">No Titles Found...</h3>
     }
-</div>
-
-<!--TODO: Fix this to the perception of users.-->
-<!--BackButton-->
-<div class="d-flex justify-content-between align-items-center pt-2">
-    <input type="button" value="Back" class="d-inline-block btn-dark font-weight-bold text-uppercase text-black py-1 px-4" onclick="history.back()" />
-    <p class="d-inline-block text-right mb-0"> @Html.ActionLink("Create New", "Create") </p>
 </div>

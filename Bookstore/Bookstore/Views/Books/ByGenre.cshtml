@@ -5,24 +5,48 @@
     ViewBag.Title = genreName + " Titles";
 }
 
-<h2 class="mt-4">@genreName Titles</h2>
+<!--PageHead-->
+<div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
 
-<!--SortBy-->
-<div class="d-flex justify-content-between">
-    <div class="d-inline-block">
-        <select class="btn btn-outline-dark bg-white text-dark py-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("ByGenre", "Books", null)">Sort by...</option>
-            <option value="@Url.Action("ByGenre", "Books", new { order = "AtoZ", role = genreName })">Title (a-z)</option>
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "ZtoA" })">Title (z-a)</option>
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "lowToHigh" })">Price ↓</option>
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "highToLow" })">Price ↑</option>
-        </select>
-        <script>
-            function SortBy() {
-                window.location.href = document.getElementById("UrlList").value;
-            }
-        </script>
+    <!--Header-->
+    <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@genreName</h2>
+
+    <!--SortBy-->
+    <select class="btn btn-outline-dark bg-white text-dark p-1" id="UrlList" onchange="SortBy()">
+        <option value="@Url.Action("ByGenre", "Books", null)">Sort by...</option>
+        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "AtoZ" })">Title (a-z)</option>
+        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "ZtoA" })">Title (z-a)</option>
+        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "lowToHigh" })">Price ↓</option>
+        <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "highToLow" })">Price ↑</option>
+    </select>
+    <script>
+        function SortBy() {
+            window.location.href = document.getElementById("UrlList").value;
+        }
+    </script>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <!--Map-->
+    <h5 class="font-italic my-0 py-0">
+        @Html.ActionLink("Home", "Index", "Home", null, null) / 
+        @Html.ActionLink("Genres", "Index", "Genres", null, null) /
+        @genreName
+    </h5>
+
+    <!--SearchBar-->
+    <div class="d-inline-block align-self-start">
+        @using (Html.BeginForm())
+        {
+            <div class="input-group">
+                @Html.TextBox("search", null, new { @class = "form-control text-dark ", placeholder = "Search..." })
+                <div class="input-group-prepend">
+                    <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        }
     </div>
+
 </div>
 
 <hr />
@@ -58,6 +82,3 @@
         </div>
     }
 </div>
-
-<input type="button" value="Back" class="d-block btn-dark font-weight-bold text-uppercase text-black my-2 py-1 px-4" onclick="history.back()" />
-
