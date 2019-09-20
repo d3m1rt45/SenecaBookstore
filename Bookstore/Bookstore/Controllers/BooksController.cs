@@ -19,28 +19,37 @@ namespace Bookstore.Controllers
         // GET: Books
         public ViewResult Index(string order, string search)
         {
-            var bookList = from b in db.Books
+            var booksQuery = from b in db.Books
                            select b;
 
             if (!String.IsNullOrEmpty(search))
             {
-                bookList = bookList.Where(x => x.Title.Contains(search));
+                booksQuery = from b in booksQuery
+                             where b.Title.Contains(search)
+                             select b;
             }
 
             if (order == "AtoZ")
-                bookList = bookList.OrderBy(x => x.Title);
+                booksQuery = from b in booksQuery
+                             orderby b.Title
+                           select b;
             else if (order == "ZtoA")
-                bookList = bookList.OrderByDescending(x => x.Title);
+                booksQuery = from b in booksQuery
+                           orderby b.Title descending
+                           select b;
             else if (order == "lowToHigh")
-                bookList = bookList.OrderBy(x => x.Price);
+                booksQuery = from b in booksQuery
+                           orderby b.Price
+                           select b;
             else if (order == "highToLow")
-                bookList = bookList.OrderByDescending(x => x.Price);
+                booksQuery = from b in booksQuery
+                           orderby b.Price descending
+                           select b;
 
-            if (bookList != null)
-                return View(bookList.ToList());
+            if (booksQuery != null)
+                return View(booksQuery.ToList());
             else
                 return View();
-
         }
 
         // GET: Books/Details/5
@@ -205,12 +214,40 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
-        public ActionResult ByGenre(string role)
+        public ActionResult ByGenre(string role, string order)
         {
-            Genre genre = db.Genres.Find(role);
-            List<Book> books = genre.Books;
+            var genre = db.Genres.Find(role);
+            var booksQuery = genre.Books.AsQueryable();
 
-            return View(books);
+            if (order == "AtoZ")
+            { 
+                booksQuery = from b in booksQuery
+                             orderby b.Title
+                             select b;
+            }
+            else if (order == "ZtoA")
+            { 
+                booksQuery = from b in booksQuery
+                             orderby b.Title descending
+                             select b;
+            }
+            else if (order == "lowToHigh")
+            { 
+                booksQuery = from b in booksQuery
+                             orderby b.Price
+                             select b;
+            }
+            else if (order == "highToLow")
+            { 
+                booksQuery = from b in booksQuery
+                             orderby b.Price descending
+                             select b;
+            }
+
+            if (booksQuery != null)
+                return View(booksQuery.ToList());
+            else
+                return View();
         }
 
         public ActionResult ByAuthor(string role)
