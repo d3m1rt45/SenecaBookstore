@@ -18,20 +18,21 @@
                     <div class="card-body d-flex flex-column text-center">
                         @if (item.Title.Length > 11)
                         {
-                            <p class="card-title font-weight-bold">@item.Title.Substring(0, 11)...</p>
+                            <p class="card-title font-weight-bold py-0 my-0">@item.Title.Substring(0, 11)...</p>
                         }
-                        @if (item.Title.Length <= 11)
+                        else
                         {
-                            <p class="card-title font-weight-bold">@item.Title</p>
+                            <p class="card-title font-weight-bold py-0 my-0">@item.Title</p>
                         }
                         @if (item.AuthorName.Length > 12)
                         {
-                            <p class="card-text">@item.AuthorName.Substring(0, 12)...</p>
+                            <p class="card-text py-0 my-0">@item.AuthorName.Substring(0, 12)...</p>
                         }
-                        @if (item.AuthorName.Length <= 12)
+                        else
                         {
-                            <p class="card-text">@item.AuthorName</p>
+                            <p class="card-text py-0 my-0">@item.AuthorName</p>
                         }
+                        <p class="card-text font-weight-bold py-0 my-0">£@item.Price</p>
                     </div>
                 </a>
             </div>

@@ -15,18 +15,21 @@
                 @Html.ActionLink("Seneca Bookstore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
 
+
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="navbar-collapse collapse">
                 <ul class="ml-auto navbar-nav">
-                    <li class="nav-item">@Html.ActionLink("Books", "Index", "Books", null, new {@class="nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("Authors", "Index", "Authors", null, new {@class="nav-link"})</li>
-                    <li class="nav-item">@Html.ActionLink("Genres", "Index", "Genres", null, new {@class="nav-link"})</li>
+                    <li class="nav-item">@Html.ActionLink("Books", "Index", "Books", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Authors", "Index", "Authors", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Genres", "Index", "Genres", null, new { @class = "nav-link" })</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
+
+
         </div>
     </div>
     <div class="container body-content">

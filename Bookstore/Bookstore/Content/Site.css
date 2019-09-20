@@ -28,11 +28,15 @@ h1 {
     font-family: Merriweather, cursive;
     font-weight: bold;
 }
+
 h2,h3,h4,h5 {
     font-family: Merriweather, cursive;
     color:black;
 }
 
+#otherGenres {
+    font-family: Merriweather, cursive;
+}
 
 /* Navigation Bar Styles*/
 .navbar-brand,
