@@ -225,12 +225,6 @@ namespace Bookstore.Controllers
                 case ("ZtoA"):
                     booksQuery = booksQuery.OrderByDescending(b => b.Title);
                     break;
-                case ("lowToHigh"):
-                    booksQuery = booksQuery.OrderBy(b => b.Price);
-                    break;
-                case ("highToLow"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Price);
-                    break;
             }
 
             return View(booksQuery.ToList());
@@ -243,7 +237,7 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(x => x.Title.Contains(search));
+                booksQuery = booksQuery.Where(b => b.Title.Contains(search));
 
             //Order by...
             switch (order)

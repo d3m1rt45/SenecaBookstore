@@ -12,7 +12,7 @@ namespace Bookstore.Controllers
     {
         private BookstoreContext db = new BookstoreContext();
 
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             return View(db.Books);
         }
