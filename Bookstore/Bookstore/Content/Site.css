@@ -16,6 +16,10 @@
     white-space: normal;
 }
 
+.map{
+    font-family: Merriweather, cursive;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

@@ -2,18 +2,52 @@
 
 @{
     ViewBag.Title = Model.Title;
+
+    var printTitle = Model.Title;
+    if (Model.Title.Length > 20)
+    {
+        printTitle = printTitle.Substring(0, 20) + "...";
+    }
 }
+
+<div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
+
+    <!--Header-->
+    <div class="align-self-start">
+        <h2 class="d-block font-weight-bold mb-0 pb-0">
+            @printTitle
+        </h2>
+        <p class="map my-0 py-0">by @Model.AuthorName</p>
+    </div>
+    <!--Map-->
+    <div>
+        <p class="map font-italic my-0 py-0 text-right">
+            @Html.ActionLink("Home", "Index", "Home", null, null) /
+            @Html.ActionLink("Genres", "Index", "Genres", null, null) /
+            @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { role = Model.GenreName }, null) /
+            @printTitle
+        </p>
+        <p class="map font-italic my-0 py-0 text-right">
+            @Html.ActionLink("Home", "Index", "Home", null, null) /
+            @Html.ActionLink("Authors", "Index", "Authors", null, null) /
+            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) /
+            @printTitle
+        </p>
+    </div>
+</div>
+<hr />
+
 
 <dl class="dl-horizontal">
     <div class="row">
         <!-- IMAGE -->
-        <div class="col-4 offset-1">
+        <div class="col-3 offset-1">
             <img class="mt-5" style="width:100%" src="~/Images/@Model.ImagePath" />
         </div>
 
-        <div class="col-6">
+        <div class="col-5 offset-1">
             <div class="row">
-                <h2 class="col-12 mt-5 pb-2">@Html.DisplayFor(model => model.Title)</h2>
+                <h2 class="col-12 mt-2 pb-2">@Html.DisplayFor(model => model.Title)</h2>
                 <div class="col-8">
                     <dt> Author </dt>
                     <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br /> </dd>
@@ -40,15 +74,14 @@
                     <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
                 </div>
                 <div class="col-3 d-flex flex-column-reverse align-items-end">
-                    <input type="button" value="Back" class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()"/>
-                    <input type="button" value="Purchase" class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100"/>
+                    <input type="button" value="Back" class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()" />
+                    <input type="button" value="Purchase" class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100" />
                 </div>
             </div><!-- row -->
         </div><!-- col -->
-
         <!-- DESCRIPTION -->
         <div class="my-5 col-10 offset-1">
-            <dd class="lead">
+            <dd class="map">
                 @Html.DisplayFor(model => model.Description)
             </dd>
         </div>
