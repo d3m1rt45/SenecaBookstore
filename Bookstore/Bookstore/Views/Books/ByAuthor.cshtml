@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<Bookstore.Models.Book>
 
 @{
-    var authorName = Model.FirstOrDefault().AuthorName;
+    var authorName = "";
+    if (Model.Any<Bookstore.Models.Book>())
+    {
+        authorName = Model.FirstOrDefault().AuthorName;
+    }
     ViewBag.Title = authorName;
 }
 
@@ -20,22 +24,20 @@
     </div>
     <div class="col-6 text-right">
         <!--SearchBar-->
-        @* ###DISABLED### - TODO: Fix This
-            <div class="d-inline-block">
-                @using (Html.BeginForm())
-                {
-                    <div class="input-group">
-                        @Html.TextBox("search", null, new { @class = "form-control text-dark mt-2", placeholder = "Search..." })
-                        <div class="input-group-prepend">
-                            <button class="btn btn-dark rounded hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
+        <div class="d-inline-block pt-2">
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
+                    <div class="input-group-prepend">
+                        <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                     </div>
-                }
-            </div>
-        *@
+                </div>
+            }
+        </div>
 
         <!--SortBy-->
-        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1 mt-2" id="UrlList" onchange="SortBy()">
+        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>

@@ -12,9 +12,16 @@ namespace Bookstore.Controllers
     {
         private BookstoreContext db = new BookstoreContext();
 
-        public ActionResult Index(string search)
+        public ActionResult Index(string searching)
         {
-            return View(db.Books);
+            if (!String.IsNullOrEmpty(searching))
+            {
+                return RedirectToAction("Index", "Books", new { order = "", search = searching });
+            }
+            else
+            {
+                return View(db.Books);
+            }
         }
 
         public ActionResult About()

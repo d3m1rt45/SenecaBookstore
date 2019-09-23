@@ -23,7 +23,7 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(x => x.Title.Contains(search));
+                booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
 
             //Order by...
             switch (order)
@@ -214,7 +214,7 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(x => x.Title.Contains(search));
+                booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
 
             //Order by...
             switch (order)
@@ -230,6 +230,11 @@ namespace Bookstore.Controllers
             return View(booksQuery.ToList());
         }
 
+        public ViewResult BookNotFound (string search, string from)
+        {
+            return View();
+        }
+
         public ViewResult ByAuthor(string role, string order, string search)
         {
             var author = db.Authors.Find(role);
@@ -237,7 +242,7 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(b => b.Title.Contains(search));
+                booksQuery = booksQuery.Where(b => b.Title.ToUpper().Contains(search.ToUpper()));
 
             //Order by...
             switch (order)
