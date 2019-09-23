@@ -1,0 +1,74 @@
+﻿@model Bookstore.ViewModels.NotFoundViewModel
+
+@{
+    ViewBag.Title = Model.Parameter;
+}
+
+    <div class="row pt-4">
+
+        @if (!String.IsNullOrEmpty(Model.Genre))
+        {
+            <div class="col-6 text-left">
+                <!--Header-->
+                <h2 class="font-weight-bold mb-0 pb-0">@Model.Genre</h2>
+
+                <!-- Map -->
+                <p class="map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Genres", "Index", "Genres") /
+                    @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { role = Model.Genre }, null) /
+                    Search
+                </p>
+            </div>
+            <div class="col-6 text-right">
+                <!--SearchBar-->
+                <div class="d-inline-block">
+                    @Html.ActionLink("Back", "ByGenre", "Books", new { role = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div>
+            </div>
+            <h3 class="col my-5">No Result for <b>"@Model.Parameter"</b> in <b>@Model.Genre Titles</b></h3>
+        }
+        else if (!String.IsNullOrEmpty(Model.Author))
+        {
+            <div class="col-6 text-left">
+                <!--Header-->
+                <h2 class="font-weight-bold mb-0 pb-0">@Model.Author</h2>
+
+                <!-- Map -->
+                <p class="map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Authors", "Index", "Authors") /
+                    @Html.ActionLink(Model.Author, "Autohr", "Books", new { role = Model.Author }, null) /
+                    Search
+                </p>
+            </div>
+            <div class="col-6 text-right">
+                <!--SearchBar-->
+                <div class="d-inline-block">
+                    @Html.ActionLink("BACK", "ByAuthor", "Books", new { role = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div>
+            </div>
+            <h3 class="col my-5">No Result for <b>"@Model.Parameter"</b> in <b>@Model.Author Titles</b></h3>
+        }
+        else
+        {
+            <div class="col-6 text-left">
+                <!--Header-->
+                <h2 class="font-weight-bold mb-0 pb-0">All Titles </h2>
+
+                <!-- Map -->
+                <p class="map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Books", "Index", "Books") /
+                    Search
+                </p>
+            </div>
+            <div class="col-6 text-right">
+                <!--SearchBar-->
+                <div class="d-inline-block">
+                    @Html.ActionLink("BACK", "Index", "Books", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div>
+            </div>
+            <h3 class="col my-5">No Result for <b>"@Model.Parameter"</b> in <b>Books</b></h3>
+        }
+</div>

@@ -1,12 +1,7 @@
 ﻿@model IEnumerable<Bookstore.Models.Book>
 
 @{
-    var genreName = "";
-    if (Model.Any<Bookstore.Models.Book>())
-    {
-        genreName = Model.FirstOrDefault().GenreName;
-    }
-
+    var genreName = Model.FirstOrDefault().GenreName;
     ViewBag.Title = genreName;
 }
 

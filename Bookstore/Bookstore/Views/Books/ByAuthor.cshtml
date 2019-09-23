@@ -1,11 +1,7 @@
 ﻿@model IEnumerable<Bookstore.Models.Book>
 
 @{
-    var authorName = "";
-    if (Model.Any<Bookstore.Models.Book>())
-    {
-        authorName = Model.FirstOrDefault().AuthorName;
-    }
+    var authorName = Model.FirstOrDefault().AuthorName;
     ViewBag.Title = authorName;
 }
 

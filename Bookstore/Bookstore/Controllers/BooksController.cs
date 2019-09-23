@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Bookstore.Models;
 using System.Data.Entity.Migrations;
 using System.IO;
+using Bookstore.ViewModels;
 
 namespace Bookstore.Controllers
 {
@@ -17,13 +18,16 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ViewResult Index(string order, string search)
+        public ActionResult Index(string order, string search)
         {
             var booksQuery = db.Books.AsQueryable();
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
                 booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
+            //Check if found...
+            if (!booksQuery.Any())
+                return RedirectToAction("NotFound", new { parameter = search });
 
             //Order by...
             switch (order)
@@ -207,14 +211,17 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
-        public ViewResult ByGenre(string role, string order, string search)
+        public ActionResult ByGenre(string role, string order, string search)
         {
-            var genre = db.Genres.Find(role);
-            var booksQuery = genre.Books.AsQueryable();
+            var thisGenre = db.Genres.Find(role);
+            var booksQuery = thisGenre.Books.AsQueryable();
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
                 booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
+            //Check if found...
+            if (!booksQuery.Any())
+                return RedirectToAction("NotFound", new { parameter = search, genre = thisGenre.Name });
 
             //Order by...
             switch (order)
@@ -226,23 +233,34 @@ namespace Bookstore.Controllers
                     booksQuery = booksQuery.OrderByDescending(b => b.Title);
                     break;
             }
-
             return View(booksQuery.ToList());
         }
 
-        public ViewResult BookNotFound (string search, string from)
+        public ActionResult NotFound(string parameter, string author, string genre)
         {
-            return View();
+            var booksQuery = db.Books.AsQueryable();
+            var notFound = new NotFoundViewModel();
+            notFound.Parameter = parameter;
+
+            if (!String.IsNullOrEmpty(genre))
+                notFound.Genre = genre;
+            else if (!String.IsNullOrEmpty(author))
+                notFound.Author = author;
+
+            return View(notFound);
         }
 
-        public ViewResult ByAuthor(string role, string order, string search)
+        public ActionResult ByAuthor(string role, string order, string search)
         {
-            var author = db.Authors.Find(role);
-            var booksQuery = author.Books.AsQueryable();
+            var thisAuthor = db.Authors.Find(role);
+            var booksQuery = thisAuthor.Books.AsQueryable();
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
                 booksQuery = booksQuery.Where(b => b.Title.ToUpper().Contains(search.ToUpper()));
+            //Check if found...
+            if (!booksQuery.Any())
+                return RedirectToAction("NotFound", new { parameter = search, author = thisAuthor.Name });
 
             //Order by...
             switch (order)
