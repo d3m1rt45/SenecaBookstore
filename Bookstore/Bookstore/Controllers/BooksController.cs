@@ -18,31 +18,31 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index(string order, string search)
+        public ActionResult Index(string search, string sortBy)
         {
-            var booksQuery = db.Books.AsQueryable();
+            //INSTANTIATE A QUERYABLE LIST OF BOOKS
+            var booksQuery = db.Books.AsQueryable();  
 
-            //Search by book title...
-            if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
-            //Check if found...
-            if (!booksQuery.Any())
-                return RedirectToAction("NotFound", new { parameter = search });
-
-            //Order by...
-            switch (order)
+            //"SearchBar" BUSINESS LOGIC
+            if (!String.IsNullOrEmpty(search))  //ONLY EXECUTED IF A SEARCH STRING IS PASSED
             {
-                case ("AtoZ"):
-                    booksQuery = booksQuery.OrderBy(b => b.Title);
+                return RedirectToAction("Search", new { keyword = search });  //...REDIRECT TO "Found" ACTION IF SO
+            }
+
+            //"SortBy" BUSINESS LOGIC
+            switch (sortBy) 
+            {
+                case ("AtoZ"):  //IF THE STRING "AtoZ" IS PASSED...
+                    booksQuery = booksQuery.OrderBy(b => b.Title);  //...ORDER ALPHABETICALLY (ASCENDING)
                     break;
-                case ("ZtoA"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Title);
+                case ("ZtoA"):  //IF THE STRING "ZtoA" IS PASSED...
+                    booksQuery = booksQuery.OrderByDescending(b => b.Title); //...ORDER ALPHABEDICALLY (DESCENDING)
                     break;
-                case ("lowToHigh"):
-                    booksQuery = booksQuery.OrderBy(b => b.Price);
+                case ("lowToHigh"):  //IF THE STRING "lowToHigh" IS PASSED...
+                    booksQuery = booksQuery.OrderBy(b => b.Price);  //...ORDER BY PRICE (ASCENDING)
                     break;
-                case ("highToLow"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Price);
+                case ("highToLow"): //IF THE STRING "highToLow" IS PASSED...
+                    booksQuery = booksQuery.OrderByDescending(b => b.Price); //...ORDER BY PRICE (DESCENDING)
                     break;
             }
 
@@ -218,10 +218,9 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(x => x.Title.ToUpper().Contains(search.ToUpper()));
-            //Check if found...
-            if (!booksQuery.Any())
-                return RedirectToAction("NotFound", new { parameter = search, genre = thisGenre.Name });
+            { 
+                return RedirectToAction("Search", new { keyword = search, genre = thisGenre.Name });
+            }
 
             //Order by...
             switch (order)
@@ -236,18 +235,37 @@ namespace Bookstore.Controllers
             return View(booksQuery.ToList());
         }
 
-        public ActionResult NotFound(string parameter, string author, string genre)
+        //SEARCH ACTION
+        public ActionResult Search(string keyword, string author, string genre)
         {
-            var booksQuery = db.Books.AsQueryable();
-            var notFound = new NotFoundViewModel();
-            notFound.Parameter = parameter;
+            var result = new SearchViewModel();  //INSTANTIATE THE RELATED VIEWMODEL
+            result.Keyword = keyword;  //SET ITS 'Keyword' PROPERTY ACCORDINGLY
 
-            if (!String.IsNullOrEmpty(genre))
-                notFound.Genre = genre;
-            else if (!String.IsNullOrEmpty(author))
-                notFound.Author = author;
+            //SEACH TITLES
+            if (!String.IsNullOrEmpty(genre)) //IF A GENRE NAME IS PASSED:
+            {
+                result.Books = db.Genres.Find(genre).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
+                result.Genre = genre; //SET THE "Genre" PROPERTY ACCORDINGLY
+            }
+            else if (!String.IsNullOrEmpty(author)) //IF AN AUTHOR NAME IS PASSED:
+            {
+                result.Books = db.Authors.Find(author).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
+                result.Author = author; //SET THE "Author" PROPERTY ACCORDINGLY
+            }
+            else //IF NEITHER:
+            {
+                result.Books = db.Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
+            }
 
-            return View(notFound);
+            //ANY FOUND?
+            if (result.Books.Any()) //IF YES:
+            {
+                return View("Found", result); //RETURN 'Found' VIEW
+            }
+            else //IF NO:
+            {
+                return View("NotFound", result);  //RETURN 'NotFound' VIEW
+            }
         }
 
         public ActionResult ByAuthor(string role, string order, string search)
@@ -257,10 +275,9 @@ namespace Bookstore.Controllers
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
-                booksQuery = booksQuery.Where(b => b.Title.ToUpper().Contains(search.ToUpper()));
-            //Check if found...
-            if (!booksQuery.Any())
-                return RedirectToAction("NotFound", new { parameter = search, author = thisAuthor.Name });
+            {
+                return RedirectToAction("Search", new { keyword = search, author = role });
+            }                
 
             //Order by...
             switch (order)

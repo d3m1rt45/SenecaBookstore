@@ -35,7 +35,7 @@
         @using (Html.BeginForm())
         {
             <div class="input-group">
-                @Html.TextBox("searching", null, new { @class = "form-control text-dark ", placeholder = "Search Titles..." })
+                @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark ", placeholder = "Search Titles..." })
                 <div class="input-group-prepend">
                     <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                 </div>

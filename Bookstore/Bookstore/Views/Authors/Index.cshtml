@@ -48,8 +48,15 @@
 <hr />
 
 <div class="row">
-    @foreach (var item in Model)
+    @if (Model.FirstOrDefault() != null)
     {
-        <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { role = item.Name }, null)</h5>
+        foreach (var item in Model)
+        {
+            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "Author", "Books", new { role = item.Name }, null)</h5>
+        }
+    }
+    else
+    {
+        <h3 class="col mb-3">No Author Found...</h3>
     }
 </div>
