@@ -1,4 +1,5 @@
 ﻿using Bookstore.Models;
+using Bookstore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,13 +15,22 @@ namespace Bookstore.Controllers
 
         public ActionResult Index(string searchKeyword)
         {
+            var homeIndexInstance = new HomeIndexViewModel();
+
+            homeIndexInstance.SetFeatured(db.Books.Take(4));
+            homeIndexInstance.AddSection("Philosophy");
+            homeIndexInstance.AddSection("Business, Finance and Law");
+            homeIndexInstance.AddSection("Crime and Mystery");
+            homeIndexInstance.AddSection("Psychology");
+            homeIndexInstance.SetOtherGenres();
+
             if (!String.IsNullOrEmpty(searchKeyword))
             {
                 return RedirectToAction("Search", "Books", new { keyword = searchKeyword });
             }
             else
             {
-                return View(db.Books);
+                return View(homeIndexInstance);
             }
         }
 

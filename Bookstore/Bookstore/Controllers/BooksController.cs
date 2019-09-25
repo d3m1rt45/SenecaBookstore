@@ -20,33 +20,21 @@ namespace Bookstore.Controllers
         // GET: Books
         public ActionResult Index(string search, string sortBy)
         {
-            //INSTANTIATE A QUERYABLE LIST OF BOOKS
-            var booksQuery = db.Books.AsQueryable();  
+            var cardsList = AllTitlesViewModel.CardsList(db.Books); //Make Smaller 'BookCardViewModel' Objects from a List of Cards
 
-            //"SearchBar" BUSINESS LOGIC
-            if (!String.IsNullOrEmpty(search))  //ONLY EXECUTED IF A SEARCH STRING IS PASSED
+            //SEARCH
+            if (!String.IsNullOrEmpty(search))  //Only Executed if A Search String is Passed
             {
                 return RedirectToAction("Search", new { keyword = search });  //...REDIRECT TO "Found" ACTION IF SO
             }
 
-            //"SortBy" BUSINESS LOGIC
-            switch (sortBy) 
+            //SORTBY
+            if (!String.IsNullOrEmpty(sortBy)) //Only Executed if A SortBy String is Passed
             {
-                case ("AtoZ"):  //IF THE STRING "AtoZ" IS PASSED...
-                    booksQuery = booksQuery.OrderBy(b => b.Title);  //...ORDER ALPHABETICALLY (ASCENDING)
-                    break;
-                case ("ZtoA"):  //IF THE STRING "ZtoA" IS PASSED...
-                    booksQuery = booksQuery.OrderByDescending(b => b.Title); //...ORDER ALPHABEDICALLY (DESCENDING)
-                    break;
-                case ("lowToHigh"):  //IF THE STRING "lowToHigh" IS PASSED...
-                    booksQuery = booksQuery.OrderBy(b => b.Price);  //...ORDER BY PRICE (ASCENDING)
-                    break;
-                case ("highToLow"): //IF THE STRING "highToLow" IS PASSED...
-                    booksQuery = booksQuery.OrderByDescending(b => b.Price); //...ORDER BY PRICE (DESCENDING)
-                    break;
+                cardsList = AllTitlesViewModel.SortCards(cardsList, sortBy); //...Call the 'SortCards' Static Method
             }
 
-            return View(booksQuery.ToList());
+            return View(cardsList);
         }
 
         // GET: Books/Details/5
@@ -211,52 +199,31 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
-        public ActionResult ByGenre(string role, string order, string search)
+        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
         {
-            var thisGenre = db.Genres.Find(role);
-            var booksQuery = thisGenre.Books.AsQueryable();
+            var thisGenreBookCards = AllTitlesViewModel.CardsList(db.Genres.Find(genreName).Books);
 
             //Search by book title...
-            if (!String.IsNullOrEmpty(search))
-            { 
-                return RedirectToAction("Search", new { keyword = search, genre = thisGenre.Name });
+            if (!String.IsNullOrEmpty(searchKeyword))
+            {
+                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName });
             }
 
-            //Order by...
-            switch (order)
+            if (!String.IsNullOrEmpty(sortBy))
             {
-                case ("AtoZ"):
-                    booksQuery = booksQuery.OrderBy(b => b.Title);
-                    break;
-                case ("ZtoA"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Title);
-                    break;
+                thisGenreBookCards = AllTitlesViewModel.SortCards(thisGenreBookCards, sortBy);
             }
-            return View(booksQuery.ToList());
+
+            var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
+
+            return View(byGenreInstance);
         }
 
         //SEARCH ACTION
         public ActionResult Search(string keyword, string author, string genre)
         {
-            var result = new SearchViewModel();  //INSTANTIATE THE RELATED VIEWMODEL
-            result.Keyword = keyword;  //SET ITS 'Keyword' PROPERTY ACCORDINGLY
-
-            //SEACH TITLES
-            if (!String.IsNullOrEmpty(genre)) //IF A GENRE NAME IS PASSED:
-            {
-                result.Books = db.Genres.Find(genre).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
-                result.Genre = genre; //SET THE "Genre" PROPERTY ACCORDINGLY
-            }
-            else if (!String.IsNullOrEmpty(author)) //IF AN AUTHOR NAME IS PASSED:
-            {
-                result.Books = db.Authors.Find(author).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
-                result.Author = author; //SET THE "Author" PROPERTY ACCORDINGLY
-            }
-            else //IF NEITHER:
-            {
-                result.Books = db.Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList(); //SET 'Books' PROPERTY ACCORDINGLY
-            }
-
+            var result = SearchViewModel.SearchTitles(author, genre, keyword);
+            
             //ANY FOUND?
             if (result.Books.Any()) //IF YES:
             {
@@ -268,35 +235,24 @@ namespace Bookstore.Controllers
             }
         }
 
-        public ActionResult ByAuthor(string role, string order, string search)
+        public ActionResult ByAuthor(string authorName, string order, string search)
         {
-            var thisAuthor = db.Authors.Find(role);
-            var booksQuery = thisAuthor.Books.AsQueryable();
+            var thisAuthorBookCards = AllTitlesViewModel.CardsList(db.Authors.Find(authorName).Books);
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
             {
-                return RedirectToAction("Search", new { keyword = search, author = role });
-            }                
-
-            //Order by...
-            switch (order)
-            {
-                case ("AtoZ"):
-                    booksQuery = booksQuery.OrderBy(b => b.Title);
-                    break;
-                case ("ZtoA"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Title);
-                    break;
-                case ("lowToHigh"):
-                    booksQuery = booksQuery.OrderBy(b => b.Price);
-                    break;
-                case ("highToLow"):
-                    booksQuery = booksQuery.OrderByDescending(b => b.Price);
-                    break;
+                return RedirectToAction("Search", new { keyword = search, author = authorName });
             }
 
-            return View(booksQuery.ToList());
+            if (!String.IsNullOrEmpty(order))
+            {
+                thisAuthorBookCards = AllTitlesViewModel.SortCards(thisAuthorBookCards, order);
+            }
+
+            var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };
+
+            return View(byAuthorInstance);
         }
 
         // GET: Books/Delete/5

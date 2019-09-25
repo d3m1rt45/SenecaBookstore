@@ -32,9 +32,9 @@
 
             <!--SortBy-->
             <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-                <option value="@Url.Action("Index", "Authors", null)">Sort by...</option>
-                <option value="@Url.Action("Index", "Authors", new { order = "AtoZ" })">Title (a-z)</option>
-                <option value="@Url.Action("Index", "Authors", new { order = "ZtoA" })">Title (z-a)</option>
+                <option value="@Url.Action("ByAuthor", "Books", null)">Sort by...</option>
+                <option value="@Url.Action("ByAuthor", "Books", new { order = "AtoZ" })">Title (a-z)</option>
+                <option value="@Url.Action("ByAuthor", "Books", new { order = "ZtoA" })">Title (z-a)</option>
             </select>
             <script>
                 function SortBy() {
@@ -52,7 +52,7 @@
     {
         foreach (var item in Model)
         {
-            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "Author", "Books", new { role = item.Name }, null)</h5>
+            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { authorName = item.Name }, null)</h5>
         }
     }
     else

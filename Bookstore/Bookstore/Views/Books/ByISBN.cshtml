@@ -24,13 +24,13 @@
         <p class="map font-italic my-0 py-0 text-right">
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Genres", "Index", "Genres", null, null) /
-            @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { role = Model.GenreName }, null) /
+            @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) /
             @printTitle
         </p>
         <p class="map font-italic my-0 py-0 text-right">
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) /
+            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { genreName = Model.AuthorName }, null) /
             @printTitle
         </p>
     </div>
@@ -50,10 +50,10 @@
                 <h2 class="col-12 mt-2 pb-2">@Html.DisplayFor(model => model.Title)</h2>
                 <div class="col-8">
                     <dt> Author </dt>
-                    <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { role = Model.AuthorName }, null) <br /> </dd>
+                    <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) <br /> </dd>
 
                     <dt> Genre </dt>
-                    <dd> <a href="/Books/ByGenre?role=@Model.Genre.Name"> @Html.DisplayFor(model => model.Genre.Name) </a> </dd>
+                    <dd> @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) </a> </dd>
 
                     <dt> Price </dt>
                     <dd> @Html.DisplayFor(model => model.Price) </dd>

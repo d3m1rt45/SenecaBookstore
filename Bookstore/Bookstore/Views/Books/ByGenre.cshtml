@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Bookstore.Models.Book>
+﻿@model Bookstore.ViewModels.ByGenreViewModel
 
 @{
-    var genreName = Model.FirstOrDefault().GenreName;
+    var genreName = Model.Genre;
     ViewBag.Title = genreName;
 }
 
@@ -24,7 +24,7 @@
             @using (Html.BeginForm())
             {
                 <div class="input-group">
-                    @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
+                    @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark", placeholder = "Search..." })
                     <div class="input-group-prepend">
                         <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                     </div>
@@ -34,9 +34,11 @@
 
         <!--SortBy-->
         <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName })">Sort by...</option>
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("ByGenre", "Books", new { role = genreName, order = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName })">Sort by...</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "AtoZ" })">Title (a-z)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "lowToHigh" })">Price ↓</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "highToLow" })">Price ↑</option>
         </select>
         <script>
             function SortBy() {
@@ -49,7 +51,7 @@
 <hr />
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.BookCards)
     {
         <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
             <div class="card w-100 bg-light hvr-grow-rotate">

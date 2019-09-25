@@ -1,27 +1,7 @@
-﻿@model IEnumerable<Bookstore.Models.Book>
+﻿@model Bookstore.ViewModels.HomeIndexViewModel
 
 @{
     ViewBag.Title = "Home Page";
-
-    var genres = new Bookstore.Models.Book[5][];
-    var otherGenres = new List<string>();
-
-    foreach (var item in Model)
-    {
-        if (item.GenreName != "Philosophy" &&
-            item.GenreName != "Business, Finance and Law" &&
-            item.GenreName != "Crime and Mystery" &&
-            item.GenreName != "Psychology")
-        {
-            otherGenres.Add(item.GenreName);
-        }
-    }
-
-    genres[0] = Model.Take(4).ToArray();
-    genres[1] = Model.Where(x => x.GenreName == "Philosophy").Take(6).ToArray();
-    genres[2] = Model.Where(x => x.GenreName == "Business, Finance and Law").Take(6).ToArray();
-    genres[3] = Model.Where(x => x.GenreName == "Crime and Mystery").Take(6).ToArray();
-    genres[4] = Model.Where(x => x.GenreName == "Psychology").Take(6).ToArray();
 }
 
 <!--PageHead-->
@@ -49,11 +29,11 @@
         <!-- Featured Titles (4) -->
         <div class="jumbotron pt-2 pb-0">
             <div class="row">
-                @for (int i = 0; i < 4; i++)
+                @foreach (var item in Model.Featured)
                 {
                     <div class="col-6 col-md-3">
-                        <a href="/Books/ByISBN?role=@genres[0][i].ISBN">
-                            <img class="hvr-grow-shadow w-100 mb-3" src="~/Images/@genres[0][i].ImagePath" />
+                        <a href="/Books/ByISBN?role=@item.ISBN">
+                            <img class="hvr-grow-shadow w-100 mb-3" src="~/Images/@item.ImagePath" />
                         </a>
                     </div>
                 }
@@ -61,40 +41,26 @@
         </div>
 
         <!-- Sections by Genre -->
-        @for (int x = 1; x < 5; x++)
+        @foreach (var sect in Model.Sections)
         {
             <div class="row my-5">
                 <div class="col-12">
                     <div class="d-flex justify-content-between align-items-center pt-1">
-                        <h4 class="mb-0">@genres[x][0].GenreName</h4>
-                        <input type="button" class="btn btn-warning text-center pt-1 hvr-grow-shadow" value="See More" onclick="window.location='@Url.Action("ByGenre", "Books", new { role = genres[x][0].GenreName })'" />
+                        <h4 class="mb-0">@sect.Title</h4>
+                        <input type="button" class="btn btn-warning text-center pt-1 hvr-grow-shadow" value="See More" onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" />
                     </div>
                     <hr />
                     <div class="row mt-3">
-                        @for (int i = 0; i < 6; i++)
+                        @foreach (var card in sect.BookCards)
                         {
                             <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
                                 <div class="card w-100 bg-light hvr-grow-rotate">
-                                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@genres[x][i].ISBN">
-                                        <img class="card-img-top w-100" src="~/Images/@genres[x][i].ImagePath" alt="Book cover" />
+                                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@card.ISBN">
+                                        <img class="card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" />
                                         <div class="card-body d-flex flex-column text-center">
-                                            @if (genres[x][i].Title.Length > 11)
-                                            {
-                                                <p class="card-title font-weight-bold p-0 m-0">@genres[x][i].Title.Substring(0, 11)...</p>
-                                            }
-                                            else
-                                            {
-                                                <p class="card-title font-weight-bold p-0 m-0">@genres[x][i].Title</p>
-                                            }
-                                            @if (genres[x][i].AuthorName.Length > 12)
-                                            {
-                                                <p class="card-text p-0 m-0">@genres[x][i].AuthorName.Substring(0, 12)...</p>
-                                            }
-                                            else
-                                            {
-                                                <p class="card-text p-0 m-0">@genres[x][i].AuthorName</p>
-                                            }
-                                            <p class="card-text font-weight-bold p-0 m-0">£@genres[x][i].Price</p>
+                                            <p class="card-title font-weight-bold p-0 m-0">@card.Title</p>
+                                            <p class="card-text p-0 m-0">@card.AuthorName</p>
+                                            <p class="card-text font-weight-bold p-0 m-0">£@card.Price</p>
                                         </div>
                                     </a>
                                 </div>
@@ -105,11 +71,10 @@
             </div>
         }
 
-
         <!-- Other Genres -->
         <div class="row">
             <h3 class="col-12 mb-3">Other Genres</h3>
-            @foreach (var genre in otherGenres)
+            @foreach (var genre in Model.OtherGenres)
             {
                 @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { id = "otherGenres", @class = "h5 mb-3 col-12 col-sm-6 col-lg-4 col-xl-3" })
             }

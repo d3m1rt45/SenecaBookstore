@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Bookstore.Models.Book>
+﻿@model Bookstore.ViewModels.ByAuthorViewModel
 
 @{
-    var authorName = Model.FirstOrDefault().AuthorName;
+    var authorName = Model.Author;
     ViewBag.Title = authorName;
 }
 
@@ -49,7 +49,7 @@
 <hr />
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.BookCards)
     {
         <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
             <div class="card w-100 bg-light hvr-grow-rotate">
