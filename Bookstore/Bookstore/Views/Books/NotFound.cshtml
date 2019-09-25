@@ -14,14 +14,14 @@
             <p class="map font-italic my-0 py-0">
                 @Html.ActionLink("Home", "Index", "Home", null, null) /
                 @Html.ActionLink("Genres", "Index", "Genres") /
-                @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { role = Model.Genre }, null) /
+                @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { genreName = Model.Genre }, null) /
                 Search
             </p>
         </div>
         <div class="col-6 text-right">
             <!--SearchBar-->
             <div class="d-inline-block">
-                @Html.ActionLink("Back", "ByGenre", "Books", new { role = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                @Html.ActionLink("Back", "ByGenre", "Books", new { genreName = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
             </div>
         </div>
     </div>
@@ -38,14 +38,14 @@ else if (!String.IsNullOrEmpty(Model.Author))
             <p class="map font-italic my-0 py-0">
                 @Html.ActionLink("Home", "Index", "Home", null, null) /
                 @Html.ActionLink("Authors", "Index", "Authors") /
-                @Html.ActionLink(Model.Author, "Autohr", "Books", new { role = Model.Author }, null) /
+                @Html.ActionLink(Model.Author, "Autohr", "Books", new { authorName = Model.Author }, null) /
                 Search
             </p>
         </div>
         <div class="col-6 text-right">
             <!--SearchBar-->
             <div class="d-inline-block">
-                @Html.ActionLink("BACK", "ByAuthor", "Books", new { role = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                @Html.ActionLink("BACK", "ByAuthor", "Books", new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
             </div>
         </div>
     </div>
