@@ -20,9 +20,9 @@ namespace Bookstore.ViewModels
             }
             set
             {
-                if (value.Length > 11)
+                if (value.Length > 10)
                 {
-                    _Title = $"{value.Substring(0, 11)}...";
+                    _Title = $"{value.Substring(0, 10)}...";
                 }
                 else
                 {
