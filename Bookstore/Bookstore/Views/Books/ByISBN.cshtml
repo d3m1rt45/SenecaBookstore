@@ -34,7 +34,7 @@
         <p class="map font-italic my-0 py-0 text-right"><!--MapByAuthor-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { genreName = Model.AuthorName }, null) /
+            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) /
             @printTitle
         </p><!--/MapByAuthor-->
 
@@ -45,60 +45,55 @@
 
 <dl class="dl-horizontal"><!--PageBody-->
     <div class="row"><!--Row-->
-        <div class="col-3 offset-1"><!--ImageContainer-->
+        <div class="col-4 pt-3 pb-4"><!--ImageContainer-->
 
-            <img class="mt-5" style="width:100%" src="~/Images/@Model.ImagePath" /><!--Image/-->
+            <img style="width:100%" src="~/Images/@Model.ImagePath" /><!--Image/-->
 
         </div><!--/ImageContainer-->
-        <div class="col-5 offset-1"><!--Column-->
-            <div class="row"><!--NestedRow-->
-                <h2 class="col-12 mt-2 pb-2"><!--Column:Header-->
+        <div class="col-8 pt-3"><!--Column-->
+            <h4>@Html.DisplayFor(x => x.Title)</h4>
+            <span class="lead mb-3"><!--Description-->
+                @Html.DisplayFor(model => model.Description)
+            </span><!--Description-->
 
-                    @Html.DisplayFor(model => model.Title)<!--BookTitle-->
-
-                </h2><!--/Column:Header-->
-                <div class="col-8"><!--Column:MetaData-->
+            <div class="row mt-4" style="font-family:Merriweather;"><!--NestedRow-->
+                <div class="col-4">
                     <dt> Author </dt>
-                    <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) <br /> </dd>
+                    <dd> @Html.DisplayFor(model => model.AuthorName)</dd>
 
                     <dt> Genre </dt>
                     <dd> @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) </a> </dd>
 
-                    <dt> Price </dt>
-                    <dd> @Html.DisplayFor(model => model.Price) </dd>
-
                     <dt> Publisher </dt>
                     <dd> @Html.DisplayFor(model => model.Publisher) </dd>
 
-                    <dt> Pages </dt>
-                    <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
-
                     <dt> Format </dt>
                     <dd> @Html.DisplayFor(model => model.Format) </dd>
+                </div>
+                <div class="col-4 offset-1">
+                    <dt> Price </dt>
+                    <dd> @Html.DisplayFor(model => model.Price) </dd>
+
+                    <dt> Pages </dt>
+                    <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
 
                     <dt> Weight</dt>
                     <dd> @Html.DisplayFor(model => model.WeightInGrams)g </dd>
 
                     <dt> Dimensions</dt>
                     <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
-                </div><!--Column:MetaData-->
-                <div class="col-3 d-flex flex-column-reverse align-items-end"><!--Column:Buttons-->
-
-                    <input type="button" value="Back" 
-                           class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()" /><!--Button:Back/-->
-
+                </div>
+                <div class="d-inline-block mt-auto ml-auto"><!--Column:PurchaseButton-->
                     <input type="button" value="Purchase" 
-                           class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100" /><!--Button:Purchase/-->
-
-                </div><!--/Column:Buttons-->
+                        class="btn-warning font-weight-bold text-uppercase text-black py-2 px-3" /><!--Button:Purchase/-->
+                </div><!--/Column:PurchaseButton-->
             </div><!--/NestedRow-->
-        </div><!--/Column-->
-        <div class="my-5 col-10 offset-1"><!--Column-->
-            
-            <dd class="map"><!--Description-->
-                @Html.DisplayFor(model => model.Description)
-            </dd><!--Description-->
 
-        </div><!--Column-->
+            
+                
+            
+            
+        </div><!--/Column-->
+        
     </div><!--/Row-->
 </dl><!--/PageBody-->

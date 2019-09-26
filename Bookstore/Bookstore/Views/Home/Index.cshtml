@@ -24,16 +24,16 @@
     </div>
 </div>
 <hr/>
-    <div class="container bg-light">
+    <div class="container">
 
         <!-- Featured Titles (4) -->
-        <div class="jumbotron pt-2 pb-0">
+        <div class="jumbotron pt-2 pb-0 w-100">
             <div class="row">
                 @foreach (var item in Model.Featured)
                 {
                     <div class="col-6 col-md-3">
                         <a href="/Books/ByISBN?isbn=@item.ISBN">
-                            <img class="hvr-grow-shadow w-100 mb-3" src="~/Images/@item.ImagePath" />
+                            <img class="hvr-shrink w-100 mb-3" src="~/Images/@item.ImagePath" />
                         </a>
                     </div>
                 }
