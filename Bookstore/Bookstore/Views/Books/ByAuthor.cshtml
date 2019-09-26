@@ -1,21 +1,21 @@
 ﻿@model Bookstore.ViewModels.ByAuthorViewModel
 
 @{
-    var authorName = Model.Author;
-    ViewBag.Title = authorName;
+    var thisAuthor = Model.Author;
+    ViewBag.Title = thisAuthor;
 }
 
 <!--PageHead-->
 <div class="row pt-4">
     <div class="col-6 text-left">
         <!--Header-->
-        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@authorName</h2>
+        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@thisAuthor</h2>
 
         <!--Map-->
         <p class="map font-italic my-0 py-0">
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @authorName
+            @thisAuthor
         </p>
     </div>
     <div class="col-6 text-right">
@@ -34,9 +34,9 @@
 
         <!--SortBy-->
         <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor })">Sort by...</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor, order = "AtoZ" })">Title (a-z)</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor, order = "ZtoA" })">Title (z-a)</option>
         </select>
         <script>
             function SortBy() {

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Bookstore.Models.Author>
+
+@{
+    ViewBag.Title = "Authors";
+}
+
+<!--PageHead-->
+<div class="row pt-4">
+    <div class="col-4 text-left">
+        <!--Header-->
+        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">Authors</h2>
+
+        <!--Map-->
+        <p class="map font-italic my-0 py-0">
+            @Html.ActionLink("Home", "Index", "Home", null, null) /
+            Authors
+        </p>
+    </div>
+    <div class="col-8 text-right">
+        <!--SearchBar-->
+        <div class="d-inline-block">
+            @Html.ActionLink("Back", "Index", "Authors", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+        </div>
+    </div>
+</div>
+
+
+<hr />
+
+<div class="row">
+    @if (Model.FirstOrDefault() != null)
+    {
+        foreach (var item in Model)
+        {
+            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { authorName = item.Name }, null)</h5>
+        }
+    }
+    else
+    {
+        <h3 class="col mb-3">No Author Found...</h3>
+    }
+</div>
