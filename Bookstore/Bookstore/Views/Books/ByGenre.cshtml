@@ -5,22 +5,40 @@
     ViewBag.Title = thisGenre;
 }
 
+<<<<<<< HEAD
 <!--PageHead-->
 <div class="row pt-4">
     <div class="col-6 text-left">
         <!--Header-->
         <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@thisGenre</h2>
+=======
+<div class="row pt-4"><!--PageHead-->
+    <div class="col-6 text-left"><!--LeftColumn-->
+        
+        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0"><!--Header-->
+            @genreName
+        </h2><!--/Header-->
+>>>>>>> PartialViews
 
-        <!--Map-->
-        <p class="map font-italic my-0 py-0">
+        <p class="map font-italic my-0 py-0"><!--Map-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Genres", "Index", "Genres", null, null) / 
+<<<<<<< HEAD
             @thisGenre
         </p>
     </div>
     <div class="col-6 text-right">
         <!--SearchBar-->
         <div class="d-inline-block pt-2">
+=======
+            @genreName
+        </p><!--/Map-->
+
+    </div><!--/LeftColumn-->
+    <div class="col-6 text-right"><!--RightColumn-->
+        
+        <div class="d-inline-block pt-2"><!--SearchBar-->
+>>>>>>> PartialViews
             @using (Html.BeginForm())
             {
                 <div class="input-group">
@@ -30,8 +48,9 @@
                     </div>
                 </div>
             }
-        </div>
+        </div><!--/SearchBar-->
 
+<<<<<<< HEAD
         <!--SortBy-->
         <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
             <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre })">Sort by...</option>
@@ -39,31 +58,48 @@
             <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "ZtoA" })">Title (z-a)</option>
             <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "lowToHigh" })">Price ↓</option>
             <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "highToLow" })">Price ↑</option>
+=======
+        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--SortBy-->
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName })">Sort by...</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "AtoZ" })">Title (a-z)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "ZtoA" })">Title (z-a)</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "lowToHigh" })">Price ↓</option>
+            <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "highToLow" })">Price ↑</option>
+>>>>>>> PartialViews
         </select>
         <script>
             function SortBy() {
                 window.location.href = document.getElementById("UrlList").value;
             }
-        </script>
-    </div>
-</div>
+        </script><!--/SortBy-->
+        
+    </div><!--/RightColumn-->
+</div><!--/PageHead-->
 
 <hr />
 
-<div class="row">
+<div class="row"><!--Row-->
     @foreach (var item in Model.BookCards)
     {
-        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
-            <div class="card w-100 bg-light hvr-grow-rotate">
-                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN">
-                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" />
-                    <div class="card-body d-flex flex-column text-center">
-                        <p class="card-title font-weight-bold py-0 my-0">@item.Title</p>
-                        <p class="card-text py-0 my-0">@item.AuthorName</p>
-                        <p class="card-text font-weight-bold py-0 my-0">£@item.Price</p>
-                    </div>
-                </a>
-            </div>
-        </div>
+        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch"><!--Column-->
+
+            <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
+                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@item.ISBN"><!--Link-->
+                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
+                    <div class="card-body d-flex flex-column text-center"><!--CardBody-->
+                        <p class="card-title font-weight-bold py-0 my-0"><!--CardTitle:BookTitle-->
+                            @item.Title
+                        </p><!--/CardTitle:BookTitle-->
+                        <p class="card-text py-0 my-0"><!--CardText:BookAuthor-->
+                            @item.AuthorName
+                        </p><!--/CardText:BookAuthor-->
+                        <p class="card-text font-weight-bold py-0 my-0"><!--CardText:BookPrice-->
+                            £@item.Price
+                        </p><!--/CardText:BookPrice-->
+                    </div><!--CardBody-->
+                </a><!--/Link-->
+            </div><!--/Card-->
+
+        </div><!--/Column-->
     }
-</div>
+</div><!--/Row-->

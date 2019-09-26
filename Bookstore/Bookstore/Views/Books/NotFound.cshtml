@@ -1,78 +1,116 @@
 ﻿@model Bookstore.ViewModels.SearchViewModel
-@{ 
+@{
     ViewBag.Title = Model.Keyword;
 }
 
-@if (!String.IsNullOrEmpty(Model.Genre))
+@if (!String.IsNullOrEmpty(Model.Genre)) //If a genre name is passed via the Genre property...
 {
-    <div class="row pt-4">
-        <div class="col-6 text-left">
-            <!--Header-->
-            <h2 class="font-weight-bold mb-0 pb-0">@Model.Genre</h2>
+    <div class="row pt-4"><!--PageHead-->
+        <div class="col-6 text-left"><!--LeftColumn-->
 
-            <!-- Map -->
-            <p class="map font-italic my-0 py-0">
+            <h2 class="font-weight-bold mb-0 pb-0"><!--Header-->
+                @Model.Genre
+            </h2><!--/Header-->
+
+            <p class="map font-italic my-0 py-0"><!--Map-->
                 @Html.ActionLink("Home", "Index", "Home", null, null) /
                 @Html.ActionLink("Genres", "Index", "Genres") /
                 @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { genreName = Model.Genre }, null) /
                 Search
-            </p>
-        </div>
-        <div class="col-6 text-right">
-            <!--SearchBar-->
-            <div class="d-inline-block">
+            </p><!--/Map-->
+
+        </div><!--/LeftColumn-->
+        <div class="col-6 text-right"><!--RightColumn-->
+
+            <div class="d-inline-block"><!--SearchBar-->
                 @Html.ActionLink("Back", "ByGenre", "Books", new { genreName = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div>
-        </div>
-    </div>
-    <hr />
-    <h3 class="col my-5">No Result for <b>"@Model.Keyword"</b> in <b>@Model.Genre Titles</b></h3>
+            </div><!--/SearchBar-->
+
+        </div><!--/RightColumn-->
+    </div><!--/PageHead-->
+
+    <br />
+
+    <div><!--PageBody-->
+
+        <h3 class="col my-5"><!--Header-->
+            No Result for <b>"@Model.Keyword"</b> in <b>@Model.Genre Titles</b>
+        </h3><!--/Header-->
+
+    </div><!--/PageBody-->
 }
-else if (!String.IsNullOrEmpty(Model.Author))
+
+else if (!String.IsNullOrEmpty(Model.Author)) //If an author name is passed via the Genre property...
 {
-    <div class="row pt-4">
-        <div class="col-6 text-left">
-            <!--Header-->
-            <h2 class="font-weight-bold mb-0 pb-0">@Model.Author</h2>
-            <!-- Map -->
-            <p class="map font-italic my-0 py-0">
+    <div class="row pt-4"><!--PageHead-->
+        <div class="col-6 text-left"><!--LeftColumn-->
+
+            <h2 class="font-weight-bold mb-0 pb-0"><!--Header-->
+                @Model.Author
+            </h2><!--/Header-->
+
+            <p class="map font-italic my-0 py-0"><!--Map-->
                 @Html.ActionLink("Home", "Index", "Home", null, null) /
                 @Html.ActionLink("Authors", "Index", "Authors") /
-                @Html.ActionLink(Model.Author, "Autohr", "Books", new { authorName = Model.Author }, null) /
+                @Html.ActionLink(Model.Author, "Author", "Books", new { authorName = Model.Author }, null) /
                 Search
-            </p>
-        </div>
-        <div class="col-6 text-right">
-            <!--SearchBar-->
-            <div class="d-inline-block">
-                @Html.ActionLink("BACK", "ByAuthor", "Books", new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div>
-        </div>
-    </div>
-    <hr />
-    <h3 class="col my-5">No Result for <b>"@Model.Keyword"</b> in <b>@Model.Author Titles</b></h3>
-}
-else
-{
-    <div class="row pt-4">
-        <div class="col-6 text-left">
-            <!--Header-->
-            <h2 class="font-weight-bold mb-0 pb-0">All Titles </h2>
+            </p><!--/Map-->
 
-            <!-- Map -->
-            <p class="map font-italic my-0 py-0">
+        </div><!--/LeftColumn-->
+        <div class="col-6 text-right"><!--RightColumn-->
+
+            <div class="d-inline-block"><!--SearchBar-->
+                @Html.ActionLink("BACK", "ByAuthor", "Books", 
+                    new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+            </div><!--/SearchBar-->
+
+        </div><!--/RightColumn-->
+    </div><!--/PageHead-->
+
+    <hr />
+
+    <div><!--PageBody-->
+
+        <h3 class="col my-5"><!--Header-->
+            No Result for <b>"@Model.Keyword"</b> in <b>@Model.Author Titles</b>
+        </h3><!--/Header-->
+
+    </div><!--/PageBody-->
+}
+else //If neither a genre name nor an author name is passed...
+{
+    
+    <div class="row pt-4"><!--PageHead-->
+        <div class="col-6 text-left"><!--LeftColumn-->
+
+            <h2 class="font-weight-bold mb-0 pb-0"><!--Header-->
+                All Titles
+            </h2><!--/Header-->
+
+            <p class="map font-italic my-0 py-0"><!--Map-->
                 @Html.ActionLink("Home", "Index", "Home", null, null) /
                 @Html.ActionLink("Books", "Index", "Books") /
                 Search
-            </p>
-        </div>
-        <div class="col-6 text-right">
-            <!--SearchBar-->
-            <div class="d-inline-block">
-                @Html.ActionLink("BACK", "Index", "Books", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div>
-        </div>
+            </p><!--/Map-->
+
+        </div><!--/LeftColumn-->
+        <div class="col-6 text-right"><!--RightColumn-->
+
+            <div class="d-inline-block"><!--SearchBar-->
+                @Html.ActionLink("BACK", "Index", "Books", 
+                    null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+            </div><!--/SearchBar-->
+
+        </div><!--/RightColumn-->
     </div>
+    
     <hr />
-    <h3 class="col my-5">No Result for <b>"@Model.Keyword"</b> in <b>Books</b></h3>
+
+    <div><!--PageBody-->
+
+        <h3 class="col my-5"><!--Header-->
+            No Result for <b>"@Model.Keyword"</b> in <b>Books</b>
+        </h3><!--/Header-->
+
+    </div><!--/PageBody-->
 }

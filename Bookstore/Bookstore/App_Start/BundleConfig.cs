@@ -29,7 +29,8 @@ namespace Bookstore
                       "~/Content/bootstrap.css",
                       "~/Content/hover.css",
                       "~/Content/site.css",
-                      "~/Conten/fontawesome.min.css"));
+                      "~/Content/fontawesome.min.css",
+                      "~/Content/PagedList.css"));
         }
     }
 }

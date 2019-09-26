@@ -10,45 +10,54 @@
     }
 }
 
-<div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
+<div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center"><!--PageHead-->
+    <div class="align-self-start"><!--LeftColumn-->
 
-    <!--Header-->
-    <div class="align-self-start">
-        <h2 class="d-block font-weight-bold mb-0 pb-0">
+        <h2 class="d-block font-weight-bold mb-0 pb-0"><!--BookName-->
             @printTitle
-        </h2>
-        <p class="map my-0 py-0">by @Model.AuthorName</p>
-    </div>
-    <!--Map-->
-    <div>
-        <p class="map font-italic my-0 py-0 text-right">
+        </h2><!--/BookName-->
+
+        <p class="map my-0 py-0"><!--BookAuthor-->
+            by @Model.AuthorName
+        </p><!--/BookAuthor-->
+
+    </div><!--/LeftColumn-->
+    <div><!--RightColumn-->
+
+        <p class="map font-italic my-0 py-0 text-right"><!--MapByGenre-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Genres", "Index", "Genres", null, null) /
             @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) /
             @printTitle
-        </p>
-        <p class="map font-italic my-0 py-0 text-right">
+        </p><!--/MapByGenre-->
+
+        <p class="map font-italic my-0 py-0 text-right"><!--MapByAuthor-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
             @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) /
             @printTitle
-        </p>
-    </div>
-</div>
+        </p><!--/MapByAuthor-->
+
+    </div><!--/RightColumn-->
+</div><!--/PageHead-->
+
 <hr />
 
+<dl class="dl-horizontal"><!--PageBody-->
+    <div class="row"><!--Row-->
+        <div class="col-3 offset-1"><!--ImageContainer-->
 
-<dl class="dl-horizontal">
-    <div class="row">
-        <!-- IMAGE -->
-        <div class="col-3 offset-1">
-            <img class="mt-5" style="width:100%" src="~/Images/@Model.ImagePath" />
-        </div>
+            <img class="mt-5" style="width:100%" src="~/Images/@Model.ImagePath" /><!--Image/-->
 
-        <div class="col-5 offset-1">
-            <div class="row">
-                <h2 class="col-12 mt-2 pb-2">@Html.DisplayFor(model => model.Title)</h2>
-                <div class="col-8">
+        </div><!--/ImageContainer-->
+        <div class="col-5 offset-1"><!--Column-->
+            <div class="row"><!--NestedRow-->
+                <h2 class="col-12 mt-2 pb-2"><!--Column:Header-->
+
+                    @Html.DisplayFor(model => model.Title)<!--BookTitle-->
+
+                </h2><!--/Column:Header-->
+                <div class="col-8"><!--Column:MetaData-->
                     <dt> Author </dt>
                     <dd> @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) <br /> </dd>
 
@@ -72,23 +81,24 @@
 
                     <dt> Dimensions</dt>
                     <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
-                </div>
-                <div class="col-3 d-flex flex-column-reverse align-items-end">
-                    <input type="button" value="Back" class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()" />
-                    <input type="button" value="Purchase" class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100" />
-                </div>
-            </div><!-- row -->
-        </div><!-- col -->
-        <!-- DESCRIPTION -->
-        <div class="my-5 col-10 offset-1">
-            <dd class="map">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-        </div>
-    </div>
+                </div><!--Column:MetaData-->
+                <div class="col-3 d-flex flex-column-reverse align-items-end"><!--Column:Buttons-->
 
-    <p class="mb-4 text-right">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ISBN }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</dl>
+                    <input type="button" value="Back" 
+                           class="btn-dark font-weight-bold text-uppercase text-black my-2 ml-4 py-2 w-100" onclick="history.back()" /><!--Button:Back/-->
+
+                    <input type="button" value="Purchase" 
+                           class="btn-warning font-weight-bold text-uppercase text-black ml-4 py-2 w-100" /><!--Button:Purchase/-->
+
+                </div><!--/Column:Buttons-->
+            </div><!--/NestedRow-->
+        </div><!--/Column-->
+        <div class="my-5 col-10 offset-1"><!--Column-->
+            
+            <dd class="map"><!--Description-->
+                @Html.DisplayFor(model => model.Description)
+            </dd><!--Description-->
+
+        </div><!--Column-->
+    </div><!--/Row-->
+</dl><!--/PageBody-->

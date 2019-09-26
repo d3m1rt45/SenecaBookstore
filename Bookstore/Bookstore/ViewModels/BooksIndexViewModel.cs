@@ -20,13 +20,13 @@ namespace Bookstore.ViewModels
             }
             set
             {
-                if (value.Length > 10)
+                if (value.Length > 10) //If the string being assigned is longer than 10 characters...
                 {
-                    _Title = $"{value.Substring(0, 10)}...";
+                    _Title = $"{value.Substring(0, 10)}..."; //...assign only the first 10 characters followed by "...";
                 }
-                else
+                else //If not...
                 {
-                    _Title = value;
+                    _Title = value;  //...assign the whole string.
                 }
             }
         }
@@ -40,13 +40,13 @@ namespace Bookstore.ViewModels
             }
             set
             {
-                if (value.Length > 12)
+                if (value.Length > 12) //If the string being assigned is longer than 12 characters...
                 {
-                    _AuthorName = $"{value.Substring(0, 12)}...";
+                    _AuthorName = $"{value.Substring(0, 12)}..."; //...assign only the first 10 characters followed by "...";
                 }
-                else
+                else //If not...
                 {
-                    _AuthorName = value;
+                    _AuthorName = value; //...assign the whole string.
                 }
             }
         }
@@ -54,65 +54,64 @@ namespace Bookstore.ViewModels
         public string ImagePath { get; set; }
 
 
-        //Take a 'List<Book>' Object and Turn It Into 'IQueryable<BookCardViewModel>'s
-        public static List<BooksIndexViewModel> CardsList(DbSet<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(DbSet<Book> bookSet) //Take a 'DBSet<Book>' Object and Turn It Into 'List<BookCardViewModel>'s
         {
-            var bookCards = new List<BooksIndexViewModel>();
+            var bookCards = new List<BooksIndexViewModel>(); //Instantiate a new List of BookIndexViewModels and,
 
-            foreach (var book in bookSet)
+            foreach (var book in bookSet) //For each book in the bookSet parameter...
             {
-                bookCards.Add(new BooksIndexViewModel
+                bookCards.Add(new BooksIndexViewModel //...map the book into a new BooksIndexViewModel and,
                 {
                     ISBN = book.ISBN,
                     Title = book.Title,
                     AuthorName = book.AuthorName,
                     Price = book.Price,
                     ImagePath = book.ImagePath
-                });
+                }); //add it to bookCards;
             }
 
-            return bookCards;
+            return bookCards; //Return bookCards;
         }
-        public static List<BooksIndexViewModel> CardsList(List<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(List<Book> bookList) //Map a List of Books into a List of BookIndexViewModels:
         {
-            var bookCards = new List<BooksIndexViewModel>();
+            var bookCards = new List<BooksIndexViewModel>(); //Instantiate a new List of BookIndexViewModels named bookCards;
 
-            foreach (var book in bookSet)
+            foreach (var book in bookList) //For each book in the bookList parameter...
             {
-                bookCards.Add(new BooksIndexViewModel
+                bookCards.Add(new BooksIndexViewModel //...map the book into a new BooksIndexViewModel object and, 
                 {
                     ISBN = book.ISBN,
                     Title = book.Title,
                     AuthorName = book.AuthorName,
                     Price = book.Price,
                     ImagePath = book.ImagePath
-                });
+                }); //add it to bookCards;
             }
 
-            return bookCards;
+            return bookCards; //return bookCards;
         }
 
-        public static List<BooksIndexViewModel> SortCards(List<BooksIndexViewModel> cardsList, string sortBy)
+        public static List<BooksIndexViewModel> SortCards(List<BooksIndexViewModel> cardsList, string sortBy) //Sort a List of BooksIndexViewModels:
         {
-            var cardsQuery = cardsList.AsQueryable();
+            var cardsQuery = cardsList.AsQueryable(); //Instantiate a new cardsQery from the cardsList parameter;
 
-            switch (sortBy)
+            switch (sortBy) //Check the sortBy parameter:
             {
-                case ("AtoZ"):  //IF THE STRING "AtoZ" IS PASSED...
-                    cardsQuery = cardsQuery.OrderBy(b => b.Title);  //...ORDER ALPHABETICALLY (ASCENDING)
+                case ("AtoZ"): //If it's "AtoZ"...
+                    cardsQuery = cardsQuery.OrderBy(b => b.Title);  //...order cardsQuery items alphabetically (ascending);
                     break;
-                case ("ZtoA"):  //IF THE STRING "ZtoA" IS PASSED...
-                    cardsQuery = cardsQuery.OrderByDescending(b => b.Title); //...ORDER ALPHABEDICALLY (DESCENDING)
+                case ("ZtoA"): //If it is "ZtoA"...
+                    cardsQuery = cardsQuery.OrderByDescending(b => b.Title); //...order cardsQuery items alphabetically (descending);
                     break;
-                case ("lowToHigh"):  //IF THE STRING "lowToHigh" IS PASSED...
-                    cardsQuery = cardsQuery.OrderBy(b => b.Price);  //...ORDER BY PRICE (ASCENDING)
+                case ("lowToHigh"): //If it is "lowToHigh"...
+                    cardsQuery = cardsQuery.OrderBy(b => b.Price);  //...order cardsQuery items by price (ascending);
                     break;
-                case ("highToLow"): //IF THE STRING "highToLow" IS PASSED...
-                    cardsQuery = cardsQuery.OrderByDescending(b => b.Price); //...ORDER BY PRICE (DESCENDING)
+                case ("highToLow"): //If it is "highToLow"...
+                    cardsQuery = cardsQuery.OrderByDescending(b => b.Price); //...order cardsQuery items by price (descending);
                     break;
             }
 
-            return cardsQuery.ToList();
+            return cardsQuery.ToList(); //Return the cardsQuery as a List of BooksIndexViewModel.
         }
     }
 }

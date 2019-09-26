@@ -17,7 +17,7 @@ namespace Bookstore.Controllers
         {
             var homeIndexInstance = new HomeIndexViewModel();
 
-            homeIndexInstance.SetFeatured(db.Books.Take(4));
+            homeIndexInstance.SetFeatured();
             homeIndexInstance.AddSection("Philosophy");
             homeIndexInstance.AddSection("Business, Finance and Law");
             homeIndexInstance.AddSection("Crime and Mystery");
