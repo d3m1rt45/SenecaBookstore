@@ -8,6 +8,6 @@ namespace Bookstore.ViewModels
     public class ByAuthorViewModel
     {
         public string Author { get; set; }
-        public List<AllTitlesViewModel> BookCards { get; set; }
+        public List<BooksIndexViewModel> BookCards { get; set; }
     }
 }

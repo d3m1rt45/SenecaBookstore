@@ -9,6 +9,6 @@ namespace Bookstore.ViewModels
     public class ByGenreViewModel
     {
         public string Genre { get; set; }
-        public List<AllTitlesViewModel> BookCards { get; set; }
+        public List<BooksIndexViewModel> BookCards { get; set; }
     }
 }

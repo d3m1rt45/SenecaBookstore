@@ -8,8 +8,8 @@ namespace Bookstore.ViewModels
     public class SectionViewModel
     {
         public string Title { get; set; }
-        private List<AllTitlesViewModel> _BookCards;
-        public List<AllTitlesViewModel> BookCards
+        private List<BooksIndexViewModel> _BookCards;
+        public List<BooksIndexViewModel> BookCards
         {
             get
             {

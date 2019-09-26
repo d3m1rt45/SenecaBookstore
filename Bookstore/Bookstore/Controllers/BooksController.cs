@@ -20,7 +20,7 @@ namespace Bookstore.Controllers
         // GET: Books
         public ActionResult Index(string search, string sortBy)
         {
-            var cardsList = AllTitlesViewModel.CardsList(db.Books); //Make Smaller 'BookCardViewModel' Objects from a List of Cards
+            var cardsList = BooksIndexViewModel.CardsList(db.Books); //Make Smaller 'BookCardViewModel' Objects from a List of Cards
 
             //SEARCH
             if (!String.IsNullOrEmpty(search))  //Only Executed if A Search String is Passed
@@ -31,7 +31,7 @@ namespace Bookstore.Controllers
             //SORTBY
             if (!String.IsNullOrEmpty(sortBy)) //Only Executed if A SortBy String is Passed
             {
-                cardsList = AllTitlesViewModel.SortCards(cardsList, sortBy); //...Call the 'SortCards' Static Method
+                cardsList = BooksIndexViewModel.SortCards(cardsList, sortBy); //...Call the 'SortCards' Static Method
             }
 
             return View(cardsList);
@@ -201,7 +201,7 @@ namespace Bookstore.Controllers
 
         public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
         {
-            var thisGenreBookCards = AllTitlesViewModel.CardsList(db.Genres.Find(genreName).Books);
+            var thisGenreBookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books);
 
             //Search by book title...
             if (!String.IsNullOrEmpty(searchKeyword))
@@ -211,7 +211,7 @@ namespace Bookstore.Controllers
 
             if (!String.IsNullOrEmpty(sortBy))
             {
-                thisGenreBookCards = AllTitlesViewModel.SortCards(thisGenreBookCards, sortBy);
+                thisGenreBookCards = BooksIndexViewModel.SortCards(thisGenreBookCards, sortBy);
             }
 
             var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
@@ -237,7 +237,7 @@ namespace Bookstore.Controllers
 
         public ActionResult ByAuthor(string authorName, string order, string search)
         {
-            var thisAuthorBookCards = AllTitlesViewModel.CardsList(db.Authors.Find(authorName).Books);
+            var thisAuthorBookCards = BooksIndexViewModel.CardsList(db.Authors.Find(authorName).Books);
 
             //Search by book title...
             if (!String.IsNullOrEmpty(search))
@@ -247,7 +247,7 @@ namespace Bookstore.Controllers
 
             if (!String.IsNullOrEmpty(order))
             {
-                thisAuthorBookCards = AllTitlesViewModel.SortCards(thisAuthorBookCards, order);
+                thisAuthorBookCards = BooksIndexViewModel.SortCards(thisAuthorBookCards, order);
             }
 
             var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };

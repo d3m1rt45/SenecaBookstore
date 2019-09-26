@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Bookstore.ViewModels
 {
-    public class AllTitlesViewModel
+    public class BooksIndexViewModel
     {
         public string ISBN { get; set; }
 
@@ -55,13 +55,13 @@ namespace Bookstore.ViewModels
 
 
         //Take a 'List<Book>' Object and Turn It Into 'IQueryable<BookCardViewModel>'s
-        public static List<AllTitlesViewModel> CardsList(DbSet<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(DbSet<Book> bookSet)
         {
-            var bookCards = new List<AllTitlesViewModel>();
+            var bookCards = new List<BooksIndexViewModel>();
 
             foreach (var book in bookSet)
             {
-                bookCards.Add(new AllTitlesViewModel
+                bookCards.Add(new BooksIndexViewModel
                 {
                     ISBN = book.ISBN,
                     Title = book.Title,
@@ -73,13 +73,13 @@ namespace Bookstore.ViewModels
 
             return bookCards;
         }
-        public static List<AllTitlesViewModel> CardsList(List<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(List<Book> bookSet)
         {
-            var bookCards = new List<AllTitlesViewModel>();
+            var bookCards = new List<BooksIndexViewModel>();
 
             foreach (var book in bookSet)
             {
-                bookCards.Add(new AllTitlesViewModel
+                bookCards.Add(new BooksIndexViewModel
                 {
                     ISBN = book.ISBN,
                     Title = book.Title,
@@ -92,7 +92,7 @@ namespace Bookstore.ViewModels
             return bookCards;
         }
 
-        public static List<AllTitlesViewModel> SortCards(List<AllTitlesViewModel> cardsList, string sortBy)
+        public static List<BooksIndexViewModel> SortCards(List<BooksIndexViewModel> cardsList, string sortBy)
         {
             var cardsQuery = cardsList.AsQueryable();
 

@@ -38,7 +38,7 @@ namespace Bookstore.ViewModels
         {
             var newSection = new SectionViewModel();
             var db = new BookstoreContext();
-            var bookCards = AllTitlesViewModel.CardsList(db.Genres.Find(genreName).Books.ToList());
+            var bookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books.ToList());
             newSection.Title = genreName;
             newSection.BookCards = bookCards;
             this.Sections.Add(newSection);
