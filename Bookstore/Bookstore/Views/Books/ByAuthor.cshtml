@@ -1,36 +1,20 @@
 ﻿@model Bookstore.ViewModels.ByAuthorViewModel
 
 @{
-    var thisAuthor = Model.Author;
-    ViewBag.Title = thisAuthor;
+    var authorName = Model.Author;
+    ViewBag.Title = authorName;
 }
 
-<<<<<<< HEAD
-<!--PageHead-->
-<div class="row pt-4">
-    <div class="col-6 text-left">
-        <!--Header-->
-        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@thisAuthor</h2>
-=======
 <div class="row pt-4"><!--PageHead-->
     <div class="col-6 text-left"><!--LeftColumn-->
         
         <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0"><!--Header-->
             @authorName
         </h2><!--/Header-->
->>>>>>> PartialViews
 
         <p class="map font-italic my-0 py-0"><!--Map-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-<<<<<<< HEAD
-            @thisAuthor
-        </p>
-    </div>
-    <div class="col-6 text-right">
-        <!--SearchBar-->
-        <div class="d-inline-block pt-2">
-=======
             @authorName
         </p><!--/Map-->
 
@@ -38,7 +22,6 @@
     <div class="col-6 text-right"><!--RightColumn-->
         
         <div class="d-inline-block pt-2"><!--SearchBar-->
->>>>>>> PartialViews
             @using (Html.BeginForm())
             {
                 <div class="input-group">
@@ -50,18 +33,10 @@
             }
         </div><!--/SearchBar-->
 
-<<<<<<< HEAD
-        <!--SortBy-->
-        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor })">Sort by...</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor, order = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { authorName = thisAuthor, order = "ZtoA" })">Title (z-a)</option>
-=======
         <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--SortBy-->
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
             <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
->>>>>>> PartialViews
         </select>
         <script>
             function SortBy() {

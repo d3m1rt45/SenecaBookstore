@@ -34,7 +34,7 @@
         <p class="map font-italic my-0 py-0 text-right"><!--MapByAuthor-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) /
+            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { genreName = Model.AuthorName }, null) /
             @printTitle
         </p><!--/MapByAuthor-->
 

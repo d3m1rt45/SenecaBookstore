@@ -21,11 +21,7 @@ namespace Bookstore.Controllers
         // GET: Books
         public ActionResult Index(string search, string sortBy, int page = 1) //All Titles:
         {
-<<<<<<< HEAD
-            var cardsList = BooksIndexViewModel.CardsList(db.Books); //Make a List<BooksIndexViewModel> Object Populated from db.Books
-=======
             var cardsList = BooksIndexViewModel.CardsList(db.Books); //Map a List of Book objects to a List of BookIndexViewModel objects
->>>>>>> PartialViews
 
             //Search:
             if (!String.IsNullOrEmpty(search)) //If a search string is passed...
@@ -180,110 +176,6 @@ namespace Bookstore.Controllers
             return View(book);
         }
 
-<<<<<<< HEAD
-        public ActionResult ByISBN(string role)
-        {
-            Book book = db.Books.Find(role);
-            return View(book);
-        }
-
-        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
-        {
-            var thisGenreBookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books);
-
-            //Search by book title...
-            if (!String.IsNullOrEmpty(searchKeyword))
-            {
-                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName });
-            }
-
-            if (!String.IsNullOrEmpty(sortBy))
-            {
-                thisGenreBookCards = BooksIndexViewModel.SortCards(thisGenreBookCards, sortBy);
-            }
-
-            var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
-
-            return View(byGenreInstance);
-        }
-
-        public ActionResult ByAuthor(string authorName, string order, string search)
-        {
-            var thisAuthorBookCards = BooksIndexViewModel.CardsList(db.Authors.Find(authorName).Books);
-
-            //Search by book title...
-            if (!String.IsNullOrEmpty(search))
-            {
-                return RedirectToAction("Search", new { keyword = search, author = authorName });
-            }
-
-            if (!String.IsNullOrEmpty(order))
-            {
-                thisAuthorBookCards = BooksIndexViewModel.SortCards(thisAuthorBookCards, order);
-            }
-
-            var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };
-
-            return View(byAuthorInstance);
-        }
-
-        //SEARCH ACTION
-        public ActionResult Search(string keyword, string author, string genre)
-        {
-            var result = SearchViewModel.SearchTitles(author, genre, keyword);
-
-            //ANY FOUND?
-            if (result.Books.Any()) //IF YES:
-            {
-                return View("Found", result); //RETURN 'Found' VIEW
-            }
-            else //IF NO:
-            {
-                return View("NotFound", result);  //RETURN 'NotFound' VIEW
-            }
-        }
-
-        // GET: Books/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = db.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-            return View(book);
-        }
-
-        // POST: Books/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Book book = db.Books.Find(id);
-            Author author = book.Author;
-            Genre genre = book.Genre;
-
-            //string imageFileName = Path.Combine(Server.MapPath("~/Images"), book.ImagePath);
-            //System.IO.File.Delete(imageFileName);
-
-            db.Books.Remove(book);
-
-            if (author.Books.Count() < 1)
-                db.Authors.Remove(author);
-
-            if (genre.Books.Count() < 1)
-                db.Genres.Remove(genre);
-
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-=======
->>>>>>> PartialViews
         protected override void Dispose(bool disposing)
         {
             if (disposing)

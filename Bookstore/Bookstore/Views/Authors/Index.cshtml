@@ -22,7 +22,7 @@
                 @using (Html.BeginForm())
                 {
                     <div class="input-group">
-                        @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark", placeholder = "Search Authors..." })
+                        @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search Authors..." })
                         <div class="input-group-prepend">
                             <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                         </div>
@@ -48,8 +48,15 @@
 <hr />
 
 <div class="row">
-    @foreach (var item in Model)
+    @if (Model.FirstOrDefault() != null)
     {
-        <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { authorName = item.Name }, null)</h5>
+        foreach (var item in Model)
+        {
+            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByAuthor", "Books", new { authorName = item.Name }, null)</h5>
+        }
+    }
+    else
+    {
+        <h3 class="col mb-3">No Author Found...</h3>
     }
 </div>

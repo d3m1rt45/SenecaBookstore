@@ -302,6 +302,14 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
+    <Content Include="Views\Authors\Details.cshtml" />
+    <Content Include="Views\Authors\Create.cshtml" />
+    <Content Include="Views\Authors\Edit.cshtml" />
+    <Content Include="Views\Authors\Delete.cshtml" />
+    <Content Include="Views\Genres\Create.cshtml" />
+    <Content Include="Views\Genres\Delete.cshtml" />
+    <Content Include="Views\Genres\Details.cshtml" />
+    <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
@@ -319,12 +327,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Books\NotFound.cshtml" />
     <Content Include="Views\Books\Found.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Authors\Search.cshtml" />
-=======
     <Content Include="Views\Books\IndexPaged.cshtml" />
     <Content Include="Views\Books\FoundPaged.cshtml" />
->>>>>>> PartialViews
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

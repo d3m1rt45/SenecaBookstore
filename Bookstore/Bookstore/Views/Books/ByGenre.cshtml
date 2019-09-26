@@ -1,36 +1,20 @@
 ﻿@model Bookstore.ViewModels.ByGenreViewModel
 
 @{
-    var thisGenre = Model.Genre;
-    ViewBag.Title = thisGenre;
+    var genreName = Model.Genre;
+    ViewBag.Title = genreName;
 }
 
-<<<<<<< HEAD
-<!--PageHead-->
-<div class="row pt-4">
-    <div class="col-6 text-left">
-        <!--Header-->
-        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">@thisGenre</h2>
-=======
 <div class="row pt-4"><!--PageHead-->
     <div class="col-6 text-left"><!--LeftColumn-->
         
         <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0"><!--Header-->
             @genreName
         </h2><!--/Header-->
->>>>>>> PartialViews
 
         <p class="map font-italic my-0 py-0"><!--Map-->
             @Html.ActionLink("Home", "Index", "Home", null, null) /
             @Html.ActionLink("Genres", "Index", "Genres", null, null) / 
-<<<<<<< HEAD
-            @thisGenre
-        </p>
-    </div>
-    <div class="col-6 text-right">
-        <!--SearchBar-->
-        <div class="d-inline-block pt-2">
-=======
             @genreName
         </p><!--/Map-->
 
@@ -38,7 +22,6 @@
     <div class="col-6 text-right"><!--RightColumn-->
         
         <div class="d-inline-block pt-2"><!--SearchBar-->
->>>>>>> PartialViews
             @using (Html.BeginForm())
             {
                 <div class="input-group">
@@ -50,22 +33,12 @@
             }
         </div><!--/SearchBar-->
 
-<<<<<<< HEAD
-        <!--SortBy-->
-        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre })">Sort by...</option>
-            <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "ZtoA" })">Title (z-a)</option>
-            <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "lowToHigh" })">Price ↓</option>
-            <option value="@Url.Action("ByGenre", "Books", new { genreName = thisGenre, sortBy = "highToLow" })">Price ↑</option>
-=======
         <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--SortBy-->
             <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName })">Sort by...</option>
             <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "AtoZ" })">Title (a-z)</option>
             <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "ZtoA" })">Title (z-a)</option>
             <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "lowToHigh" })">Price ↓</option>
             <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "highToLow" })">Price ↑</option>
->>>>>>> PartialViews
         </select>
         <script>
             function SortBy() {
