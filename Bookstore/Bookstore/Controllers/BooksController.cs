@@ -104,9 +104,9 @@ namespace Bookstore.Controllers
 
         public ActionResult Search(string keyword, string author, string genre, int page = 1) //Titles as search results:
         {
-            var result = SearchViewModel.SearchTitles(author, genre, keyword);
-            result.Author = author;
-            result.Genre = genre;
+            var result = SearchViewModel.SearchTitles(author, genre, keyword); //Instantiate a SearchViewModel object;
+            result.Author = author; //Set its 'Author' property by the 'author' parameter;
+            result.Genre = genre; //Set its 'Genre' property by the 'genre' parameter;
 
             if (result.MustBePaged()) //...and if they must be paged (more than 24)...
             {
