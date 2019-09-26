@@ -19,59 +19,83 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index(string search, string sortBy, int page = 1)
+        public ActionResult Index(string search, string sortBy, int page = 1) //All Titles:
         {
-            var cardsList = BooksIndexViewModel.CardsList(db.Books); //Make Smaller 'BookCardViewModel' Objects from a List of Cards
+            var cardsList = BooksIndexViewModel.CardsList(db.Books); //Map a List of Book objects to a List of BookIndexViewModel objects
 
-            //SEARCH
-            if (!String.IsNullOrEmpty(search))  //Only Executed if A Search String is Passed
+            //Search:
+            if (!String.IsNullOrEmpty(search)) //If a search string is passed...
             {
-                return RedirectToAction("Search", new { keyword = search });  //...REDIRECT TO "Found" ACTION IF SO
+                return RedirectToAction("Search", new { keyword = search });  //...pass the search string to the Search action;
             }
 
-            //SORTBY
-            if (!String.IsNullOrEmpty(sortBy)) //Only Executed if A SortBy String is Passed
+            //SortBy:
+            if (!String.IsNullOrEmpty(sortBy)) //If a sortBy string is passed...
             {
-                cardsList = BooksIndexViewModel.SortCards(cardsList, sortBy); //...Call the 'SortCards' Static Method
+                cardsList = BooksIndexViewModel.SortCards(cardsList, sortBy); //...sort cards accordingly;
             }
 
-            //PAGING
+            //Paging:
             if (cardsList.Count > 24) //If cardsList have more than 24 members...
             {
-                return View("IndexPaged", cardsList.ToPagedList(page, 24)); //...return 'IndexPaged' view with a PagedList<HomeIndexViewModel>
+                return View("IndexPaged", cardsList.ToPagedList(page, 24)); //...return 'IndexPaged' view with a PagedList<HomeIndexViewModel>;
             }
             else //If not...
             {
-                return View(cardsList); //...return 'Index' view with a List<HomeIndexViewModel>
+                return View(cardsList); //...return 'Index' view with a List<HomeIndexViewModel>;
             }
         }
 
-        public ActionResult ByISBN(string role)
+        public ActionResult ByISBN(string isbn) //A Single Title:
         {
-            Book book = db.Books.Find(role);
-            return View(book);
+            Book book = db.Books.Find(isbn); //Find Book object by the isbn parameter, and
+            return View(book); //pass it to the View;
         }
 
-        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
+        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword) //Titles of One Specific Genre:
         {
-            var thisGenreBookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books);
+            var bookCards = BooksIndexViewModel.CardsList( //Find the Titles of a genre by the genreName parameter, and
+                db.Genres.Find(genreName).Books); //map them into a List of BooksIndexViewModel objects named bookCards; 
 
-            //Search by book title...
-            if (!String.IsNullOrEmpty(searchKeyword))
+            //Search:
+            if (!String.IsNullOrEmpty(searchKeyword)) //If a search string is passed...
             {
-                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName });
+                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName }); //...pass the search string and genreName to the Search action;
             }
 
-            if (!String.IsNullOrEmpty(sortBy))
+            //SortBy:
+            if (!String.IsNullOrEmpty(sortBy)) //If a sortBy string is passed...
             {
-                thisGenreBookCards = BooksIndexViewModel.SortCards(thisGenreBookCards, sortBy);
+                bookCards = BooksIndexViewModel.SortCards(bookCards, sortBy); //...sort bookCards accordingly;
             }
 
-            var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
+            //Instantiate a ByGenreViewModel object with 'bookCards' and 'genreName';
+            var byGenreObject = new ByGenreViewModel { BookCards = bookCards, Genre = genreName };
 
-            return View(byGenreInstance);
+            return View(byGenreObject);
         }
+        public ActionResult ByAuthor(string authorName, string order, string search)
+        {
+            var bookCards = BooksIndexViewModel.CardsList( //Find the Titles of an author by the authorName parameter, and
+                db.Authors.Find(authorName).Books); //map them into a List of BooksIndexViewModel objects named bookCards; 
 
+            //Search:
+            if (!String.IsNullOrEmpty(search))
+            {
+                return RedirectToAction("Search", new { keyword = search, author = authorName });
+            }
+
+            //SortBy
+            if (!String.IsNullOrEmpty(order)) //If an sortBy string is passed...
+            {
+                bookCards = BooksIndexViewModel.SortCards(bookCards, order); //...sort bookCards accordingly;
+            }
+
+            //Instantiate a ByGenreViewModel object with 'bookCards' and 'authorName';
+            var byAuthorObject = new ByAuthorViewModel { BookCards = bookCards, Author = authorName };
+
+            return View(byAuthorObject);
+        }
         public ActionResult Search(string keyword, string author, string genre, int page = 1)
         {
             var result = SearchViewModel.SearchTitles(author, genre, keyword);
@@ -83,36 +107,17 @@ namespace Bookstore.Controllers
                     result.BooksPaged = result.Books.ToPagedList(page, 24); //...set the BooksPaged property as an IPagedList<Book>,
                     return View("FoundPaged", result); //return 'FoundPaged' view with a PagedList<Book>;
                 }
-                else //If less than 24 books found...
+                else //If not...
                 {
                     return View("Found", result); //...return 'Found' view;
                 }
             }
-            else //If no books found...
+            else //If not...
             {
                 return View("NotFound", result);  //...return 'NotFound' view;
             }
         }
 
-        public ActionResult ByAuthor(string authorName, string order, string search)
-        {
-            var thisAuthorBookCards = BooksIndexViewModel.CardsList(db.Authors.Find(authorName).Books);
-
-            //Search by book title...
-            if (!String.IsNullOrEmpty(search))
-            {
-                return RedirectToAction("Search", new { keyword = search, author = authorName });
-            }
-
-            if (!String.IsNullOrEmpty(order))
-            {
-                thisAuthorBookCards = BooksIndexViewModel.SortCards(thisAuthorBookCards, order);
-            }
-
-            var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };
-
-            return View(byAuthorInstance);
-        }
 
         // GET: Books/Create
         public ActionResult Create()

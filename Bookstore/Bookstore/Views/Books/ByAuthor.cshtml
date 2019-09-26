@@ -33,18 +33,16 @@
             }
         </div><!--/SearchBar-->
 
-        <div><!--SortBy-->
-            <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--Button-->
-                <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
-                <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
-                <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
-            </select><!--/Button-->
-            <script>//Script
-                function SortBy() {
-                    window.location.href = document.getElementById("UrlList").value;
-                }
-            </script><!--/Script-->
-        </div><!--/SortBy-->
+        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--SortBy-->
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
+            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
+        </select>
+        <script>
+            function SortBy() {
+                window.location.href = document.getElementById("UrlList").value;
+            }
+        </script><!--/SortBy-->
 
     </div><!--/RightColumn-->
 </div><!--/PageHead-->
@@ -57,7 +55,7 @@
         <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch"><!--Column-->
 
             <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
-                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN"><!--Link-->
+                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@item.ISBN"><!--Link-->
                     <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
                     <div class="card-body d-flex flex-column text-center"><!--CardBody-->
                         <p class="card-title font-weight-bold py-0 my-0"><!--CardTitle:BookTitle-->
