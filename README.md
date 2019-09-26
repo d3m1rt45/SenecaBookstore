@@ -1,1 +1,2 @@
-# online-bookstore
+# Seneca Online Bookstore Demo
+
