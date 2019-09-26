@@ -16,10 +16,10 @@ namespace Bookstore.Controllers
 {
     public class BooksController : Controller
     {
-        private BookstoreContext db = new BookstoreContext();
+        private BookstoreContext db = new BookstoreContext(); //DataAccess
 
         // GET: Books
-        public ActionResult Index(string search, string sortBy, int page = 1) //All Titles:
+        public ActionResult Index(string search, string sortBy, int page = 1) //All titles:
         {
             var cardsList = BooksIndexViewModel.CardsList(db.Books); //Map a List of Book objects to a List of BookIndexViewModel objects
 
@@ -46,13 +46,15 @@ namespace Bookstore.Controllers
             }
         }
 
-        public ActionResult ByISBN(string isbn) //A Single Title:
+
+        public ActionResult ByISBN(string isbn) //A single title:
         {
             Book book = db.Books.Find(isbn); //Find Book object by the isbn parameter, and
             return View(book); //pass it to the View;
         }
 
-        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword) //Titles of One Specific Genre:
+
+        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword) //Titles of one specific genre:
         {
             var bookCards = BooksIndexViewModel.CardsList( //Find the Titles of a genre by the genreName parameter, and
                 db.Genres.Find(genreName).Books); //map them into a List of BooksIndexViewModel objects named bookCards; 
@@ -74,7 +76,9 @@ namespace Bookstore.Controllers
 
             return View(byGenreObject);
         }
-        public ActionResult ByAuthor(string authorName, string order, string search)
+
+
+        public ActionResult ByAuthor(string authorName, string order, string search) //Titles of one specific author:
         {
             var bookCards = BooksIndexViewModel.CardsList( //Find the Titles of an author by the authorName parameter, and
                 db.Authors.Find(authorName).Books); //map them into a List of BooksIndexViewModel objects named bookCards; 
@@ -96,38 +100,29 @@ namespace Bookstore.Controllers
 
             return View(byAuthorObject);
         }
-        public ActionResult Search(string keyword, string author, string genre, int page = 1)
+
+
+        public ActionResult Search(string keyword, string author, string genre, int page = 1) //Titles as search results:
         {
             var result = SearchViewModel.SearchTitles(author, genre, keyword);
-            
-            if (result.Books.Any()) //If any books found...
+            result.Author = author;
+            result.Genre = genre;
+
+            if (result.MustBePaged()) //...and if they must be paged (more than 24)...
             {
-                if (result.MustBePaged()) //...and if they must be paged (more than 24)...
-                {
-                    result.BooksPaged = result.Books.ToPagedList(page, 24); //...set the BooksPaged property as an IPagedList<Book>,
-                    return View("FoundPaged", result); //return 'FoundPaged' view with a PagedList<Book>;
-                }
-                else //If not...
-                {
-                    return View("Found", result); //...return 'Found' view;
-                }
+                result.BooksPaged = result.Books.ToPagedList(page, 24); //...set the BooksPaged property as an IPagedList<Book>;
             }
-            else //If not...
-            {
-                return View("NotFound", result);  //...return 'NotFound' view;
-            }
+
+            return View("Search", result); //Return 'FoundPaged' view with the result;
+           
         }
 
 
-        // GET: Books/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Books/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Book book)

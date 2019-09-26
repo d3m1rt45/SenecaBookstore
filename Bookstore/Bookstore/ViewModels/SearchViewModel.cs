@@ -16,6 +16,11 @@ namespace Bookstore.ViewModels
         public List<BooksIndexViewModel> Books { get; set; }
         public IPagedList<BooksIndexViewModel> BooksPaged { get; set; }
 
+        public SearchViewModel()
+        {
+            this.Books = new List<BooksIndexViewModel>();
+        }
+
         public static SearchViewModel SearchTitles(string author, string genre, string keyword) //Search Titles
         {
             var db = new BookstoreContext(); //Instantiate BookstoreContext for data access;
