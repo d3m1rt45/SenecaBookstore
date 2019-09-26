@@ -4,65 +4,75 @@
     ViewBag.Title = "All Titles";
 }
 
-    <div class="row pt-4">
-        <div class="col-4 text-left">
-            <!--Header-->
-            <h2 class="font-weight-bold mb-0 pb-0">All Titles</h2>
+<div class="row pt-4"><!--PageHead-->
+    <div class="col-4 text-left"><!--LeftColumn-->
 
-            <!--Map-->
-            <p class="map font-italic my-0 py-0">
-                @Html.ActionLink("Home", "Index", "Home", null, null) /
-                Books
-            </p>
-        </div>
-        <div class="col-8 text-right">
-            <!--SearchBar-->
-            <div class="d-inline-block">
-                @using (Html.BeginForm())
-                {
-                    <div class="input-group">
-                        @Html.TextBox("search", null, new { @class = "form-control text-dark mt-2", placeholder = "Search..." })
-                        <div class="input-group-prepend">
-                            <button class="btn btn-dark rounded hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
-                        </div>
+        <h2 class="font-weight-bold mb-0 pb-0"><!--Header-->
+            All Titles
+        </h2><!--/Header-->
+
+        <p class="map font-italic my-0 py-0"><!--Map-->
+            @Html.ActionLink("Home", "Index", "Home", null, null) /
+            Books
+        </p><!--/Map-->
+
+    </div><!--/LeftColumn-->
+    <div class="col-8 text-right"><!--RightColumn-->
+
+        <div class="d-inline-block"><!--SearchBar-->
+            @using (Html.BeginForm())
+            {
+                <div class="input-group">
+                    @Html.TextBox("search", null, new { @class = "form-control text-dark mt-2", placeholder = "Search..." })
+                    <div class="input-group-prepend">
+                        <button class="btn btn-dark rounded hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
                     </div>
-                }
-            </div>
+                </div>
+            }
+        </div><!--/SearchBar-->
 
-            <!--SortBy-->
-            <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
+        <div><!--SortBy-->
+            <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--Button-->
                 <option value="@Url.Action("Index", "Books", null)">Sort by...</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "AtoZ" })">Title (a-z)</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "ZtoA" })">Title (z-a)</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "lowToHigh" })">Price ↓</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "highToLow" })">Price ↑</option>
-            </select>
-            <script>
+            </select><!--/Button-->
+            <script>//Script
                 function SortBy() {
                     window.location.href = document.getElementById("UrlList").value;
                 }
-            </script>
-        </div>
-    </div>
+            </script><!--/Script-->
+        </div><!--/SortBy-->
 
+    </div><!--/RightColumn-->
+</div><!--/PageHead-->
 
 <hr />
 
-<!--BookList-->
-<div class="row">
-    @foreach (var item in Model)
+<div class="row"><!--Row-->
+    @foreach (var item in Model) //Print BooksIndexViewModel objects as Bootstrap Cards
     {
-        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
-            <div class="card w-100 bg-light hvr-grow-rotate">
-                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN">
-                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" />
-                    <div class="card-body d-flex flex-column text-center">
-                        <p class="card-title font-weight-bold py-0 my-0">@item.Title</p>
-                        <p class="card-text py-0 my-0">@item.AuthorName</p>
-                        <p class="card-text font-weight-bold py-0 my-0">£@item.Price</p>
-                    </div>
-                </a>
-            </div>
-        </div>
+        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch"><!--Column-->
+
+            <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
+                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN"><!--Link-->
+                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
+                    <div class="card-body d-flex flex-column text-center"><!--CardBody-->
+                        <p class="card-title font-weight-bold py-0 my-0"><!--CardTitle:BookTitle-->
+                            @item.Title
+                        </p><!--/CardTitle:BookTitle-->
+                        <p class="card-text py-0 my-0"><!--CardText:BookAuthor-->
+                            @item.AuthorName
+                        </p><!--/CardText:BookAuthor-->
+                        <p class="card-text font-weight-bold py-0 my-0"><!--CardText:BookPrice-->
+                            £@item.Price
+                        </p><!--/CardText:BookPrice-->
+                    </div><!--CardBody-->
+                </a><!--/Link-->
+            </div><!--/Card-->
+
+        </div><!--/Column-->
     }
-</div>
+</div><!--/Row-->

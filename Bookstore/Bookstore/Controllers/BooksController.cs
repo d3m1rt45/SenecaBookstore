@@ -10,6 +10,7 @@ using Bookstore.Models;
 using System.Data.Entity.Migrations;
 using System.IO;
 using Bookstore.ViewModels;
+using PagedList;
 
 namespace Bookstore.Controllers
 {
@@ -18,7 +19,7 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Books
-        public ActionResult Index(string search, string sortBy)
+        public ActionResult Index(string search, string sortBy, int page = 1)
         {
             var cardsList = BooksIndexViewModel.CardsList(db.Books); //Make Smaller 'BookCardViewModel' Objects from a List of Cards
 
@@ -34,22 +35,83 @@ namespace Bookstore.Controllers
                 cardsList = BooksIndexViewModel.SortCards(cardsList, sortBy); //...Call the 'SortCards' Static Method
             }
 
-            return View(cardsList);
+            //PAGING
+            if (cardsList.Count > 24) //If cardsList have more than 24 members...
+            {
+                return View("IndexPaged", cardsList.ToPagedList(page, 24)); //...return 'IndexPaged' view with a PagedList<HomeIndexViewModel>
+            }
+            else //If not...
+            {
+                return View(cardsList); //...return 'Index' view with a List<HomeIndexViewModel>
+            }
         }
 
-        // GET: Books/Details/5
-        public ActionResult Details(string id)
+        public ActionResult ByISBN(string role)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = db.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
+            Book book = db.Books.Find(role);
             return View(book);
+        }
+
+        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
+        {
+            var thisGenreBookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books);
+
+            //Search by book title...
+            if (!String.IsNullOrEmpty(searchKeyword))
+            {
+                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName });
+            }
+
+            if (!String.IsNullOrEmpty(sortBy))
+            {
+                thisGenreBookCards = BooksIndexViewModel.SortCards(thisGenreBookCards, sortBy);
+            }
+
+            var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
+
+            return View(byGenreInstance);
+        }
+
+        public ActionResult Search(string keyword, string author, string genre, int page = 1)
+        {
+            var result = SearchViewModel.SearchTitles(author, genre, keyword);
+            
+            if (result.Books.Any()) //If any books found...
+            {
+                if (result.MustBePaged()) //...and if they must be paged (more than 24)...
+                {
+                    result.BooksPaged = result.Books.ToPagedList(page, 24); //...set the BooksPaged property as an IPagedList<Book>,
+                    return View("FoundPaged", result); //return 'FoundPaged' view with a PagedList<Book>;
+                }
+                else //If less than 24 books found...
+                {
+                    return View("Found", result); //...return 'Found' view;
+                }
+            }
+            else //If no books found...
+            {
+                return View("NotFound", result);  //...return 'NotFound' view;
+            }
+        }
+
+        public ActionResult ByAuthor(string authorName, string order, string search)
+        {
+            var thisAuthorBookCards = BooksIndexViewModel.CardsList(db.Authors.Find(authorName).Books);
+
+            //Search by book title...
+            if (!String.IsNullOrEmpty(search))
+            {
+                return RedirectToAction("Search", new { keyword = search, author = authorName });
+            }
+
+            if (!String.IsNullOrEmpty(order))
+            {
+                thisAuthorBookCards = BooksIndexViewModel.SortCards(thisAuthorBookCards, order);
+            }
+
+            var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };
+
+            return View(byAuthorInstance);
         }
 
         // GET: Books/Create
@@ -107,191 +169,6 @@ namespace Bookstore.Controllers
             }
 
             return View(book);
-        }
-
-        // GET: Books/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = db.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(book);
-        }
-
-        // POST: Books/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                Book duplicate = db.Books.Find(book.ISBN);
-
-                Author prevAuthor = duplicate.Author;
-                Genre prevGenre = duplicate.Genre;
-
-
-                db.Books.Remove(duplicate);
-
-                if (prevAuthor.Books.Count() < 1)
-                    db.Authors.Remove(prevAuthor);
-
-                if (prevGenre.Books.Count() < 1)
-                    db.Genres.Remove(prevGenre);
-
-                db.SaveChanges();
-
-                if (book.ImageFile.FileName != null)
-                {
-                    string imageFileName = Path.Combine(Server.MapPath("~/Images"), duplicate.ImagePath);
-                    System.IO.File.Delete(imageFileName);
-
-                    string extension = Path.GetExtension(book.ImageFile.FileName);
-                    imageFileName = book.ISBN + extension;
-                    book.ImagePath = imageFileName;
-                    imageFileName = Path.Combine(Server.MapPath("~/Images"), imageFileName);
-                    book.ImageFile.SaveAs(imageFileName);
-                }
-
-                Author author = db.Authors.Find(book.AuthorName);
-                Genre genre = db.Genres.Find(book.GenreName);
-
-                if (author == null)
-                    author = new Author() { Name = book.AuthorName };
-
-                if (genre == null)
-                    genre = new Genre() { Name = book.GenreName };
-
-                if (author.Books == null)
-                    author.Books = new List<Book>();
-
-                if (genre.Books == null)
-                    genre.Books = new List<Book>();
-
-                if (!author.Books.Contains(book))
-                    author.Books.Add(book);
-
-                if (!genre.Books.Contains(book))
-                    genre.Books.Add(book);
-
-                book.Genre = genre;
-                book.Author = author;
-
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(book);
-        }
-
-        public ActionResult ByISBN(string role)
-        {
-            Book book = db.Books.Find(role);
-            return View(book);
-        }
-
-        public ActionResult ByGenre(string genreName, string sortBy, string searchKeyword)
-        {
-            var thisGenreBookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books);
-
-            //Search by book title...
-            if (!String.IsNullOrEmpty(searchKeyword))
-            {
-                return RedirectToAction("Search", new { keyword = searchKeyword, genre = genreName });
-            }
-
-            if (!String.IsNullOrEmpty(sortBy))
-            {
-                thisGenreBookCards = BooksIndexViewModel.SortCards(thisGenreBookCards, sortBy);
-            }
-
-            var byGenreInstance = new ByGenreViewModel { BookCards = thisGenreBookCards, Genre = genreName };
-
-            return View(byGenreInstance);
-        }
-
-        //SEARCH ACTION
-        public ActionResult Search(string keyword, string author, string genre)
-        {
-            var result = SearchViewModel.SearchTitles(author, genre, keyword);
-            
-            //ANY FOUND?
-            if (result.Books.Any()) //IF YES:
-            {
-                return View("Found", result); //RETURN 'Found' VIEW
-            }
-            else //IF NO:
-            {
-                return View("NotFound", result);  //RETURN 'NotFound' VIEW
-            }
-        }
-
-        public ActionResult ByAuthor(string authorName, string order, string search)
-        {
-            var thisAuthorBookCards = BooksIndexViewModel.CardsList(db.Authors.Find(authorName).Books);
-
-            //Search by book title...
-            if (!String.IsNullOrEmpty(search))
-            {
-                return RedirectToAction("Search", new { keyword = search, author = authorName });
-            }
-
-            if (!String.IsNullOrEmpty(order))
-            {
-                thisAuthorBookCards = BooksIndexViewModel.SortCards(thisAuthorBookCards, order);
-            }
-
-            var byAuthorInstance = new ByAuthorViewModel { BookCards = thisAuthorBookCards, Author = authorName };
-
-            return View(byAuthorInstance);
-        }
-
-        // GET: Books/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = db.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-            return View(book);
-        }
-
-        // POST: Books/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Book book = db.Books.Find(id);
-            Author author = book.Author;
-            Genre genre = book.Genre;
-
-            //string imageFileName = Path.Combine(Server.MapPath("~/Images"), book.ImagePath);
-            //System.IO.File.Delete(imageFileName);
-
-            db.Books.Remove(book);
-
-            if (author.Books.Count() < 1)
-                db.Authors.Remove(author);
-
-            if (genre.Books.Count() < 1)
-                db.Genres.Remove(genre);
-
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

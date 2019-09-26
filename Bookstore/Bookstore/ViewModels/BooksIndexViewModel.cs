@@ -54,8 +54,7 @@ namespace Bookstore.ViewModels
         public string ImagePath { get; set; }
 
 
-        //Take a 'List<Book>' Object and Turn It Into 'IQueryable<BookCardViewModel>'s
-        public static List<BooksIndexViewModel> CardsList(DbSet<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(DbSet<Book> bookSet) //Take a 'DBSet<Book>' Object and Turn It Into 'List<BookCardViewModel>'s
         {
             var bookCards = new List<BooksIndexViewModel>();
 
@@ -73,7 +72,7 @@ namespace Bookstore.ViewModels
 
             return bookCards;
         }
-        public static List<BooksIndexViewModel> CardsList(List<Book> bookSet)
+        public static List<BooksIndexViewModel> CardsList(List<Book> bookSet) //Take a 'List<Book>' Object and Turn It Into 'List<BookCardViewModel>'s
         {
             var bookCards = new List<BooksIndexViewModel>();
 

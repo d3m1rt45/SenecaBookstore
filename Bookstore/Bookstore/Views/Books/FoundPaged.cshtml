@@ -1,0 +1,134 @@
+﻿@using PagedList;
+
+@model Bookstore.ViewModels.SearchViewModel
+
+@{
+    ViewBag.Title = Model.Keyword; //Search keyword becomes the Title
+    var pagedList = Model.BooksPaged;
+}
+
+<!--PageHead-->
+<div class="row pt-4">
+
+    @if (!String.IsNullOrEmpty(Model.Genre)) //If a genre name is passed via Genre property...
+    {
+        <!--LeftColumn-->
+        <div class="col-6 text-left">
+            <!--Header-->
+            <h2 class="font-weight-bold mb-0 pb-0">@Model.Genre</h2>
+            <!--/Header-->
+            <!--Map-->
+            <p class="map font-italic my-0 py-0">
+                @Html.ActionLink("Home", "Index", "Home", null, null) /
+                @Html.ActionLink("Genres", "Index", "Genres") /
+                @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { genreName = Model.Genre }, null) /
+                Search
+            </p>
+            <!--/Map-->
+        </div>
+        <!--/LeftColumn-->
+
+        <!--RightColumn-->
+        <div class="col-6 text-right">
+            <!--SearchBar-->
+            <div class="d-inline-block">
+                @Html.ActionLink("Back", "ByGenre", "Books", new { genreName = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+            </div>
+            <!--/SearchBar-->
+        </div>
+        <!--RightColumn-->
+
+    }
+    else if (!String.IsNullOrEmpty(Model.Author)) //If an author name is passed via Genre property...
+    {
+        <!--LeftColumn-->
+        <div class="col-6 text-left">
+            <!--Header-->
+            <h2 class="font-weight-bold mb-0 pb-0">@Model.Author</h2>
+            <!--/Header-->
+            <!--Map-->
+            <p class="map font-italic my-0 py-0">
+                @Html.ActionLink("Home", "Index", "Home", null, null) /
+                @Html.ActionLink("Authors", "Index", "Authors") /
+                @Html.ActionLink(Model.Author, "Autohr", "Books", new { authorName = Model.Author }, null) /
+                Search
+            </p>
+            <!--/Map-->
+        </div>
+        <!--/LeftColumn-->
+
+        <!--RightColumn-->
+        <div class="col-6 text-right">
+            <!--SearchBar-->
+            <div class="d-inline-block">
+                @Html.ActionLink("BACK", "ByAuthor", "Books", new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+            </div>
+            <!--/SearchBar-->
+        </div>
+        <!--/RightColumn-->
+    }
+    else //If neither a genre name nor an author name is passed...
+    {
+        <!--LeftColumn-->
+        <div class="col-6 text-left">
+            <!--Header-->
+            <h2 class="font-weight-bold mb-0 pb-0">All Titles </h2>
+            <!--/Header-->
+            <!--Map-->
+            <p class="map font-italic my-0 py-0">
+                @Html.ActionLink("Home", "Index", "Home", null, null) /
+                @Html.ActionLink("Books", "Index", "Books") /
+                Search
+            </p>
+            <!--/Map-->
+        </div>
+        <!--/LeftColumn-->
+
+        <!--RightColumn-->
+        <div class="col-6 text-right">
+            <!--SearchBar-->
+            <div class="d-inline-block">
+                @Html.ActionLink("BACK", "Index", "Books", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+            </div>
+            <!--/SearchBar-->
+        </div>
+        <!--/RightColumn-->
+    }
+</div>
+<!--/PageHead-->
+
+<hr />
+
+<!--BookList-->
+<div class="row"><!--Row-->
+    @foreach (var item in Model.Books)
+    {
+        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch"><!--Column-->
+
+            <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
+                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?role=@item.ISBN"><!--Link-->
+                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
+                    <div class="card-body d-flex flex-column text-center"><!--CardBody-->
+                        <p class="card-title font-weight-bold py-0 my-0"><!--CardTitle:BookTitle-->
+                            @item.Title
+                        </p><!--/CardTitle:BookTitle-->
+                        <p class="card-text py-0 my-0"><!--CardText:BookAuthor-->
+                            @item.AuthorName
+                        </p><!--/CardText:BookAuthor-->
+                        <p class="card-text font-weight-bold py-0 my-0"><!--CardText:BookPrice-->
+                            £@item.Price
+                        </p><!--/CardText:BookPrice-->
+                    </div><!--CardBody-->
+                </a><!--/Link-->
+            </div><!--/Card-->
+
+        </div><!--/Column-->
+    }
+</div><!--/Row-->
+
+<!--PageControls-->
+<div class="text-center mt-2">
+    Page @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) of @pagedList.PageCount
+    @Html.PagedListPager(pagedList, page => Url.Action("FoundPaged", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+<!--/PageControls-->
