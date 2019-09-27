@@ -4,14 +4,13 @@
     ViewBag.Title = "Home Page";
 }
 
-<!--PageHead-->
-<div class="d-flex pt-4 mb-0 pb-0 justify-content-between align-items-center">
+<div class="d-flex pt-4 mb-0 pb-0 justify-content-between align-items-center"><!--PageHead-->
 
-    <!--Header-->
-    <h2 class="d-block align-self-end font-weight-bold mb-0 pb-0">Featured Titles</h2>
+    <h2 class="d-block align-self-end font-weight-bold mb-0 pb-0"><!--Header-->
+        Featured Titles
+    </h2><!--/Header-->
 
-    <!--SearchBar-->
-    <div class="d-inline-block align-self-start">
+    <div class="d-inline-block align-self-start"><!--SearchBar-->
         @using (Html.BeginForm())
         {
             <div class="input-group">
@@ -21,62 +20,84 @@
                 </div>
             </div>
         }
-    </div>
-</div>
+    </div><!--/SearchBar-->
+
+</div><!--/PageHead-->
+
 <hr/>
-    <div class="container">
 
-        <!-- Featured Titles (4) -->
-        <div class="jumbotron pt-2 pb-0 w-100">
-            <div class="row">
-                @foreach (var item in Model.Featured)
-                {
-                    <div class="col-6 col-md-3">
-                        <a href="/Books/ByISBN?isbn=@item.ISBN">
-                            <img class="hvr-shrink w-100 mb-3" src="~/Images/@item.ImagePath" />
-                        </a>
-                    </div>
-                }
-            </div>
-        </div>
+<div class="container"><!--PageBody-->
 
-        <!-- Sections by Genre -->
-        @foreach (var sect in Model.Sections)
-        {
-            <div class="row my-5">
-                <div class="col-12">
-                    <div class="d-flex justify-content-between align-items-center pt-1">
-                        <h4 class="mb-0">@sect.Title</h4>
-                        <input type="button" class="btn btn-dark rounded hvr-grow-shadow mb-0 mt-auto" value="See More" onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" />
-                    </div>
-                    <hr />
-                    <div class="row mt-3">
-                        @foreach (var card in sect.BookCards)
-                        {
-                            <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
-                                <div class="card w-100 bg-light hvr-grow-rotate">
-                                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@card.ISBN">
-                                        <img class="card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" />
-                                        <div class="card-body d-flex flex-column text-center">
-                                            <p class="card-title font-weight-bold p-0 m-0">@card.Title</p>
-                                            <p class="card-text p-0 m-0">@card.AuthorName</p>
-                                            <p class="card-text font-weight-bold p-0 m-0">£@card.Price</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-
-        <!-- Other Genres -->
-        <div class="row">
-            <h3 class="col-12 mb-3">Other Genres</h3>
-            @foreach (var genre in Model.OtherGenres)
+    
+    <div class="jumbotron pt-2 pb-0 w-100"><!--FeaturedTitles-->
+        <div class="row"><!--FeaturedContainer-->
+            @foreach (var item in Model.Featured)
             {
-                @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { id = "otherGenres", @class = "h5 mb-3 col-12 col-sm-6 col-lg-4 col-xl-3" })
+                <div class="col-6 col-md-3"><!--FeaturedTitle-->
+                    <a href="/Books/ByIN?isbn=@item.ISBN"><!--Link-->
+                        <img class="hvr-grow-shadow w-100 mb-3" src="~/Images/@item.ImagePath" /><!--Image-->
+                    </a><!--/Link-->
+                </div><!--/FeaturedTitle-->
             }
-        </div>
-    </div>
+        </div><!--/Row-->
+    </div><!--/FeaturedTitles-->
+
+    
+    @foreach (var sect in Model.Sections)
+    {
+        <div class="row my-5"><!--SectionByGenre-->
+            <div class="col-12"><!--Column-->
+                <div class="d-flex justify-content-between align-items-center pt-1"><!--SectionHead-->
+
+                    <h4 class="mb-0"><!--Header-->
+                        @sect.Title
+                    </h4><!--/Header-->
+
+                    <input type="button" class="btn btn-dark rounded hvr-grow-shadow mb-0 mt-auto" value="See More" 
+                           onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" /><!--ButtonToGenre/-->
+
+                </div><!--/SectionHead-->
+
+                <hr />
+
+                <div class="row mt-3"><!--SectionBody-->
+                    @foreach (var card in sect.BookCards)
+                    {
+                        <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch"><!--CardContainer-->
+                            <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
+                                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@card.ISBN"><!--Link-->
+                                    
+                                    <img class="card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--CardImage/-->
+                                    
+                                    <div class="card-body d-flex flex-column text-center"><!--CardBody-->
+                                        <p class="card-title font-weight-bold p-0 m-0"><!--CardTitle-->
+                                            @card.Title
+                                        </p><!--/CardTitle-->
+
+                                        <p class="card-text p-0 m-0"><!--CardText:AuthorName-->
+                                            @card.AuthorName
+                                        </p><!--/CardText:AuthorName-->
+
+                                        <p class="card-text font-weight-bold p-0 m-0"><!--CardText:Price-->
+                                            £@card.Price
+                                        </p><!--/CardText:Price-->
+                                    </div><!--/CardBody-->
+
+                                </a><!--/Link-->
+                            </div><!--/Card-->
+                        </div><!--/CardContainer-->
+                    }
+                </div><!--/SectionBody-->
+            </div><!--/Column-->
+        </div><!--/SectionByGenre-->
+    }
+
+    <div class="row"><!--Other Genres-->
+        <h4 class="col-12 mb-3">Other Genres</h4><hr />
+            
+        @foreach (var genre in Model.OtherGenres)
+        {
+            @Html.ActionLink(genre, "ByGenre", "Books", new { role = genre }, new { id = "otherGenres", @class = "h5 mb-3 col-12 col-sm-6 col-lg-4 col-xl-3" })
+        }
+    </div><!--/OtherGenres-->
+</div><!--/PageBody-->

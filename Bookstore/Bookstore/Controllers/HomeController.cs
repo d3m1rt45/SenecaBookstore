@@ -15,18 +15,28 @@ namespace Bookstore.Controllers
 
         public ActionResult Index(string searchKeyword)
         {
-            var homeIndexInstance = new HomeIndexViewModel();
+            var homeIndexInstance = new HomeIndexViewModel(); //DataAccess
 
-            homeIndexInstance.SetFeatured();
-            homeIndexInstance.AddSection("Philosophy");
-            homeIndexInstance.AddSection("Business, Finance and Law");
-            homeIndexInstance.AddSection("Crime and Mystery");
-            homeIndexInstance.AddSection("Psychology");
-            homeIndexInstance.SetOtherGenres();
+            homeIndexInstance.SetFeatured(); //Set four featured books;
 
-            if (!String.IsNullOrEmpty(searchKeyword))
+            var genres = db.Genres.Where(x => x.Books.Count > 5); //Make a List of every genre that has 6 or more books;
+
+            if (homeIndexInstance.Sections.Count > 6) //If there are more than 6 genres in the genres List...
             {
-                return RedirectToAction("Search", "Books", new { keyword = searchKeyword });
+                homeIndexInstance.Sections = homeIndexInstance.Sections.Take(6).ToList(); //...take only the first 6;
+            }
+
+            foreach (var g in genres) //For each genre in the genres List...
+            {
+                homeIndexInstance.AddSection(g.Name); //...add a new section to the 'Sections' property;
+            }
+
+            homeIndexInstance.SetOtherGenres(); //Set the 'OtherGenres' property as genres that are not included in the 'Sections' property;
+
+            //Search:
+            if (!String.IsNullOrEmpty(searchKeyword)) //If a search string is passed...
+            {
+                return RedirectToAction("Search", "Books", new { keyword = searchKeyword }); //...pass it to the 'Search' View;
             }
             else
             {
