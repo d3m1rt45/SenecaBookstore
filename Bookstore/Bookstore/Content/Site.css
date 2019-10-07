@@ -1,17 +1,113 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url(../Images/background.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.Section {
+    background-position: center;
+    background-size: cover;
+    padding: 2rem 2rem 1.5rem 2rem;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+.Render {
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%);
+}
+
+.Section h4 {
+    font-weight: 700;
+}
+
+.FeaturedHeader {
+    margin-left: 2rem;
+}
+
+.SearchBar {
+    margin-right: 2rem;
+}
+
+/*.busin {
+    background-image: url(../Images/business.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.crime {
+    background-image: url(../Images/crime.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.philo {
+    background-image: url(../Images/philosophy.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.psych {
+    background-image: url(../Images/psychology.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 2rem 2rem 1.5rem 2rem;
+}*/
+
+.Others .Row {
+    padding-left: 2rem;
+}
+
+.Others .Header {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    font-weight: 700;
+}
+
+.OtherGenre {
+    height: 10rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.OtherGenre h3 {
+    color: #f9f9f9;
+    display:block;
+    align-self:center;
+    justify-self:center;
+}
+
+.fanta {
+    background-image: url(../Images/fantasy.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.healt {
+    background-image: url(../Images/health.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.roman {
+    background-image: url(../Images/romance.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.self- {
+    background-image: url(../Images/self-help.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.Section .col-12 {
+    opacity: 1;
+}
+
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -20,14 +116,12 @@
     font-family: Merriweather, cursive;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
 
-/* Header Styles */
 h1 {
     font-family: Merriweather, cursive;
     font-weight: bold;
@@ -42,12 +136,15 @@ h2,h3,h4,h5 {
     font-family: Merriweather, cursive;
 }
 
-/* Navigation Bar Styles*/
 .navbar-brand,
 .navbar-nav {
     font-family: Merriweather, cursive;
 }
 
+/*FEATURED TITLES*/
+.Featured {
+    padding: 2rem 2rem 1.5rem 2rem;
+}
 
 /* merriweather-regular - latin */
 @font-face {

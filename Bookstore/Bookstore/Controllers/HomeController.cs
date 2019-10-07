@@ -11,24 +11,25 @@ namespace Bookstore.Controllers
 {
     public class HomeController : Controller
     {
-        private BookstoreContext db = new BookstoreContext();
+        private BookstoreContext db = new BookstoreContext(); //Data Access
 
         public ActionResult Index(string searchKeyword)
         {
-            var homeIndexInstance = new HomeIndexViewModel(); //DataAccess
+            var homeIndexInstance = new HomeIndexViewModel();
 
             homeIndexInstance.SetFeatured(); //Set four featured books;
 
             var genres = db.Genres.Where(x => x.Books.Count > 5); //Make a List of every genre that has 6 or more books;
 
-            if (homeIndexInstance.Sections.Count > 6) //If there are more than 6 genres in the genres List...
-            {
-                homeIndexInstance.Sections = homeIndexInstance.Sections.Take(6).ToList(); //...take only the first 6;
-            }
 
             foreach (var g in genres) //For each genre in the genres List...
             {
                 homeIndexInstance.AddSection(g.Name); //...add a new section to the 'Sections' property;
+            }
+
+            if (homeIndexInstance.Sections.Count > 6) //If there are more than 6 genres in the Sections List...
+            {
+                homeIndexInstance.Sections = homeIndexInstance.Sections.Take(6).ToList(); //...take only the first 6;
             }
 
             homeIndexInstance.SetOtherGenres(); //Set the 'OtherGenres' property as genres that are not included in the 'Sections' property;

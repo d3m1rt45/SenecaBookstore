@@ -10,13 +10,13 @@ namespace Bookstore.ViewModels
     {
         public List<FeaturedViewModel> Featured { get; set; }
         public List<SectionViewModel> Sections { get; set; }
-        public List<String> OtherGenres{ get; set; }
+        public List<OtherGenreViewModel> OtherGenres{ get; set; }
 
         public HomeIndexViewModel() //On instantiation of a HomeIndexViewModel object:
         {
             this.Featured = new List<FeaturedViewModel>(); //Instantiate its Featured property as a new List of FeaturedViewModels, and
             this.Sections = new List<SectionViewModel>(); //instantiate its Sections property as a new List of SectionViewModels, and
-            this.OtherGenres = new List<String>(); //instantiate its OtherGenres property as a new List of Strings;
+            this.OtherGenres = new List<OtherGenreViewModel>(); //instantiate its OtherGenres property as a new List of Strings;
         }
 
         public void SetFeatured() //Set four FeaturedViewModel objects as Featured property:
@@ -45,6 +45,7 @@ namespace Bookstore.ViewModels
             var section = new SectionViewModel(); //Instantiate a new SectionViewModel object, and
             section.Title = genreName; //set its Title property as the genreName parameter, and
             section.BookCards = bookCards; //set its bookCards property as bookCards object;
+            section.ImageClass = section.Title.Substring(0, 5).ToLower();
 
             this.Sections.Add(section); //Add section to the Sections property of the object;
         }
@@ -62,7 +63,11 @@ namespace Bookstore.ViewModels
 
             foreach (var gen in allGenres) //For each remaining item in the allGenres object...
             {
-                this.OtherGenres.Add(gen.Name); //...add its name to the OtherGenres proplerty.
+                this.OtherGenres.Add(new OtherGenreViewModel
+                {
+                    Name = gen.Name,
+                    ImageClass = gen.Name.ToLower().Substring(0,5)
+                }); //...add its name to the OtherGenres proplerty.
             }
         }
     }

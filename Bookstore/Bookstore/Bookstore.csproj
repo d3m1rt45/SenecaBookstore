@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\ByGenreViewModel.cs" />
     <Compile Include="ViewModels\FeaturedViewModel.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModels\OtherGenreViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
   </ItemGroup>
