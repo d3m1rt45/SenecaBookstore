@@ -21,7 +21,6 @@ namespace Bookstore.Controllers
 
             var genres = db.Genres.Where(x => x.Books.Count > 5); //Make a List of every genre that has 6 or more books;
 
-
             foreach (var g in genres) //For each genre in the genres List...
             {
                 homeIndexInstance.AddSection(g.Name); //...add a new section to the 'Sections' property;
@@ -43,20 +42,6 @@ namespace Bookstore.Controllers
             {
                 return View(homeIndexInstance);
             }
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

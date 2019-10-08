@@ -5,72 +5,59 @@
     ViewBag.Title = authorName;
 }
 
-<div class="row pt-4"><!--PageHead-->
-    <div class="col-6 text-left"><!--LeftColumn-->
-        
-        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0"><!--Header-->
-            @authorName
-        </h2><!--/Header-->
+    <section class="Books-ByAuthor">
 
-        <p class="map font-italic my-0 py-0"><!--Map-->
-            @Html.ActionLink("Home", "Index", "Home", null, null) /
-            @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @authorName
-        </p><!--/Map-->
+        <article class="PageHead row pt-4">
+            <div class="Left col-6 text-left">
+                <h2 class="Header d-block align-self-start font-weight-bold mb-0 pb-0">
+                    @authorName
+                </h2><!--/.Header-->
 
-    </div><!--/LeftColumn-->
-    <div class="col-6 text-right"><!--RightColumn-->
-        
-        <div class="d-inline-block pt-2"><!--SearchBar-->
-            @using (Html.BeginForm())
+                <p class="Map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Authors", "Index", "Authors", null, null) /
+                    @authorName
+                </p><!--/.Map-->
+            </div><!--/.Left-->
+            <div class="Right col-6 text-right">
+                <div class="SearchBar d-inline-block pt-2">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="Inner input-group">
+                            @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark", placeholder = "Search..." })
+                            <div class="ButtonContainer input-group-prepend">
+                                <button class="Button btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button><!--.Button.-->
+                            </div><!--/.ButtonContainer-->
+                        </div><!--/.Inner-->
+                    }
+                </div><!--/.SearchBar-->
+
+                <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
+                    <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
+                    <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
+                    <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
+                </select><!--/.SortBy-->
+            </div><!--/.Right-->
+        </article><!--/.PageHead-->
+
+        <hr /><!--Head/Body Divider-->
+
+        <article class="PageBody row">
+            @foreach (var card in Model.BookCards)//Print BooksIndexViewModel objects as Bootstrap Cards
             {
-                <div class="input-group">
-                    @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
-                    <div class="input-group-prepend">
-                        <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
+                <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
+                    <div class="Card card w-100 bg-dark hvr-grow-rotate">
+                        <a class="CardLink stretched-link card-link text-light" href="/Books/ByISBN?isbn=@card.ISBN">
+                            <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->
+                            <div class="CardBody card-body d-flex flex-column text-center">
+                                <p class="Title card-title font-weight-bold p-0 m-0">@card.Title</p><!--.Title/-->
+                                <p class="Author card-text p-0 m-0">@card.AuthorName</p><!--.Author/-->
+                                <p class="Price card-text font-weight-bold p-0 m-0">£@card.Price</p><!--.Price.-->
+                            </div><!--/.CardBody-->
+                        </a><!--/.CardLink-->
+                    </div><!--/.Card-->
+                </div><!--/.CardContainer-->
             }
-        </div><!--/SearchBar-->
+        </article><!--/.PageBody-->
 
-        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()"><!--SortBy-->
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName })">Sort by...</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("ByAuthor", "Books", new { role = authorName, order = "ZtoA" })">Title (z-a)</option>
-        </select>
-        <script>
-            function SortBy() {
-                window.location.href = document.getElementById("UrlList").value;
-            }
-        </script><!--/SortBy-->
-
-    </div><!--/RightColumn-->
-</div><!--/PageHead-->
-
-<hr />
-
-<div class="row"><!--Row-->
-    @foreach (var item in Model.BookCards)//Print BooksIndexViewModel objects as Bootstrap Cards
-    {
-        <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch"><!--Column-->
-
-            <div class="card w-100 bg-light hvr-grow-rotate"><!--Card-->
-                <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@item.ISBN"><!--Link-->
-                    <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
-                    <div class="card-body d-flex flex-column text-center"><!--CardBody-->
-                        <p class="card-title font-weight-bold py-0 my-0"><!--CardTitle:BookTitle-->
-                            @item.Title
-                        </p><!--/CardTitle:BookTitle-->
-                        <p class="card-text py-0 my-0"><!--CardText:BookAuthor-->
-                            @item.AuthorName
-                        </p><!--/CardText:BookAuthor-->
-                        <p class="card-text font-weight-bold py-0 my-0"><!--CardText:BookPrice-->
-                            £@item.Price
-                        </p><!--CardText:BookPrice-->
-                    </div><!--/CardBody-->
-                </a><!--/Link-->
-            </div><!--/Card-->
-
-        </div><!--/Column-->
-    }
-</div><!--/Row-->
+    </section><!--/.Books-ByAuthor-->

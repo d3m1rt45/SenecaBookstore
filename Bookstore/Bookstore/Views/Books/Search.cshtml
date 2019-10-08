@@ -5,207 +5,137 @@
     ViewBag.Title = Model.Keyword;
 }
 
-<div class="row pt-4"><!--PageHead-->
-    <!--If navigated from the ByGenre Page:-->
-    @if (!String.IsNullOrEmpty(Model.Genre))
-    {
-        <div class="col-6 text-left">
-            <!--LeftColumn-->
+<section class="Books-Search">
 
-            <h2 class="font-weight-bold mb-0 pb-0">
-                <!--Header-->
-                @Model.Genre
-            </h2><!--/Header-->
-
-            <p class="map font-italic my-0 py-0">
-                <!-- Map -->
-                @Html.ActionLink("Home", "Index", "Home", null, null) /
-                @Html.ActionLink("Genres", "Index", "Genres") /
-                @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { genreName = Model.Genre }, null) /
-                Search
-            </p><!--/Map-->
-
-        </div><!--/LeftColumn-->
-        <div class="col-6 text-right">
-            <!--RightColumn-->
-
-            <div class="d-inline-block">
-                <!--BackButton-->
-                @Html.ActionLink("Back", "ByGenre", "Books", new { genreName = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div><!--/BackButton-->
-
-        </div><!--/RightColumn-->
-    }
-    //If not, if navigated from ByAuthor Page:
-    else if (!String.IsNullOrEmpty(Model.Author))
-    {
-        <div class="col-6 text-left">
-            <!--LeftColumn-->
-
-            <h2 class="font-weight-bold mb-0 pb-0">
-                <!--Header-->
-                @Model.Author
-            </h2><!--/Header-->
-
-            <p class="map font-italic my-0 py-0">
-                <!--Map-->
-                @Html.ActionLink("Home", "Index", "Home", null, null) /
-                @Html.ActionLink("Authors", "Index", "Authors") /
-                @Html.ActionLink(Model.Author, "Autohr", "Books", new { authorName = Model.Author }, null) /
-                Search
-            </p><!--/Map-->
-
-        </div><!--/LeftColumn-->
-        <div class="col-6 text-right">
-            <!--RightColumn-->
-
-            <div class="d-inline-block">
-                <!--BackButton-->
-                @Html.ActionLink("BACK", "ByAuthor", "Books", new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div><!--/BackButton-->
-
-        </div><!--/RightColumn-->
-    }
-    //If neither:
-    else
-    {
-        <div class="col-6 text-left">
-            <!--LeftColumn-->
-
-            <h2 class="font-weight-bold mb-0 pb-0">
-                <!--Header-->
-                All Titles
-            </h2><!--/Header-->
-
-            <p class="map font-italic my-0 py-0">
-                <!--Map-->
-                @Html.ActionLink("Home", "Index", "Home", null, null) /
-                @Html.ActionLink("Books", "Index", "Books") /
-                Search
-            </p><!--/Map-->
-
-        </div><!--/LeftColumn-->
-        <div class="col-6 text-right">
-            <!--RightColumn-->
-
-            <div class="d-inline-block">
-                <!--BackButton-->
-                @Html.ActionLink("BACK", "Index", "Books", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
-            </div><!--BackButton-->
-
-        </div><!--/RightColumn-->
-    }
-</div><!--/PageHead-->
-
-<hr />
-
-<!--FoundPaged Logic-->
-@if (Model.BooksPaged != null) //FoundPaged Logic
-{
-    <div class="row">
-        <!--Row-->
-        @foreach (var item in Model.BooksPaged)
+    <article class="PageHead row pt-4">
+        @if (!String.IsNullOrEmpty(Model.Genre)) //If navigated from the Books/ByGenre...
         {
-            <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
-                <!--Column-->
-
-                <div class="card w-100 bg-light hvr-grow-rotate">
-                    <!--Card-->
-                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@item.ISBN">
-                        <!--Link-->
-                        <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
-                        <div class="card-body d-flex flex-column text-center">
-                            <!--CardBody-->
-                            <p class="card-title font-weight-bold py-0 my-0">
-                                <!--CardTitle:BookTitle-->
-                                @item.Title
-                            </p><!--/CardTitle:BookTitle-->
-                            <p class="card-text py-0 my-0">
-                                <!--CardText:BookAuthor-->
-                                @item.AuthorName
-                            </p><!--/CardText:BookAuthor-->
-                            <p class="card-text font-weight-bold py-0 my-0">
-                                <!--CardText:BookPrice-->
-                                £@item.Price
-                            </p><!--/CardText:BookPrice-->
-                        </div><!--CardBody-->
-                    </a><!--/Link-->
-                </div><!--/Card-->
-
-            </div><!--/Column-->
+            <div class="Left col-6 text-left">
+                <h2 class="Header font-weight-bold mb-0 pb-0">
+                    @Model.Genre
+                </h2><!--/.Header-->
+                <p class="Map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Genres", "Index", "Genres") /
+                    @Html.ActionLink(Model.Genre, "ByGenre", "Books", new { genreName = Model.Genre }, null) /
+                    Search
+                </p><!--/.Map-->
+            </div><!--/.Left-->
+            <div class="Right col-6 text-right">
+                <div class="BackButton d-inline-block">
+                    @Html.ActionLink("Back", "ByGenre", "Books", new { genreName = Model.Genre }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div><!--/.BackButton-->
+            </div><!--/.Right-->
         }
-    </div><!--/Row-->
-    <div class="text-center mt-2">
-        <!--PageControls-->
-        Page @(Model.BooksPaged.PageCount < Model.BooksPaged.PageNumber ? 0 : Model.BooksPaged.PageNumber) of @Model.BooksPaged.PageCount
-        @Html.PagedListPager(Model.BooksPaged, page => Url.Action("Search", new
+        else if (!String.IsNullOrEmpty(Model.Author)) //...but if not, and if navigated from he Books/ByAuthor:
         {
-            page,
-            sortOrder = ViewBag.CurrentSort,
-            currentFilter = ViewBag.CurrentFilter,
-        keyword = Model.Keyword,
-            author = Model.Author,
-            genre = Model.Genre
-        }))
-    </div><!--/PageControls-->
-} 
-//Found Logic
-else if (Model.Books != null && Model.Books.Any()) //Found Logic
-{
-    <div class="row">
-        <!--Row-->
-        @foreach (var item in Model.Books)
-        {
-            <div class="col-6 col-md-4 col-lg-3 col-xl-2 my-3 d-flex align-items-stretch">
-                <!--Column-->
-
-                <div class="card w-100 bg-light hvr-grow-rotate">
-                    <!--Card-->
-                    <a class="stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@item.ISBN">
-                        <!--Link-->
-                        <img class="card-img-top w-100" src="~/Images/@item.ImagePath" alt="Book cover" /><!--Image/-->
-                        <div class="card-body d-flex flex-column text-center">
-                            <!--CardBody-->
-                            <p class="card-title font-weight-bold py-0 my-0">
-                                <!--CardTitle:BookTitle-->
-                                @item.Title
-                            </p><!--/CardTitle:BookTitle-->
-                            <p class="card-text py-0 my-0">
-                                <!--CardText:BookAuthor-->
-                                @item.AuthorName
-                            </p><!--/CardText:BookAuthor-->
-                            <p class="card-text font-weight-bold py-0 my-0">
-                                <!--CardText:BookPrice-->
-                                £@item.Price
-                            </p><!--/CardText:BookPrice-->
-                        </div><!--CardBody-->
-                    </a><!--/Link-->
-                </div><!--/Card-->
-
-            </div><!--/Column-->
+            <div class="Left col-6 text-left">
+                <h2 class="Header font-weight-bold mb-0 pb-0">
+                    @Model.Author
+                </h2><!--/.Header-->
+                <p class="Map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Authors", "Index", "Authors") /
+                    @Html.ActionLink(Model.Author, "Autohr", "Books", new { authorName = Model.Author }, null) /
+                    Search
+                </p><!--/.Map-->
+            </div><!--/.Left-->
+            <div class="Right col-6 text-right">
+                <div class="BackButton d-inline-block">
+                    @Html.ActionLink("BACK", "ByAuthor", "Books", new { authorName = Model.Author }, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div><!--/.BackButton-->
+            </div><!--/Right-->
         }
-    </div><!--/Row-->
-}
-//NotFound Logic
-else
-{
-    if (!String.IsNullOrEmpty(Model.Genre)) //If a genre name is passed via the Genre property...
+        else //...but if neither:
+        {
+            <div class="Left col-6 text-left">
+                <h2 class="Header font-weight-bold mb-0 pb-0">
+                    All Titles
+                </h2><!--/.Header-->
+                <p class="Map font-italic my-0 py-0">
+                    @Html.ActionLink("Home", "Index", "Home", null, null) /
+                    @Html.ActionLink("Books", "Index", "Books") /
+                    Search
+                </p><!--/.Map-->
+
+            </div><!--/.Left-->
+            <div class="Right col-6 text-right">
+                <div class="BackButton d-inline-block">
+                    @Html.ActionLink("BACK", "Index", "Books", null, new { @class = "btn btn-dark mt-2 py-2 px-4 hvr-grow-shadow" })
+                </div><!--BackButton-->
+            </div><!--/.Right-->
+        }
+    </article><!--/PageHead-->
+
+    <hr /><!--Head/Body-Divider-->
+
+    @if (Model.BooksPaged != null) //If found more than 24 results... 
     {
-        <h3 class="col my-5"><!--PageBody-->
-                No Result for <b>"@Model.Keyword"</b> in <b>@Model.Genre Titles</b>
-        </h3><!--/PageBody-->
+        <article class="PageBody row">
+            @foreach (var card in Model.BooksPaged)
+            {
+                <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
+                    <div class="Card card w-100 bg-dark hvr-grow-rotate">
+                        <a class="CardLink stretched-link card-link text-light" href="/Books/ByISBN?isbn=@card.ISBN">
+                            <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->
+                            <div class="CardBody card-body d-flex flex-column text-center">
+                                <p class="Title card-title font-weight-bold p-0 m-0">@card.Title</p><!--.Title/-->
+                                <p class="Author card-text p-0 m-0">@card.AuthorName</p><!--.Author/-->
+                                <p class="Price card-text font-weight-bold p-0 m-0">£@card.Price</p><!--.Price.-->
+                            </div><!--/.CardBody-->
+                        </a><!--/.CardLink-->
+                    </div><!--/.Card-->
+                </div><!--/.CardContainer-->
+            }
+        </article><!--/.PageBody-->
+
+        <article class="PageControls text-center mt-2">
+            Page @(Model.BooksPaged.PageCount < Model.BooksPaged.PageNumber ? 0 : Model.BooksPaged.PageNumber) of @Model.BooksPaged.PageCount
+            @Html.PagedListPager(Model.BooksPaged, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </article><!--/.PageControls-->
     }
-    else if (!String.IsNullOrEmpty(Model.Author)) //If an author name is passed via the Genre property...
+    else if (Model.Books != null && Model.Books.Any()) //...if  not, and if found some results...
     {
-        <h3 class="col my-5"><!--PageBody-->
-            No Result for <b>"@Model.Keyword"</b> in <b>@Model.Author Titles</b>
-        </h3><!--/PageBody-->
+        <article class="PageBody row">
+            <!--Row-->
+            @foreach (var item in Model.Books)
+            {
+                <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
+                    <div class="Card card w-100 bg-dark hvr-grow-rotate">
+                        <a class="CardLink stretched-link card-link text-light" href="/Books/ByISBN?isbn=@card.ISBN">
+                            <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->
+                            <div class="CardBody card-body d-flex flex-column text-center">
+                                <p class="Title card-title font-weight-bold p-0 m-0">@card.Title</p><!--.Title/-->
+                                <p class="Author card-text p-0 m-0">@card.AuthorName</p><!--.Author/-->
+                                <p class="Price card-text font-weight-bold p-0 m-0">£@card.Price</p><!--.Price.-->
+                            </div><!--/.CardBody-->
+                        </a><!--/.CardLink-->
+                    </div><!--/.Card-->
+                </div><!--/.CardContainer-->
+            }
+        </article><!--/.PageBody-->
     }
-    else //If neither a genre name nor an author name is passed...
+    else //...if no results found...
     {
-        <h3 class="col my-5"><!--PageBody-->
-            No Result for <b>"@Model.Keyword"</b> in <b>Books</b>
-        </h3><!--/PageBody-->
+        if (!String.IsNullOrEmpty(Model.Genre)) //If a genre name is passed via the Genre property...
+        {
+            <article class="PageBody col my-5">
+                <h3>No Result for <b>"@Model.Keyword"</b> in <b>@Model.Genre Titles</b></h3>
+            </article><!--/.PageBody-->
+        }
+        else if (!String.IsNullOrEmpty(Model.Author)) //If an author name is passed via the Genre property...
+        {
+            <article class="PageBody col my-5">
+                <h3>No Result for <b>"@Model.Keyword"</b> in <b>@Model.Author Titles</b></h3>
+            </article><!--/.PageBody-->
+        }
+        else //If neither a genre name nor an author name is passed...
+        {
+            <article class="PageBody col my-5">
+                <h3>No Result for <b>"@Model.Keyword"</b> in <b>Books</b></h3>
+            </article><!--/.PageBody-->
+        }
     }
-}
+
+</section><!--/.Books-Search-->
 

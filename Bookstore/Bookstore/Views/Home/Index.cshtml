@@ -4,7 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<section class="HomeIndex">
+<section class="Home-Index">
 
     <article class="PageHead d-flex pt-4 mb-0 pb-0 justify-content-between align-items-center">
 
@@ -50,7 +50,7 @@
                             onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" /><!--.ButtonToGenre/-->
                 </div><!--/.SectionHead-->
 
-                <hr /><!--Head/Body Divider-->
+                <hr/><!--Head/Body-Divider-->
 
                 <div class="SectionBody row mt-3">
                     @foreach (var card in sect.BookCards)

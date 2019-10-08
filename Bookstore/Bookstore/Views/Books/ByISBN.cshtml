@@ -10,90 +10,74 @@
     }
 }
 
-<div class="d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center"><!--PageHead-->
-    <div class="align-self-start"><!--LeftColumn-->
+<section class="Books-ByISBN text-light">
 
-        <h2 class="d-block font-weight-bold mb-0 pb-0"><!--BookName-->
-            @printTitle
-        </h2><!--/BookName-->
+    <article class="PageHead d-flex pt-4 mb-2 pb-0 justify-content-between align-items-center">
+        <div class="Left align-self-start">
+            <h2 class="Header text-light d-block font-weight-bold mb-0 pb-0">
+                @printTitle
+            </h2><!--/.Header-->
+            <p class="Map my-0 py-0">
+                <!--BookAuthor-->
+                by @Model.AuthorName
+            </p><!--/.Map-->
+        </div><!--/.Left-->
+        <div class="Right">
+            <p class="Map ByGenre font-italic my-0 py-0 text-right">
+                @Html.ActionLink("Home", "Index", "Home", null, null) /
+                @Html.ActionLink("Genres", "Index", "Genres", null, null) /
+                @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) /
+                @printTitle
+            </p><!--/.Map.ByGenre-->
 
-        <p class="map my-0 py-0"><!--BookAuthor-->
-            by @Model.AuthorName
-        </p><!--/BookAuthor-->
+            <p class="Map ByAuthor font-italic my-0 py-0 text-right">
+                @Html.ActionLink("Home", "Index", "Home", null, null) /
+                @Html.ActionLink("Authors", "Index", "Authors", null, null) /
+                @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) /
+                @printTitle
+            </p><!--/.Map.ByAuthor-->
+        </div><!--/.Right-->
+    </article><!--/.PageHead-->
 
-    </div><!--/LeftColumn-->
-    <div><!--RightColumn-->
+    <hr /><!--Head/Body-Divider-->
 
-        <p class="map font-italic my-0 py-0 text-right"><!--MapByGenre-->
-            @Html.ActionLink("Home", "Index", "Home", null, null) /
-            @Html.ActionLink("Genres", "Index", "Genres", null, null) /
-            @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) /
-            @printTitle
-        </p><!--/MapByGenre-->
+    <dl class="BodyContainer dl-horizontal">
+        <article class="PageBody row">
+            <div class="ImageContainer col-4 pt-3 pb-4">
+                <img style="width:100%" src="~/Images/@Model.ImagePath" /><!--.Image/-->
+            </div><!--/.ImageContainer-->
+            <div class="Info col-8 pt-3">
+                <h4 class="Title text-light">@Html.DisplayFor(x => x.Title)</h4><!--.Title/-->
+                <span class="Description lead mb-3">
+                    @Html.DisplayFor(model => model.Description)
+                </span><!--/.Description-->
+                <div class="Inner row mt-4" style="font-family:Merriweather;">
+                    <div class="Left col-4">
+                        <dt> Author </dt>
+                        <dd> @Html.DisplayFor(model => model.AuthorName)</dd>
+                        <dt> Genre </dt>
+                        <dd> @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) </a> </dd>
+                        <dt> Publisher </dt>
+                        <dd> @Html.DisplayFor(model => model.Publisher) </dd>
+                        <dt> Format </dt>
+                        <dd> @Html.DisplayFor(model => model.Format) </dd>
+                    </div><!--/.Left-->
+                    <div class="Right col-4 offset-1">
+                        <dt> Price </dt>
+                        <dd> @Html.DisplayFor(model => model.Price) </dd>
+                        <dt> Pages </dt>
+                        <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
+                        <dt> Weight</dt>
+                        <dd> @Html.DisplayFor(model => model.WeightInGrams)g </dd>
+                        <dt> Dimensions</dt>
+                        <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
+                    </div><!--/.Right-->
+                    <div class="ButtonContainer d-inline-block mt-auto ml-auto">
+                        <input type="button" value="Purchase" class="btn-dark font-weight-bold text-uppercase text-black py-2 px-3 hvr-grow rounded" /><!--.PurchaseButton/-->
+                    </div><!--/.ButtonContainer-->
+                </div><!--/.Inner-->
+            </div><!--/.Info-->
+        </article><!--/.PageBdy-->
+    </dl><!--/.BodyContainer-->
 
-        <p class="map font-italic my-0 py-0 text-right"><!--MapByAuthor-->
-            @Html.ActionLink("Home", "Index", "Home", null, null) /
-            @Html.ActionLink("Authors", "Index", "Authors", null, null) /
-            @Html.ActionLink(Model.AuthorName, "ByAuthor", "Books", new { authorName = Model.AuthorName }, null) /
-            @printTitle
-        </p><!--/MapByAuthor-->
-
-    </div><!--/RightColumn-->
-</div><!--/PageHead-->
-
-<hr />
-
-<dl class="dl-horizontal"><!--PageBody-->
-    <div class="row"><!--Row-->
-        <div class="col-4 pt-3 pb-4"><!--ImageContainer-->
-
-            <img style="width:100%" src="~/Images/@Model.ImagePath" /><!--Image/-->
-
-        </div><!--/ImageContainer-->
-        <div class="col-8 pt-3"><!--Column-->
-            <h4>@Html.DisplayFor(x => x.Title)</h4>
-            <span class="lead mb-3"><!--Description-->
-                @Html.DisplayFor(model => model.Description)
-            </span><!--Description-->
-
-            <div class="row mt-4" style="font-family:Merriweather;"><!--NestedRow-->
-                <div class="col-4">
-                    <dt> Author </dt>
-                    <dd> @Html.DisplayFor(model => model.AuthorName)</dd>
-
-                    <dt> Genre </dt>
-                    <dd> @Html.ActionLink(Model.GenreName, "ByGenre", "Books", new { genreName = Model.GenreName }, null) </a> </dd>
-
-                    <dt> Publisher </dt>
-                    <dd> @Html.DisplayFor(model => model.Publisher) </dd>
-
-                    <dt> Format </dt>
-                    <dd> @Html.DisplayFor(model => model.Format) </dd>
-                </div>
-                <div class="col-4 offset-1">
-                    <dt> Price </dt>
-                    <dd> @Html.DisplayFor(model => model.Price) </dd>
-
-                    <dt> Pages </dt>
-                    <dd> @Html.DisplayFor(model => model.NumberOfPages) </dd>
-
-                    <dt> Weight</dt>
-                    <dd> @Html.DisplayFor(model => model.WeightInGrams)g </dd>
-
-                    <dt> Dimensions</dt>
-                    <dd> @Html.DisplayFor(model => model.HeightInMm) x @Html.DisplayFor(model => model.WidthInMm) mm </dd>
-                </div>
-                <div class="d-inline-block mt-auto ml-auto"><!--Column:PurchaseButton-->
-                    <input type="button" value="Purchase" 
-                        class="btn-dark font-weight-bold text-uppercase text-black py-2 px-3 hvr-grow rounded" /><!--Button:Purchase/-->
-                </div><!--/Column:PurchaseButton-->
-            </div><!--/NestedRow-->
-
-            
-                
-            
-            
-        </div><!--/Column-->
-        
-    </div><!--/Row-->
-</dl><!--/PageBody-->
+</section><!--/.Books-ByISBN-->

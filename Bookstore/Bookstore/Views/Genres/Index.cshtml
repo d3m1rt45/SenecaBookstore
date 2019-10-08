@@ -4,7 +4,7 @@
     ViewBag.Title = "Genres";
 }
 
-<section class="GenresIndex">
+<section class="Genres-Index">
     
     <article class="PageHead row pt-4">
         <div class="Left col-4 text-left">
@@ -14,8 +14,7 @@
                 Genres
             </p><!--/.Map-->
         </div><!--/.Left-->
-
-        <div class="Filtering col-8 text-right">
+        <div class="Right col-8 text-right">
             <div class="SearchBar d-inline-block pt-2 mr-0">
                 @using (Html.BeginForm())
                 {
@@ -27,14 +26,12 @@
                     </div>
                 }
             </div><!--/.SearchBar-->
-
             <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-1 ml-0" id="UrlList" onchange="SortBy()">
                 <option value="@Url.Action("Index", "Genres", null)">Sort by...</option>
                 <option value="@Url.Action("Index", "Genres", new { order = "AtoZ" })">Title (a-z)</option>
                 <option value="@Url.Action("Index", "Genres", new { order = "ZtoA" })">Title (z-a)</option>
             </select><!--/.SortBy-->
-        </div><!--/.Filtering-->
-
+        </div><!--/.Right-->
     </article><!--/.PageHead-->
 
     <hr />
