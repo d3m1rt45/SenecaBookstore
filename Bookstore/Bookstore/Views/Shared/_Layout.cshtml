@@ -8,26 +8,32 @@
     @Styles.Render("~/Content/fontawesome")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="mt-3">
-    <div class="Navbar navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="NavContainer container">
-            <div class="NavbarBrand navbar-brand">
-                @Html.ActionLink("Seneca Bookstore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div><!--/.NavbarBrand-->
+<body>
 
-            <button class="NavbarToggler navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="navbar-toggler-icon"></span>
-            </button><!--/.NavbarToggler-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top container">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home", null)"><h1 class="mb-0">Seneca Bookstore</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="NavbarCollapse navbar-collapse collapse">
-                <ul class="InnerLinks ml-auto navbar-nav">
-                    <li class="Link nav-item">@Html.ActionLink("Books", "Index", "Books", null, new { @class = "nav-link" })</li><!--.Link/-->
-                    <li class="Link nav-item">@Html.ActionLink("Authors", "Index", "Authors", null, new { @class = "nav-link" })</li><!--.Link/-->
-                    <li class="Link nav-item">@Html.ActionLink("Genres", "Index", "Genres", null, new { @class = "nav-link" })</li><!--.Link/-->
-                </ul><!--/.InnerLinks-->
-            </div><!--/.NavbarCollapse-->
-        </div><!--/.NavContainer-->
-    </div><!--/.Navbar-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Home", null)"><h4>Home</h4><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Books", null)"><h4>Books</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Genres", null)"><h4>Genres</h4></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Authors", null)"><h4>Authors</h4></a>
+                </li>
+            </ul>
+            
+        </div>
+    </nav>
 
     <div class="Render container body-content">
         @RenderBody()
@@ -46,5 +52,11 @@
             window.location.href = document.getElementById("UrlList").value;
         }
     </script><!--/.SortByScript-->
+    <script class="NavigationScript">
+        $(".NavToggler").click(function () {
+            $(".Render").toggleClass("on");
+            $(".Brand").toggleClass("on");
+        })
+    </script>
 </body>
 </html>

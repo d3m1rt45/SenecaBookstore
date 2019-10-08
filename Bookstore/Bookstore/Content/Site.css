@@ -1,7 +1,7 @@
 ﻿/* [HOME-INDEX] */
 .Home-Index .PageHead {
     margin: 0rem 2rem 0rem 2rem;
-    padding: 1.5rem 0rem 1rem 2rem;
+    padding: 1.5rem 0rem 1rem 1rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
@@ -12,6 +12,11 @@
 
 .OthersRow {
     padding-left: 2rem;
+}
+
+.navbar-nav h4 {
+    padding:0;
+    margin:0;
 }
 
 .OtherGenres .SectionHead {
@@ -59,16 +64,16 @@
 }
 
 .SectionByGenre {
-    padding: 2rem 2rem 1.5rem 2rem;
+    padding: 2rem 2rem 2rem 2rem;
 }
 
     .SectionByGenre .SectionHead {
-        padding: 0.5rem 1rem;
+        padding: 1rem 1rem;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
     }
-    .SectionByGenre .Header, .OtherGenres .Header {
+    .SectionByGenre .Header, .OtherGenres .Header, .FeaturedTitles .Header {
         font-weight: 700;
     }
 
@@ -127,23 +132,33 @@
     background-size: cover;
 }
 
-
-
+/*NAVIGATION*/
+.navbar {
+    padding: 1rem 3rem;
+    transition-duration: 0.5s;
+    background: rgba(255,255,255,0.8);
+}
 
 /*GENERAL*/
+
+
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
     background-image: url(../Images/background.jpg);
     background-position: center;
     background-size: cover;
+    transition-duration: 0.5s;
 }
 
 .Render {
     background: rgb(255,255,255);
-    background: rgba(255,255,255,0.1) 0%;
-    padding-top: 1rem;
+    background: rgba(255,255,255,0.1);
+    padding-top: 8rem;
+    margin-top: 0;
+    min-height: 90vh;
+    transition-duration: 0.5s;
 }
+
 
 .SearchBar {
     margin-right: 2rem;
