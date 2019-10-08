@@ -4,58 +4,55 @@
     ViewBag.Title = "Genres";
 }
 
-<!--PageHead-->
-<div class="row pt-4">
-    <div class="col-4 text-left">
-        <!--Header-->
-        <h2 class="d-block align-self-start font-weight-bold mb-0 pb-0">Genres</h2>
+<section class="GenresIndex">
+    
+    <article class="PageHead row pt-4">
+        <div class="Left col-4 text-left">
+            <h2 class="Header d-block align-self-start font-weight-bold mb-0 pb-0">Genres</h2><!--.Header/-->
+            <p class="Map font-italic my-0 py-0">
+                @Html.ActionLink("Home", "Index", "Home", null, null) / 
+                Genres
+            </p><!--/.Map-->
+        </div><!--/.Left-->
 
-        <!--Map-->
-        <p class="map font-italic my-0 py-0">
-            @Html.ActionLink("Home", "Index", "Home", null, null) /
-            Genres
-        </p>
-    </div>
-    <div class="col-8 text-right">
-        <!--SearchBar-->
-        <div class="d-inline-block pt-2">
-            @using (Html.BeginForm())
-            {
-                <div class="input-group">
-                    @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
-                    <div class="input-group-prepend">
-                        <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+        <div class="Filtering col-8 text-right">
+            <div class="SearchBar d-inline-block pt-2 mr-0">
+                @using (Html.BeginForm())
+                {
+                    <div class="input-group">
+                        @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
+                        <div class="input-group-prepend">
+                            <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div><!--/.SearchBar-->
 
-        <!--SortBy-->
-        <select class="btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
-            <option value="@Url.Action("Index", "Genres", null)">Sort by...</option>
-            <option value="@Url.Action("Index", "Genres", new { order = "AtoZ" })">Title (a-z)</option>
-            <option value="@Url.Action("Index", "Genres", new { order = "ZtoA" })">Title (z-a)</option>
-        </select>
-        <script>
-            function SortBy() {
-                window.location.href = document.getElementById("UrlList").value;
-            }
-        </script>
-    </div>
-</div>
+            <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-1 ml-0" id="UrlList" onchange="SortBy()">
+                <option value="@Url.Action("Index", "Genres", null)">Sort by...</option>
+                <option value="@Url.Action("Index", "Genres", new { order = "AtoZ" })">Title (a-z)</option>
+                <option value="@Url.Action("Index", "Genres", new { order = "ZtoA" })">Title (z-a)</option>
+            </select><!--/.SortBy-->
+        </div><!--/.Filtering-->
 
-<hr />
+    </article><!--/.PageHead-->
 
-<div class="row">
-    @if (Model.FirstOrDefault() != null)
-    { 
-        foreach (var item in Model)
+    <hr />
+
+    <article class="Body row">
+        @if (Model.FirstOrDefault() != null)
         {
-            <h5 class="mb-3 col-12 col-sm-6 col-lg-4">@Html.ActionLink(item.Name, "ByGenre", "Books", new { genreName = item.Name }, null)</h5>
+            foreach (var item in Model)
+            {
+                <h5 class="Genre mb-3 col-12 col-sm-6 col-lg-4">
+                    @Html.ActionLink(item.Name, "ByGenre", "Books", new { genreName = item.Name }, null)
+                </h5><!--/.Genre-->
+            }
         }
-    }
-    else
-    {
-        <h3 class="col mb-3">No Genre Found...</h3>
-    }
-</div>
+        else
+        {
+            <h3 class="NotFound col mb-3">No Genre Found...</h3><!--.NotFound/-->
+        }
+    </article><!--/.Body-->
+
+</section><!--/.GenresIndex-->

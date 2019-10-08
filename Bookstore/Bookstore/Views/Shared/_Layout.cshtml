@@ -13,35 +13,38 @@
         <div class="container">
             <div class="navbar-brand">
                 @Html.ActionLink("Seneca Bookstore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-
+            </div><!--/.navbar-brand-->
 
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button><!--/.navbar-toggler-->
 
             <div class="navbar-collapse collapse">
                 <ul class="ml-auto navbar-nav">
                     <li class="nav-item">@Html.ActionLink("Books", "Index", "Books", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Authors", "Index", "Authors", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Genres", "Index", "Genres", null, new { @class = "nav-link" })</li>
-                </ul>
-                @*@Html.Partial("_LoginPartial")*@
-            </div>
+                </ul><!--/.navbar-nav-->
+            </div><!--/.navbar-collapse-->
+        </div><!--/.container-->
+    </div><!--/.navbar-->
 
-
-        </div>
-    </div>
     <div class="Render container body-content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Seneca Online Bookstore</p>
         </footer>
-    </div>
+    </div><!--/.Render-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script class="SortByScript">
+        function SortBy() {
+            window.location.href = document.getElementById("UrlList").value;
+        }
+    </script><!--/.SortByScript-->
 </body>
 </html>

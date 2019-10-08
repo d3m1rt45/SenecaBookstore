@@ -1,35 +1,45 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-image: url(../Images/background.jpg);
-    background-position: center;
-    background-size: cover;
-}
-
-.Section {
-    background-position: center;
-    background-size: cover;
-    padding: 2rem 2rem 1.5rem 2rem;
-}
-
-.Render {
-    background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%);
-}
-
-.Section h4 {
-    font-weight: 700;
-}
-
-.FeaturedHeader {
+﻿/* [HOME/INDEX] */
+.HomeIndex .Header {
     margin-left: 2rem;
 }
 
-.SearchBar {
-    margin-right: 2rem;
+.OthersRow {
+    padding-left: 2rem;
 }
 
-/*.busin {
+.OtherGenres .Header {
+    margin-top: 2rem;
+    padding-left: 2rem;
+    font-weight: 700;
+}
+
+.OtherGenre {
+    height: 10rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+    .OtherGenre h3 {
+        color: #f9f9f9;
+        display: block;
+        align-self: center;
+        justify-self: center;
+    }
+
+.Featured {
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.SectionByGenre {
+    padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.SectionByGenre h4 {
+    font-weight: 700;
+}
+
+
+/* GENRE-SPECIFIC */
+.busin {
     background-image: url(../Images/business.jpg);
     background-position: center;
     background-size: cover;
@@ -55,29 +65,6 @@
     background-position: center;
     background-size: cover;
     padding: 2rem 2rem 1.5rem 2rem;
-}*/
-
-.Others .Row {
-    padding-left: 2rem;
-}
-
-.Others .Header {
-    margin-top: 2rem;
-    padding-left: 2rem;
-    font-weight: 700;
-}
-
-.OtherGenre {
-    height: 10rem;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.OtherGenre h3 {
-    color: #f9f9f9;
-    display:block;
-    align-self:center;
-    justify-self:center;
 }
 
 .fanta {
@@ -104,22 +91,29 @@
     background-size: cover;
 }
 
-.Section .col-12 {
-    opacity: 1;
+
+
+
+/*GENERAL*/
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url(../Images/background.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
-.dl-horizontal dt {
-    white-space: normal;
+.Render {
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%);
 }
 
-.map{
+.SearchBar {
+    margin-right: 2rem;
+}
+
+.Map {
     font-family: Merriweather, cursive;
-}
-
-input,
-select,
-textarea {
-    max-width: 280px;
 }
 
 h1 {
@@ -141,9 +135,12 @@ h2,h3,h4,h5 {
     font-family: Merriweather, cursive;
 }
 
-/*FEATURED TITLES*/
-.Featured {
-    padding: 2rem 2rem 1.5rem 2rem;
+
+
+input,
+select,
+textarea {
+    max-width: 280px;
 }
 
 /* merriweather-regular - latin */
