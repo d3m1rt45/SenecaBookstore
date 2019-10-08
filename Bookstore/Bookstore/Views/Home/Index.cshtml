@@ -6,9 +6,9 @@
 
 <section class="Home-Index">
 
-    <article class="PageHead d-flex pt-4 mb-0 pb-0 justify-content-between align-items-center">
+    <article class="PageHead d-flex justify-content-between align-items-center">
 
-        <h2 class="Header d-block align-self-end text-light font-weight-bold mb-0 pb-0">
+        <h2 class="Header d-block text-light font-weight-bold align-self-start">
             Featured Titles
         </h2><!--/.Header-->
 
@@ -18,7 +18,7 @@
                 <div class="input-group">
                     @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark ", placeholder = "Search Titles..." })
                     <div class="input-group-prepend">
-                        <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-light rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             }
@@ -26,13 +26,13 @@
 
     </article><!--/.PageHead-->
 
-    <article class="FeaturedTitles jumbotron w-100">
+    <article class="FeaturedTitles">
         <div class="row">
             @foreach (var item in Model.Featured)
             {
                 <div class="FeaturedTitle col-6 col-md-3">
                     <a class="LinkToBookPage" href="/Books/ByIN?isbn=@item.ISBN">
-                        <img class="BookCover hvr-shrink w-100 mb-3" src="~/Images/@item.ImagePath" /><!--.BookCover/-->
+                        <img class="BookCover hvr-buzz-out w-100 mb-3" src="~/Images/@item.ImagePath" /><!--.BookCover/-->
                     </a><!--/.LinkToBookPage-->
                 </div><!--/.FeaturedTitle-->
             }
@@ -44,20 +44,18 @@
     {
         <article class="SectionByGenre row my-0">
             <div class="OuterColumn col-12">
-                <div class="SectionHead d-flex justify-content-between align-items-center pt-1">
-                    <h4 class="Header mb-0 ml-0 text-light">@sect.Title</h4><!--.Header/-->
-                    <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded hvr-grow-shadow mb-0 mt-auto" value="See More"
+                <div class="SectionHead @sect.ImageClass d-flex justify-content-between align-items-center">
+                    <h4 class="Header m-0 text-light">@sect.Title</h4><!--.Header/-->
+                    <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded mt-auto mt-auto" value="See More"
                             onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" /><!--.ButtonToGenre/-->
                 </div><!--/.SectionHead-->
 
-                <hr/><!--Head/Body-Divider-->
-
-                <div class="SectionBody row mt-3">
+                <div class="SectionBody row mt-4">
                     @foreach (var card in sect.BookCards)
                     {
                         <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
-                            <div class="Card card w-100 bg-dark hvr-grow-rotate">
-                                <a class="CardLink stretched-link card-link text-light" href="/Books/ByISBN?isbn=@card.ISBN">
+                            <div class="Card card w-100 bg-light hvr-buzz-out">
+                                <a class="CardLink stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@card.ISBN">
 
                                     <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->
 
@@ -76,18 +74,30 @@
         </article><!--/.SectionByGenre-->
     }
 
-    <article class="OtherGenres">
-        <h4 class="Header text-light">Other Genres</h4><hr /><!--.Header/-->
+    <article class="OtherGenres mt-4">
+        <div class="SectionHead d-flex justify-content-between align-items-center">
+            <h4 class="Header pl-3 m-0 text-light">Other Genres</h4><!--.Header/-->
+            <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded mt-auto mt-auto" value="See More"
+                            onclick="window.location='@Url.Action("Index", "Genres", null)'" /><!--.ButtonToGenres/-->
+        </div><!--/.SectionHead-->
         <div class="OthersRow row w-100">
             @foreach (var genre in Model.OtherGenres)
             {
                 <a class="OtherGenreLink col-6" href="@Url.Action("ByGenre", "Books", new { genreName = genre.Name })">
                     <div class="OtherGenre d-flex align-items-center justify-content-center rounded @genre.ImageClass">
-                        <h3 class="Name">@genre.Name</h3>
+                        <h3 class="Name font-weight-bold">@genre.Name</h3>
                     </div><!--/.OtherGenre-->
                 </a><!--/.OtherGenreLink-->
             }
         </div><!--/.OthersRow-->
-    </article><!--/.OtherGenres-->
+</article><!--/.OtherGenres-->
 
 </section><!--/.HomeIndex-->
+
+@section scripts {
+    <script>
+        $(".OtherGenreLink").hover(function () {
+            $(".OtherGenre").toggleClass("hvr-buzz-out");
+        });
+    </script>
+    }

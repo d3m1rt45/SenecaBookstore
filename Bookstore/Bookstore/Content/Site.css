@@ -1,16 +1,41 @@
 ﻿/* [HOME-INDEX] */
-.Home-Index .Header {
-    margin-left: 2rem;
+.Home-Index .PageHead {
+    margin: 0rem 2rem 0rem 2rem;
+    padding: 1.5rem 0rem 1rem 2rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    background-image: url(../Images/featured.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .OthersRow {
     padding-left: 2rem;
 }
 
+.OtherGenres .SectionHead {
+    margin: 0 2rem 1rem 2rem;
+    padding: 0.5rem 1rem 0.5rem 0rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    background-image: url(../Images/others.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
 .OtherGenres .Header {
     margin-top: 2rem;
     padding-left: 2rem;
-    font-weight: 700;
+}
+
+.OtherGenre {
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+}
+
+.OtherGenreLink:hover {
+    text-decoration: none;
 }
 
 .OtherGenre {
@@ -25,17 +50,31 @@
         justify-self: center;
     }
 
-.Featured {
-    padding: 2rem 2rem 1.5rem 2rem;
+.FeaturedTitles {
+    margin: 2rem 2rem 2rem 2rem;
+}
+
+.FeaturedTitles .BookCover {
+    box-shadow: rgbA(0,0,0,0.8) 0.3rem 0.5em;
 }
 
 .SectionByGenre {
     padding: 2rem 2rem 1.5rem 2rem;
 }
 
-.SectionByGenre h4 {
-    font-weight: 700;
-}
+    .SectionByGenre .SectionHead {
+        padding: 0.5rem 1rem;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    }
+    .SectionByGenre .Header, .OtherGenres .Header {
+        font-weight: 700;
+    }
+
+    .SectionByGenre .Card {
+        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    }
 
 
 /* GENRE-SPECIFIC */
@@ -50,21 +89,18 @@
     background-image: url(../Images/crime.jpg);
     background-position: center;
     background-size: cover;
-    padding: 2rem 2rem 1.5rem 2rem;
 }
 
 .philo {
     background-image: url(../Images/philosophy.jpg);
     background-position: center;
     background-size: cover;
-    padding: 2rem 2rem 1.5rem 2rem;
 }
 
 .psych {
     background-image: url(../Images/psychology.jpg);
     background-position: center;
     background-size: cover;
-    padding: 2rem 2rem 1.5rem 2rem;
 }
 
 .fanta {
@@ -105,7 +141,8 @@ body {
 
 .Render {
     background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%);
+    background: rgba(255,255,255,0.1) 0%;
+    padding-top: 1rem;
 }
 
 .SearchBar {
