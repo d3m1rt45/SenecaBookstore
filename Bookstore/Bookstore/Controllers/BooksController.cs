@@ -51,10 +51,6 @@ namespace Bookstore.Controllers
         {
             var book = db.Books.Find(isbn); //Find Book object by the isbn parameter, and
 
-            if (book.Description.Length > 650) //If its Description property is longer than 650 characters...
-            {
-                book.Description = $"{book.Description.Substring(0, 650)}..."; //...change it to the first 650 characters followed by three dots;
-            }
             return View(book); //pass it to the View;
         }
 

@@ -1,13 +1,6 @@
 ﻿/* [HOME-INDEX] */
 .Home-Index .PageHead {
-    margin: 0rem 2rem 0rem 2rem;
-    padding: 1rem 0rem 0.5rem 1rem;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
     background-image: url(../../Images/featured.jpg);
-    background-position: center;
-    background-size: cover;
 }
 
 /* FeaturedTitles */
@@ -85,14 +78,40 @@
     background-image: url(../../Images/all-titles.jpg);
 }
 
+/*[BOOKS/BYISBN]*/
+.Books-ByISBN .PageHead {
+    margin-bottom: 0 !important;
+}
+
+.Books-ByISBN .BodyContainer {
+    margin: 0 2rem 0 2rem;
+    padding: 2rem 0 2rem 0;
+    border-radius: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+}
+
+    .Books-ByISBN .PageBody img {
+        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4rem;
+    }
+
+.Purchase {
+    margin: 2rem 0 0 0;
+    width: 100%;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4rem;
+}
+
+
 /* [GENRES/INDEX] */
-.GenresIndex .Genre {
+.Genres-Index .PageHead {
+    background-image: url(../../Images/genres.jpg);
+}
+.Genres-Index .Genre {
     height: 10rem;
     width: 100%;
     margin-bottom: 1rem;
     box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
 }
-    .GenresIndex .Genre {
+    .Genres-Index .Genre {
         color: #f9f9f9;
         display: block;
         align-self: center;
@@ -100,8 +119,13 @@
     }
 
 /* [AUTHORS/INDEX] */
+.Authors-Index .PageHead,
+.Books-ByAuthor .PageHead{
+    background-image: url(../../Images/authors.jpg);
+}
+
 .Authors-Index .PageBody {
-    padding: 0 3rem 0 3rem !important;
+    padding: 0 2rem 0 2rem !important;
 }
 
 .Authors-Index .AuthorContainer {
@@ -116,6 +140,5 @@
 .Authors-Index a {
     text-decoration: none;
 }
-
 
 
