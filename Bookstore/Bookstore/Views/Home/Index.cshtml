@@ -12,7 +12,7 @@
             Featured Titles
         </h3><!--/.Header-->
 
-        <div class="SearchBar d-inline-block align-self-start">
+        <div class="SearchBar d-inline-block align-self-start mr-3">
             @using (Html.BeginForm())
             {
                 <div class="input-group">
@@ -31,7 +31,7 @@
             @foreach (var item in Model.Featured)
             {
                 <div class="FeaturedTitle col-6 col-md-3">
-                    <a class="LinkToBookPage" href="/Books/ByIN?isbn=@item.ISBN">
+                    <a class="LinkToBookPage" href="/Books/ByISBN?isbn=@item.ISBN">
                         <img class="BookCover hvr-buzz-out w-100 mb-3" src="~/Images/@item.ImagePath" /><!--.BookCover/-->
                     </a><!--/.LinkToBookPage-->
                 </div><!--/.FeaturedTitle-->
@@ -44,7 +44,7 @@
     {
         <article class="SectionByGenre row my-0">
             <div class="OuterColumn col-12">
-                <div class="SectionHead @sect.ImageClass d-flex justify-content-between align-items-center">
+                <div class="SectionHead  @sect.ImageClass d-flex justify-content-between align-items-center">
                     <h4 class="Header m-0 text-light">@sect.Title</h4><!--.Header/-->
                     <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded mt-auto mt-auto" value="See More"
                             onclick="window.location='@Url.Action("ByGenre", "Books", new { genreName = sect.Title })'" /><!--.ButtonToGenre/-->
@@ -54,7 +54,7 @@
                     @foreach (var card in sect.BookCards)
                     {
                         <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
-                            <div class="Card card w-100 bg-light hvr-buzz-out">
+                            <div class="Card card w-100 bg-light hvr-shrink">
                                 <a class="CardLink stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@card.ISBN">
 
                                     <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->

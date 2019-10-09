@@ -1,7 +1,7 @@
 ﻿/* [HOME-INDEX] */
-.Home-Index .PageHead {
+.Home-Index > .PageHead {
     margin: 0rem 2rem 0rem 2rem;
-    padding: 1.5rem 0rem 1rem 1rem;
+    padding: 1rem 0rem 0.5rem 1rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
@@ -10,18 +10,45 @@
     background-size: cover;
 }
 
+/*FeaturedTitles*/
+.FeaturedTitles {
+    margin: 2rem 2rem 2rem 2rem;
+}
+
+    .FeaturedTitles .BookCover {
+        box-shadow: rgbA(0,0,0,0.8) 0.3rem 0.5em;
+    }
+
+/*SectionsByGenre*/
+.SectionByGenre {
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+    .SectionByGenre .SectionHead {
+        padding: 1rem 1rem 0.5rem 1rem;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    }
+
+    .SectionByGenre .Header,
+    .OtherGenres .Header,
+    .FeaturedTitles .Header {
+        font-weight: 700;
+    }
+
+.Card {
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+}
+
+/*OtherGenres*/
 .OthersRow {
     padding-left: 2rem;
 }
 
-.navbar-nav h4 {
-    padding:0;
-    margin:0;
-}
-
 .OtherGenres .SectionHead {
-    margin: 0 2rem 1rem 2rem;
-    padding: 0.5rem 1rem 0.5rem 0rem;
+    margin: 0 2rem 1.5rem 2rem;
+    padding: 1rem 0rem 0.5rem 0rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
@@ -55,32 +82,29 @@
         justify-self: center;
     }
 
-.FeaturedTitles {
-    margin: 2rem 2rem 2rem 2rem;
+
+/*[BOOKS-INDEX] and [BOOKS-INDEXPAGED]*/
+.Books-IndexPaged,
+.Books-Index {
+    padding-top: 0;
 }
 
-.FeaturedTitles .BookCover {
-    box-shadow: rgbA(0,0,0,0.8) 0.3rem 0.5em;
+.Books-IndexPaged .PageBody,
+.Books-Index .PageBody {
+    padding: 0 2rem 0 2rem;
+    }
+
+.Books-IndexPaged .PageHead,
+.Books-Index .PageHead {
+    margin: 0rem 2rem 0rem 2rem;
+    padding: 1rem 0rem 1rem 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    background-image: url(../Images/featured.jpg);
+    background-position: center;
+    background-size: cover;
 }
-
-.SectionByGenre {
-    padding: 2rem 2rem 2rem 2rem;
-}
-
-    .SectionByGenre .SectionHead {
-        padding: 1rem 1rem;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
-        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
-    }
-    .SectionByGenre .Header, .OtherGenres .Header, .FeaturedTitles .Header {
-        font-weight: 700;
-    }
-
-    .SectionByGenre .Card {
-        box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
-    }
-
 
 /* GENRE-SPECIFIC */
 .busin {
@@ -134,13 +158,15 @@
 
 /*NAVIGATION*/
 .navbar {
-    padding: 1rem 3rem;
+    padding: 1rem 3rem; 
     transition-duration: 0.5s;
     background: rgba(255,255,255,0.8);
 }
 
-/*GENERAL*/
-
+.navbar-nav > h4 {
+    padding: 0;
+    margin: 0;
+}
 
 body {
     padding-bottom: 20px;
@@ -153,7 +179,7 @@ body {
 .Render {
     background: rgb(255,255,255);
     background: rgba(255,255,255,0.1);
-    padding-top: 8rem;
+    padding-top: 7.5rem;
     margin-top: 0;
     min-height: 90vh;
     transition-duration: 0.5s;
