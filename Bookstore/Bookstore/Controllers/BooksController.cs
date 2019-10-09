@@ -76,10 +76,14 @@ namespace Bookstore.Controllers
                 bookCards = BooksIndexViewModel.SortCards(bookCards, sortBy); //...sort bookCards accordingly;
             }
 
-            //Instantiate a ByGenreViewModel object with 'bookCards' and 'genreName';
-            var byGenreObject = new ByGenreViewModel { BookCards = bookCards, Genre = genreName };
+            var byGenreInstance = new GenreViewModel
+            {
+                ImageClass = genreName.ToLower().Substring(0, 5),
+                Name = genreName,
+                BookCards = bookCards
+            };
 
-            return View(byGenreObject);
+            return View(byGenreInstance);
         }
 
 

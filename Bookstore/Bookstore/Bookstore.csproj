@@ -201,28 +201,24 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\BooksIndexViewModel.cs" />
     <Compile Include="ViewModels\ByAuthorViewModel.cs" />
-    <Compile Include="ViewModels\ByGenreViewModel.cs" />
     <Compile Include="ViewModels\FeaturedViewModel.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
-    <Compile Include="ViewModels\OtherGenreViewModel.cs" />
+    <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\fontawesome\font-awesome.css" />
-    <Content Include="Content\fontawesome\font-awesome.min.css" />
-    <Content Include="Content\Fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\hover.css" />
-    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\libraries\bootstrap.css" />
+    <Content Include="Content\libraries\fontawesome\font-awesome.css" />
+    <Content Include="Content\libraries\fontawesome\font-awesome.min.css" />
+    <Content Include="Content\libraries\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\libraries\hover.css" />
+    <Content Include="Content\libraries\PagedList.css" />
+    <Content Include="Content\project-specific\Fonts.css" />
+    <Content Include="Content\project-specific\Shared.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\site.css" />
+    <Content Include="Content\project-specific\PageSpecific.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -239,16 +235,10 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\Fonts\FontAwesome.otf" />
-    <Content Include="Content\Fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\libraries\fonts\FontAwesome.otf" />
+    <Content Include="Content\libraries\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\libraries\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\libraries\fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -301,10 +291,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
-    <Content Include="Views\Authors\Details.cshtml" />
-    <Content Include="Views\Authors\Create.cshtml" />
-    <Content Include="Views\Authors\Edit.cshtml" />
-    <Content Include="Views\Authors\Delete.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
@@ -325,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\project-specific\Fonts\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

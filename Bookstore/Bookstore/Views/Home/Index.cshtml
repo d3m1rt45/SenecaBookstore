@@ -18,7 +18,7 @@
                 <div class="input-group">
                     @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark ", placeholder = "Search Titles..." })
                     <div class="input-group-prepend">
-                        <button class="btn btn-light rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             }
@@ -77,7 +77,7 @@
     <article class="OtherGenres mt-4">
         <div class="SectionHead d-flex justify-content-between align-items-center">
             <h4 class="Header pl-3 m-0 text-light">Other Genres</h4><!--.Header/-->
-            <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded mt-auto mt-auto" value="See More"
+            <input type="button" class="ButtonToGenre btn btn-outline-light font-weight-bold rounded mt-auto mr-3" value="See More"
                             onclick="window.location='@Url.Action("Index", "Genres", null)'" /><!--.ButtonToGenres/-->
         </div><!--/.SectionHead-->
         <div class="OthersRow row w-100">

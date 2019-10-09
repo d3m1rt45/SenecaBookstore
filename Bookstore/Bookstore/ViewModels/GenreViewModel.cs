@@ -1,14 +1,14 @@
-﻿using Bookstore.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Bookstore.ViewModels
 {
-    public class ByGenreViewModel
+    public class GenreViewModel
     {
-        public string Genre { get; set; }
+        public string Name { get; set; }
+        public string ImageClass { get; set; }
         public List<BooksIndexViewModel> BookCards { get; set; }
     }
 }

@@ -1,0 +1,148 @@
+﻿body {
+    padding-bottom: 20px;
+    background-image: url(../../Images/background.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.Render {
+    background: rgb(255,255,255);
+    background: rgba(255,255,255,0.1);
+    padding-top: 7.5rem;
+    margin-top: 0;
+    min-height: 90vh;
+}
+
+.PageHead {
+    margin: 0rem 2rem 0rem 2rem;
+    padding: 1rem 0rem 1rem 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+    background-position: center;
+    background-size: cover;
+}
+
+.PageBody {
+    padding: 0 2rem 0 2rem;
+}
+
+
+.PageHead h1,
+.PageHead h2,
+.PageHead h3,
+.PageHead h4,
+.PageHead h5,
+.PageHead .Map{
+    color: #f9f9f9;
+}
+
+/*NAVIGATION*/
+.Navigation {
+    padding: 1rem 3rem;
+    transition-duration: 0.5s;
+    background: rgba(255,255,255,0.8);
+}
+
+.navbar-nav > h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    margin: 0 0.2rem 0 0.2rem;
+}
+
+    .nav-item:hover {
+        background-color: rgbA(0,0,0,0.15);
+        transition-duration: 1s;
+    }
+
+    .nav-item.active {
+        background-color: rgbA(0,0,0,0.4);
+    }
+
+/* SEARCHBAR */
+.SearchBar {
+    margin-right: 2rem;
+}
+
+.SearchBar .input-group-prepend {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+/* MAP */
+.Map {
+    font-family: Merriweather, cursive;
+}
+
+/* GENRE IMAGE-CLASSES */
+.busin {
+    background-image: url(../../Images/business.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.crime {
+    background-image: url(../../Images/crime.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.philo {
+    background-image: url(../../Images/philosophy.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.psych {
+    background-image: url(../../Images/psychology.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.fanta {
+    background-image: url(../../Images/fantasy.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.healt {
+    background-image: url(../../Images/health.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.roman {
+    background-image: url(../../Images/romance.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.self- {
+    background-image: url(../../Images/self-help.jpg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+h1 {
+    font-family: Merriweather, cursive;
+    font-weight: bold;
+}
+
+h2, h3, h4, h5 {
+    font-family: Merriweather, cursive;
+    color: black;
+}
+
+.navbar-brand,
+.navbar-nav {
+    font-family: Merriweather, cursive;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}

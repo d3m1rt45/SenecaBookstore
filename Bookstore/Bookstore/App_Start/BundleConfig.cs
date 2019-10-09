@@ -25,12 +25,18 @@ namespace Bookstore
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/hover.css",
-                      "~/Content/site.css",
-                      "~/Content/fontawesome.min.css",
-                      "~/Content/PagedList.css"));
+
+            bundles.Add(new StyleBundle("~/Content/external-libraries").Include(
+                      "~/Content/libraries/bootstrap.css",
+                      "~/Content/libraries/fontawesome/font-awesome.min.css",
+                      "~/Content/libraries/hover.css",
+                      "~/Content/libraries/PagedList.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/project-specific").Include(
+                      "~/Content/project-specific/Fonts.css",
+                      "~/Content/project-specific/Shared.css",
+                      "~/Content/project-specific/PageSpecific.css"));
         }
     }
 }

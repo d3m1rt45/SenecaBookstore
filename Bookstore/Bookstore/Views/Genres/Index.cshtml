@@ -36,12 +36,12 @@
 
     <hr />
 
-    <article class="Body row">
+    <article class="PageBody row">
         @if (Model.FirstOrDefault() != null)
         {
             foreach (var genre in Model)
             {
-                <a class="OtherGenreLink col-6" href="@Url.Action("ByGenre", "Books", new { genreName = genre.Name })">
+                <a class="OtherGenreLink hvr-shrink col-6" href="@Url.Action("ByGenre", "Books", new { genreName = genre.Name })">
                     <div class="OtherGenre d-flex align-items-center justify-content-center rounded @genre.ImageClass">
                         <h3 class="Name font-weight-bold">@genre.Name</h3>
                     </div><!--/.OtherGenre-->

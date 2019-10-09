@@ -1,13 +1,13 @@
-﻿@model Bookstore.ViewModels.ByGenreViewModel
+﻿@model Bookstore.ViewModels.GenreViewModel
 
 @{
-    var genreName = Model.Genre;
+    var genreName = Model.Name;
     ViewBag.Title = genreName;
 }
 
     <section class="Books-ByGenre">
 
-        <section class="PageHead row pt-4">
+        <section class="PageHead @Model.ImageClass row pt-4">
 
             <div class="Left col-6 text-left">
                 <h2 class="Header d-block align-self-start font-weight-bold mb-0 pb-0">
