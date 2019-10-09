@@ -1,4 +1,15 @@
-﻿/* [HOME-INDEX] */
+﻿/* SHARED */
+.Books-IndexPaged,
+.Books-Index {
+    padding-top: 0;
+}
+
+    .Books-IndexPaged .PageBody,
+    .Books-Index .PageBody {
+        padding: 0 2rem 0 2rem;
+    }
+
+/* [HOME-INDEX] */
 .Home-Index > .PageHead {
     margin: 0rem 2rem 0rem 2rem;
     padding: 1rem 0rem 0.5rem 1rem;
@@ -10,7 +21,7 @@
     background-size: cover;
 }
 
-/*FeaturedTitles*/
+/* FeaturedTitles */
 .FeaturedTitles {
     margin: 2rem 2rem 2rem 2rem;
 }
@@ -19,18 +30,16 @@
         box-shadow: rgbA(0,0,0,0.8) 0.3rem 0.5em;
     }
 
-/*SectionsByGenre*/
+/* SectionsByGenre */
 .SectionByGenre {
     padding: 2rem 2rem 2rem 2rem;
 }
-
     .SectionByGenre .SectionHead {
         padding: 1rem 1rem 0.5rem 1rem;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
     }
-
     .SectionByGenre .Header,
     .OtherGenres .Header,
     .FeaturedTitles .Header {
@@ -62,10 +71,6 @@
     padding-left: 2rem;
 }
 
-.OtherGenre {
-    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
-}
-
 .OtherGenreLink:hover {
     text-decoration: none;
 }
@@ -74,6 +79,7 @@
     height: 10rem;
     width: 100%;
     margin-bottom: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
 }
     .OtherGenre h3 {
         color: #f9f9f9;
@@ -84,18 +90,8 @@
 
 
 /*[BOOKS-INDEX] and [BOOKS-INDEXPAGED]*/
-.Books-IndexPaged,
-.Books-Index {
-    padding-top: 0;
-}
 
-.Books-IndexPaged .PageBody,
-.Books-Index .PageBody {
-    padding: 0 2rem 0 2rem;
-    }
-
-.Books-IndexPaged .PageHead,
-.Books-Index .PageHead {
+.PageHead {
     margin: 0rem 2rem 0rem 2rem;
     padding: 1rem 0rem 1rem 1rem;
     border-top-left-radius: 1rem;
@@ -156,8 +152,22 @@
     background-size: cover;
 }
 
+/* [GENRES/INDEX] */
+.GenresIndex .Genre {
+    height: 10rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-shadow: rgbA(0,0,0,0.8) 0.2rem 0.4em;
+}
+    .GenresIndex .Genre {
+        color: #f9f9f9;
+        display: block;
+        align-self: center;
+        justify-self: center;
+    }
+
 /*NAVIGATION*/
-.navbar {
+.Navigation {
     padding: 1rem 3rem; 
     transition-duration: 0.5s;
     background: rgba(255,255,255,0.8);
@@ -168,6 +178,17 @@
     margin: 0;
 }
 
+.nav-item:hover {
+    background-color: rgbA(0,0,0,0.15);
+    transition-duration: 1s;
+}
+
+.nav-item.active {
+    background-color: rgbA(0,0,0,0.4);
+}
+
+
+/* GENERAL */
 body {
     padding-bottom: 20px;
     background-image: url(../Images/background.jpg);

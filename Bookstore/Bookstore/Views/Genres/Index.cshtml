@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bookstore.Models.Genre>
+﻿@model List<Bookstore.ViewModels.GenreViewModel>
 
 @{
     ViewBag.Title = "Genres";
@@ -8,20 +8,20 @@
     
     <article class="PageHead row pt-4">
         <div class="Left col-4 text-left">
-            <h2 class="Header d-block align-self-start font-weight-bold mb-0 pb-0">Genres</h2><!--.Header/-->
-            <p class="Map font-italic my-0 py-0">
+            <h2 class="Header d-block align-self-start font-weight-bold mb-0 pb-0 text-light">Genres</h2><!--.Header/-->
+            <p class="Map font-italic text-light my-0 py-0">
                 @Html.ActionLink("Home", "Index", "Home", null, null) / 
                 Genres
             </p><!--/.Map-->
         </div><!--/.Left-->
         <div class="Right col-8 text-right">
-            <div class="SearchBar d-inline-block pt-2 mr-0">
+            <div class="SearchBar d-inline-block pt-2 mr-1">
                 @using (Html.BeginForm())
                 {
                     <div class="input-group">
                         @Html.TextBox("search", null, new { @class = "form-control text-dark", placeholder = "Search..." })
                         <div class="input-group-prepend">
-                            <button class="btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-light hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 }
@@ -39,11 +39,13 @@
     <article class="Body row">
         @if (Model.FirstOrDefault() != null)
         {
-            foreach (var item in Model)
+            foreach (var genre in Model)
             {
-                <h5 class="Genre mb-3 col-12 col-sm-6 col-lg-4">
-                    @Html.ActionLink(item.Name, "ByGenre", "Books", new { genreName = item.Name }, null)
-                </h5><!--/.Genre-->
+                <a class="OtherGenreLink col-6" href="@Url.Action("ByGenre", "Books", new { genreName = genre.Name })">
+                    <div class="OtherGenre d-flex align-items-center justify-content-center rounded @genre.ImageClass">
+                        <h3 class="Name font-weight-bold">@genre.Name</h3>
+                    </div><!--/.OtherGenre-->
+                </a><!--/.OtherGenreLink-->
             }
         }
         else

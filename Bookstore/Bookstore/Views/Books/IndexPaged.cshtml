@@ -58,7 +58,7 @@
             }
         </article><!--/.PageBody-->
 
-        <article class="PageControls text-center mt-2 font-weight-bold h5">
+        <article class="PageControls text-center mt-5 font-weight-bold h5">
             <span class="text-light h6 pb-0 mb-0">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </article><!--/.PageControls-->

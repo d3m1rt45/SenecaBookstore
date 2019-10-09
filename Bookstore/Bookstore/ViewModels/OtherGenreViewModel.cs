@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Bookstore.ViewModels
 {
-    public class OtherGenreViewModel
+    public class GenreViewModel
     {
         public string Name { get; set; }
         public string ImageClass { get; set; }

@@ -10,13 +10,13 @@ namespace Bookstore.ViewModels
     {
         public List<FeaturedViewModel> Featured { get; set; }
         public List<SectionViewModel> Sections { get; set; }
-        public List<OtherGenreViewModel> OtherGenres{ get; set; }
+        public List<GenreViewModel> OtherGenres{ get; set; }
 
         public HomeIndexViewModel() //On instantiation of a HomeIndexViewModel object:
         {
             this.Featured = new List<FeaturedViewModel>(); //Instantiate its Featured property as a new List of FeaturedViewModels, and
             this.Sections = new List<SectionViewModel>(); //instantiate its Sections property as a new List of SectionViewModels, and
-            this.OtherGenres = new List<OtherGenreViewModel>(); //instantiate its OtherGenres property as a new List of Strings;
+            this.OtherGenres = new List<GenreViewModel>(); //instantiate its OtherGenres property as a new List of Strings;
         }
 
         public void SetFeatured() //Set four FeaturedViewModel objects as Featured property:
@@ -55,15 +55,18 @@ namespace Bookstore.ViewModels
             var db = new BookstoreContext(); //Instantiate BookstoreContext for data access;
             var allGenres = db.Genres.ToList(); //Get all genres as allGenres;
 
-            foreach (var sect in this.Sections) //For each item in the object's Section property...
+            if (this.Sections != null)
             {
-                var rem = allGenres.Find(x => x.Name == sect.Title); //Find the item's genre, and
-                allGenres.Remove(rem); //remove it from allGenres;
+                foreach (var sect in this.Sections) //For each item in the object's Section property...
+                {
+                    var rem = allGenres.Find(x => x.Name == sect.Title); //Find the item's genre, and
+                    allGenres.Remove(rem); //remove it from allGenres;
+                }
             }
 
             foreach (var gen in allGenres) //For each remaining item in the allGenres object...
             {
-                this.OtherGenres.Add(new OtherGenreViewModel
+                this.OtherGenres.Add(new GenreViewModel
                 {
                     Name = gen.Name,
                     ImageClass = gen.Name.ToLower().Substring(0,5)

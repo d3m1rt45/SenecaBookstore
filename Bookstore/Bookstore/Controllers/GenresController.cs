@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Bookstore.Models;
+using Bookstore.ViewModels;
 
 namespace Bookstore.Controllers
 {
@@ -19,6 +20,7 @@ namespace Bookstore.Controllers
         public async Task<ActionResult> Index(string search, string order)
         {
             var genreQuery = db.Genres.AsQueryable();
+            var genresInstance = new List<GenreViewModel>();
 
             if (!String.IsNullOrEmpty(search))
                 genreQuery = genreQuery.Where(g => g.Name.Contains(search));
@@ -33,7 +35,16 @@ namespace Bookstore.Controllers
                     break;
             }
 
-            return View(await genreQuery.ToListAsync());
+            foreach (var gen in genreQuery) //For each remaining item in the allGenres object...
+            {
+                genresInstance.Add(new GenreViewModel
+                {
+                    Name = gen.Name,
+                    ImageClass = gen.Name.ToLower().Substring(0, 5)
+                });
+            }
+
+            return View(genresInstance);
         }
     }
 }
