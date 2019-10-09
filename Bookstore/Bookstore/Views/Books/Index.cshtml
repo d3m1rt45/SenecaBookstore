@@ -17,18 +17,18 @@
             </p><!--/.Map-->
         </div><!--/.Left-->
         <div class="Right col-8 text-right">
-            <div class="SearchBar d-inline-block">
+            <div class="SearchBar d-inline-block mr-2">
                 @using (Html.BeginForm())
                 {
                     <div class="input-group">
                         @Html.TextBox("search", null, new { @class = "form-control text-dark mt-2", placeholder = "Search..." })
                         <div class="input-group-prepend">
-                            <button class="btn btn-dark rounded hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-light rounded-right hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 }
             </div><!--/.SearchBar-->
-            <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
+            <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-0" id="UrlList" onchange="SortBy()">
                 <option value="@Url.Action("Index", "Books", null)">Sort by...</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "AtoZ" })">Title (a-z)</option>
                 <option value="@Url.Action("Index", "Books", new { sortBy = "ZtoA" })">Title (z-a)</option>

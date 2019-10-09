@@ -16,13 +16,13 @@
                 </p><!--/.Map-->
             </div><!--/.Left-->
             <div class="Right col-8 text-right">
-                <div class="SearchBar d-inline-block">
+                <div class="SearchBar d-inline-block mr-1">
                     @using (Html.BeginForm())
                     {
                         <div class="input-group">
                             @Html.TextBox("search", null, new { @class = "form-control text-dark mt-2", placeholder = "Search..." })
                             <div class="input-group-prepend">
-                                <button class="btn btn-dark rounded hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-light rounded-right hvr-grow-shadow mt-2" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     }
@@ -58,8 +58,8 @@
                         @foreach (var card in sect.BookCards)
                         {
                             <div class="CardContainer col-6 col-md-4 col-lg-3 col-xl-2 mb-4 d-flex align-items-stretch">
-                                <div class="Card card w-100 bg-light hvr-shrink">
-                                    <a class="CardLink stretched-link card-link text-dark" href="/Books/ByISBN?isbn=@card.ISBN">
+                                <div class="Card card w-100 bg-dark hvr-shrink">
+                                    <a class="CardLink stretched-link card-link text-light" href="/Books/ByISBN?isbn=@card.ISBN">
 
                                         <img class="CardImage card-img-top w-100" src="~/Images/@card.ImagePath" alt="Book cover" /><!--.CardImage/-->
 
@@ -88,7 +88,7 @@
                 @foreach (var genre in Model.OtherGenres)
                 {
                     <a class="OtherGenreLink col-6" href="@Url.Action("ByGenre", "Books", new { genreName = genre.Name })">
-                        <div class="OtherGenre d-flex align-items-center justify-content-center rounded @genre.ImageClass">
+                        <div class="OtherGenre hvr-shrink d-flex align-items-center justify-content-center rounded @genre.ImageClass">
                             <h3 class="Name font-weight-bold">@genre.Name</h3>
                         </div><!--/.OtherGenre-->
                     </a><!--/.OtherGenreLink-->
@@ -97,11 +97,3 @@
         </article><!--/.OtherGenres-->
 
     </section><!--/.HomeIndex-->
-
-@section scripts {
-    <script>
-        $(".OtherGenreLink").hover(function () {
-            $(".OtherGenre").toggleClass("hvr-buzz-out");
-        });
-    </script>
-    }

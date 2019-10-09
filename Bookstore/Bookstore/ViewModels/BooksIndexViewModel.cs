@@ -40,9 +40,9 @@ namespace Bookstore.ViewModels
             }
             set
             {
-                if (value.Length > 12) //If the string being assigned is longer than 12 characters...
+                if (value.Length > 9) //If the string being assigned is longer than 12 characters...
                 {
-                    _AuthorName = $"{value.Substring(0, 12)}..."; //...assign only the first 10 characters followed by "...";
+                    _AuthorName = $"{value.Substring(0, 9)}..."; //...assign only the first 10 characters followed by "...";
                 }
                 else //If not...
                 {

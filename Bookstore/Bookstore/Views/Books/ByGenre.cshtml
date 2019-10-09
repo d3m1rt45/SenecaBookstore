@@ -20,21 +20,21 @@
                     @genreName
                 </p><!--/.Map-->
             </div><!--/.Left-->
-
+            
             <div class="Right col-6 text-right">
-                <div class="SearchBar d-inline-block pt-2">
+                <div class="SearchBar d-inline-block pt-2 mr-2">
                     @using (Html.BeginForm())
                     {
-                        <div class="Inner input-group">
+                        <div class="Inner input-group mr-0">
                             @Html.TextBox("searchKeyword", null, new { @class = "form-control text-dark", placeholder = "Search..." })
                             <div class="ButtonContainer input-group-prepend">
-                                <button class="Button btn btn-dark rounded hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button><!--.Button.-->
+                                <button class="Button btn btn-light rounded-right hvr-grow-shadow" type="submit"><i class="fa fa-search"></i></button><!--.Button.-->
                             </div><!--/.ButtonContainer-->
                         </div><!--/.Inner-->
                     }
                 </div><!--/.SearchBar-->
 
-                <select class="SortBy btn btn-outline-dark bg-white text-dark p-2 mb-1" id="UrlList" onchange="SortBy()">
+                <select class="SortBy btn btn-outline-dark bg-white text-dark ml-0 p-2 mb-1" id="UrlList" onchange="SortBy()">
                     <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName })">Sort by...</option>
                     <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "AtoZ" })">Title (a-z)</option>
                     <option value="@Url.Action("ByGenre", "Books", new { thisGenre = genreName, sortBy = "ZtoA" })">Title (z-a)</option>
