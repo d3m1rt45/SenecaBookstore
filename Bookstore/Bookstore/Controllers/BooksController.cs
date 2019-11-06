@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Bookstore.Models;
-using System.Data.Entity.Migrations;
-using System.IO;
+﻿using Bookstore.Models;
 using Bookstore.ViewModels;
 using PagedList;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Bookstore.Controllers
 {
