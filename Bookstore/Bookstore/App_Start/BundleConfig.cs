@@ -17,14 +17,8 @@ namespace Bookstore
             bundles.Add(new ScriptBundle("~/bundles/jqueryvalunobstrusive").Include(
                         "~/Scripts/jquery.validate.unobstrusive.min.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-2.8.3.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
-
 
             bundles.Add(new StyleBundle("~/Content/external-libraries").Include(
                       "~/Content/libraries/bootstrap.css",
