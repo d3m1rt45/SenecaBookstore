@@ -16,17 +16,15 @@ namespace Bookstore.Controllers
         // Pass a new HomeIndexViewModel instance to Home/Index view
         public ActionResult Index(string searchKeyword)
         {
+            // Search:
             if (!String.IsNullOrEmpty(searchKeyword))
                 return RedirectToAction("Search", "Books", new { keyword = searchKeyword });
 
             var homeIndexVM = new HomeIndexViewModel();
-            Book.SetFeaturedForVM(db, homeIndexVM);
+            Book.SetFeaturedBooksFor(homeIndexVM, db);
+            Genre.SetSectionsFor(homeIndexVM, db);
+            Genre.SetOtherGenresFor(homeIndexVM, db);
 
-            // Add a maximum of 6 sections, one for each genre that contains 6 or more books
-            foreach (var g in db.Genres.Where(x => x.Books.Count >= 6).Take(6))
-                homeIndexVM.AddSection(g.Name);
-
-            homeIndexVM.SetOtherGenres();
             return View(homeIndexVM);
         }
     }

@@ -28,11 +28,6 @@ namespace Bookstore.Models
         [StringLength(50)]
         public string AuthorName { get; set; }
 
-        internal static void SetFeaturedForVM(BookstoreContext db)
-        {
-            throw new NotImplementedException();
-        }
-
         [Required]
         public string GenreName { get; set; }
 
@@ -112,8 +107,8 @@ namespace Bookstore.Models
             return cardsQuery.ToList();
         }
 
-
-        public static void SetFeaturedForVM(BookstoreContext db, HomeIndexViewModel homeIndexVM)
+        // Sets 4 random books as the featured properthy of the HomeIndexViewModel passed
+        public static void SetFeaturedBooksFor(HomeIndexViewModel homeIndexVM, BookstoreContext db)
         {
             foreach (var book in db.Books.Take(4).ToList())
                 homeIndexVM.Featured.Add(new FeaturedViewModel { ISBN = book.ISBN, ImagePath = book.ImagePath });
