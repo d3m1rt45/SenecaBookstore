@@ -9,6 +9,6 @@ namespace Bookstore.ViewModels
     {
         public string Name { get; set; }
         public string ImageClass { get; set; }
-        public List<BooksIndexViewModel> BookCards { get; set; }
+        public List<BookViewModel> BookCards { get; set; }
     }
 }

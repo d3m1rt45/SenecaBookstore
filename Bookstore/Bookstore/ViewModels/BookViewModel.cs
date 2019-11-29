@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Bookstore.ViewModels
 {
-    public class BooksIndexViewModel
+    public class BookViewModel
     {
         public string ISBN { get; set; }
 

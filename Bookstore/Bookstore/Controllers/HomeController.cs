@@ -1,4 +1,5 @@
-﻿using Bookstore.Models;
+﻿using Bookstore.ExtensionMethods;
+using Bookstore.Models;
 using Bookstore.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,7 @@ namespace Bookstore.Controllers
                 return RedirectToAction("Search", "Books", new { keyword = searchKeyword });
 
             var homeIndexVM = new HomeIndexViewModel();
-            Book.SetFeaturedBooksFor(homeIndexVM, db);
-            Genre.SetSectionsFor(homeIndexVM, db);
-            Genre.SetOtherGenresFor(homeIndexVM, db);
+            homeIndexVM.FullSetUp(db);
 
             return View(homeIndexVM);
         }

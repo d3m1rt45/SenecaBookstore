@@ -11,14 +11,14 @@ namespace Bookstore.ViewModels
     public class SearchViewModel
     {
         // Constructor(s)
-        public SearchViewModel() { Books = new List<BooksIndexViewModel>(); }
+        public SearchViewModel() { Books = new List<BookViewModel>(); }
 
         // Properties
         public string Keyword { get; set; }
         public string Author { get; set; }
         public string Genre { get; set; }
-        public List<BooksIndexViewModel> Books { get; set; }
-        public IPagedList<BooksIndexViewModel> BooksPaged { get; set; }
+        public List<BookViewModel> Books { get; set; }
+        public IPagedList<BookViewModel> BooksPaged { get; set; }
 
     }
 }

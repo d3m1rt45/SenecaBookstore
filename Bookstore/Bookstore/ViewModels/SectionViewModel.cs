@@ -10,8 +10,8 @@ namespace Bookstore.ViewModels
         public string Title { get; set; }
         public string ImageClass { get; set; }
 
-        private List<BooksIndexViewModel> _BookCards;
-        public List<BooksIndexViewModel> BookCards
+        private List<BookViewModel> _BookCards;
+        public List<BookViewModel> BookCards
         {
             get
             {
