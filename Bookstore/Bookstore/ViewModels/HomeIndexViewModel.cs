@@ -8,39 +8,21 @@ namespace Bookstore.ViewModels
 {
     public class HomeIndexViewModel
     {
+        public HomeIndexViewModel()
+        {
+            this.Featured = new List<FeaturedViewModel>();
+            this.Sections = new List<SectionViewModel>();
+            this.OtherGenres = new List<GenreViewModel>();
+        }
+
         public List<FeaturedViewModel> Featured { get; set; }
         public List<SectionViewModel> Sections { get; set; }
         public List<GenreViewModel> OtherGenres{ get; set; }
 
-        public HomeIndexViewModel() //On instantiation of a HomeIndexViewModel object:
-        {
-            this.Featured = new List<FeaturedViewModel>(); //Instantiate its Featured property as a new List of FeaturedViewModels, and
-            this.Sections = new List<SectionViewModel>(); //instantiate its Sections property as a new List of SectionViewModels, and
-            this.OtherGenres = new List<GenreViewModel>(); //instantiate its OtherGenres property as a new List of Strings;
-        }
-
-        public void SetFeatured() //Set four FeaturedViewModel objects as Featured property:
-        {
-            var db = new BookstoreContext(); //Instantiate BookstoreContext for data access;
-            var booksList = db.Books.Take(4).ToList(); //Make a list of four random books named booksList;
-
-            var featuredList = new List<FeaturedViewModel>(); //Instantiate a new List of FeaturedViewModels named featuredList;
-            foreach (var book in booksList) //For each item in bookList...
-            {
-                var featured = new FeaturedViewModel //...instantiate a new FeaturedViewModel with ISBN and ImagePath properties of the item, and
-                {
-                    ISBN = book.ISBN,
-                    ImagePath = book.ImagePath
-                };
-                featuredList.Add(featured); //add it to the featuredList property;
-            }
-            this.Featured = featuredList; //Set the featuredList property of the object as the featuredList;
-        }
-
         public void AddSection(string genreName) //Add a SectionViewModel object to Sections property;
         {
             var db = new BookstoreContext(); //Instantiate BookstoreContext for data access;
-            var bookCards = BooksIndexViewModel.CardsList(db.Genres.Find(genreName).Books.ToList()); //Find books by the genreName parameter and, save them
+            var bookCards = Book.ToVMList(db.Genres.Find(genreName).Books); //Find books by the genreName parameter and, save them
                                                                                                      //as a List of BooksIndexViewModel named bookCards;
             var section = new SectionViewModel(); //Instantiate a new SectionViewModel object, and
             section.Title = genreName; //set its Title property as the genreName parameter, and

@@ -21,32 +21,26 @@ namespace Bookstore.ViewModels
             this.Books = new List<BooksIndexViewModel>();
         }
 
-        public static SearchViewModel SearchTitles(string author, string genre, string keyword) //Search Titles
+        public static SearchViewModel SearchTitles(BookstoreContext db, string author, string genre, string keyword) //Search Titles
         {
-            var db = new BookstoreContext(); //Instantiate BookstoreContext for data access;
+            var result = new SearchViewModel { Keyword = keyword }; 
 
-            var result = new SearchViewModel();  //Instantiate this ViewModel...
-            result.Keyword = keyword;  //...and set the 'Keyword' property as the 'keyword' parameter;
+            IEnumerable<Book> books;
 
-            if (!String.IsNullOrEmpty(genre)) //If a genre name is passed...
+            if (!String.IsNullOrEmpty(genre))
             {
-                result.Books = BooksIndexViewModel.CardsList( //Search all the books of said genre for the 'keyword' parameter;
-                    db.Genres.Find(genre).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList()); //set them as the Books property of the object;
-
-                result.Genre = genre; //Set the 'Genre' property by the 'genre' parameter;
+                books = db.Genres.Find(genre).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
+                result.Genre = genre;
             }
-            else if (!String.IsNullOrEmpty(author)) //If not, and if an author name is passed...
+            else if (!String.IsNullOrEmpty(author))
             {
-                result.Books = BooksIndexViewModel.CardsList( //Search all the books of said author for the 'keyword' parameter;
-                    db.Authors.Find(author).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList()); //set them as the Books property of the object; 
+                books = db.Authors.Find(author).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
+                result.Author = author;
+            }
+            else
+                books = db.Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
 
-                result.Author = author; //Set the 'Author' property by the 'author' parameter;
-            }
-            else //If neither is true...
-            {
-                result.Books = BooksIndexViewModel.CardsList( //Search all the books for the 'keyword' parameter;
-                    db.Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper())).ToList()); //set them as the Books property of the object; 
-            }
+            result.Books = Book.ToVMList(books);
 
             return result; //Return the object.
         }

@@ -17,34 +17,24 @@ namespace Bookstore.Controllers
         private BookstoreContext db = new BookstoreContext();
 
         // GET: Genres
-        public async Task<ActionResult> Index(string search, string order)
+        public ActionResult Index(string search, string order)
         {
             var genreQuery = db.Genres.AsQueryable();
-            var genresInstance = new List<GenreViewModel>();
+            var genreVMList = new List<GenreViewModel>();
 
             if (!String.IsNullOrEmpty(search))
                 genreQuery = genreQuery.Where(g => g.Name.Contains(search));
 
-            switch (order)
-            {
-                case "AtoZ":
-                    genreQuery = genreQuery.OrderBy(g => g.Name);
-                    break;
-                case "ZtoA":
-                    genreQuery = genreQuery.OrderByDescending(g => g.Name);
-                    break;
-            }
+            if (order == "AtoZ")
+                genreQuery = genreQuery.OrderBy(g => g.Name);
+            else if (order == "ZtoA")
+                genreQuery = genreQuery.OrderByDescending(g => g.Name);
 
-            foreach (var gen in genreQuery) //For each remaining item in the allGenres object...
-            {
-                genresInstance.Add(new GenreViewModel
-                {
-                    Name = gen.Name,
-                    ImageClass = gen.Name.ToLower().Substring(0, 5)
-                });
-            }
+            //For each remaining item in the allGenres object..
+            foreach (var gen in genreQuery)
+                genreVMList.Add(new GenreViewModel { Name = gen.Name, ImageClass = gen.Name.ToLower().Substring(0, 5) });
 
-            return View(genresInstance);
+            return View(genreVMList);
         }
     }
 }

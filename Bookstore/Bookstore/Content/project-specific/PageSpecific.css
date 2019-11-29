@@ -73,7 +73,8 @@
 
 /*[BOOKS-INDEX] and [BOOKS-INDEXPAGED]*/
 .Books-Index .PageHead,
-.Books-IndexPaged .PageHead
+.Books-IndexPaged .PageHead,
+.Books-Search .PageHead
 {
     background-image: url(../../Images/all-titles.jpg);
 }
