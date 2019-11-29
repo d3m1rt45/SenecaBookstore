@@ -14,17 +14,22 @@ namespace Bookstore.Controllers
 {
     public class GenresController : Controller
     {
-        private BookstoreContext db = new BookstoreContext();
+        // EF Database Access Property
+        private readonly BookstoreContext db = new BookstoreContext();
 
-        // GET: Genres
+        // Get all genres.
+        // If there is search or sorting selected, apply them.
+        // Return result.
         public ActionResult Index(string search, string order)
         {
             var genreQuery = db.Genres.AsQueryable();
             var genreVMList = new List<GenreViewModel>();
 
+            // Search:
             if (!String.IsNullOrEmpty(search))
                 genreQuery = genreQuery.Where(g => g.Name.Contains(search));
 
+            // Sorting:
             if (order == "AtoZ")
                 genreQuery = genreQuery.OrderBy(g => g.Name);
             else if (order == "ZtoA")

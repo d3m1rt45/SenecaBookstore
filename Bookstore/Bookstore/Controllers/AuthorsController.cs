@@ -13,15 +13,19 @@ namespace Bookstore.Controllers
 {
     public class AuthorsController : Controller
     {
-        private BookstoreContext db = new BookstoreContext();
+        // EF Database Access Property
+        private readonly BookstoreContext db = new BookstoreContext();
 
+        // If there is a search, return results. If not, return all Authors
         public async Task<ActionResult> Index(string order, string search)
         {
             var authorQuery = db.Authors.AsQueryable();
 
+            // Search Logic:
             if (!String.IsNullOrEmpty(search))
                 authorQuery = authorQuery.Where(a => a.Name.Contains(search));
 
+            // Order Logic:
             switch (order)
             {
                 case "AtoZ":

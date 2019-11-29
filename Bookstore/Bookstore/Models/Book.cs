@@ -62,8 +62,32 @@ namespace Bookstore.Models
         [ForeignKey("AuthorName")]
         public virtual Author Author { get; set; }
 
+        // Search Books
+        public static SearchViewModel Search(BookstoreContext db, string author, string genre, string keyword)
+        {
+            var result = new SearchViewModel { Keyword = keyword };
 
-        //Take a 'DBSet<Book>' Object and Turn It Into 'List<BookCardViewModel>'s
+            IEnumerable<Book> books;
+
+            if (!String.IsNullOrEmpty(genre))
+            {
+                books = db.Genres.Find(genre).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
+                result.Genre = genre;
+            }
+            else if (!String.IsNullOrEmpty(author))
+            {
+                books = db.Authors.Find(author).Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
+                result.Author = author;
+            }
+            else
+                books = db.Books.Where(b => b.Title.ToUpper().Contains(keyword.ToUpper()));
+
+            result.Books = Book.ToVMList(books);
+
+            return result;
+        }
+
+        // Take a 'DBSet<Book>' Object and Turn It Into 'List<BookCardViewModel>'s
         public static List<BooksIndexViewModel> ToVMList(IEnumerable<Book> bookSet) 
         {
             var bookCards = new List<BooksIndexViewModel>();
@@ -83,7 +107,7 @@ namespace Bookstore.Models
             return bookCards;
         }
 
-        //Sort a List of BooksIndexViewModels
+        // Sort a List of BooksIndexViewModels
         public static List<BooksIndexViewModel> SortVMList(List<BooksIndexViewModel> cardsList, string sortBy) 
         {
             var cardsQuery = cardsList.AsQueryable();

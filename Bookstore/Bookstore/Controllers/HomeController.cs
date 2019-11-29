@@ -13,7 +13,7 @@ namespace Bookstore.Controllers
     {
         private readonly BookstoreContext db = new BookstoreContext();
 
-        // Pass a new HomeIndexViewModel instance to Home/Index view
+        // Populate a new HomeIndexViewModel instance to Home/Index view
         public ActionResult Index(string searchKeyword)
         {
             // Search:
