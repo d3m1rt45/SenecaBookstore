@@ -28,7 +28,6 @@ namespace Bookstore
                       ));
 
             bundles.Add(new StyleBundle("~/Content/project-specific").Include(
-                      "~/Content/project-specific/Fonts.css",
                       "~/Content/project-specific/Shared.css",
                       "~/Content/project-specific/PageSpecific.css"));
         }
