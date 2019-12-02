@@ -209,9 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\libraries\bootstrap.css" />
-    <Content Include="Content\libraries\fontawesome\font-awesome.css" />
-    <Content Include="Content\libraries\fontawesome\font-awesome.min.css" />
-    <Content Include="Content\libraries\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\libraries\hover.css" />
     <Content Include="Content\libraries\PagedList.css" />
     <Content Include="Content\project-specific\Fonts.css" />
@@ -272,10 +269,6 @@
     <Content Include="Images\romance.jpg" />
     <Content Include="Images\self-help.jpg" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\libraries\fonts\FontAwesome.otf" />
-    <Content Include="Content\libraries\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\libraries\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\libraries\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
@@ -323,7 +316,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\libraries\webfonts\" />
     <Folder Include="Images\Vector\" />
   </ItemGroup>
   <ItemGroup>
